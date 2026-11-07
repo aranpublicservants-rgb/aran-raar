@@ -4,7 +4,7 @@ Bilingual public information website for the network, with sourced aggregate dat
 
 ## Contents
 
-- Network introduction, proposed activities, GCXchange link and Georges Fattouche's professional contact address.
+- Network introduction, proposed activities, GCXchange link and a contribution form. The homepage identifies Tim as executive founder using the name provided by the site owner. Georges Fattouche is no longer named in the hero or main contact text.
 - Executive representation by level, 2017–2025, including executive workforce availability benchmarks.
 - Racialized subgroup representation and published Black executive shares by level for 2025.
 - Executive hires, promotions and separations for 2024–2025.
@@ -48,3 +48,11 @@ Le fichier `index.html` est autonome pour les tableaux, le changement de langue 
 Les populations, périodes et dénominateurs diffèrent selon la source. Les valeurs supprimées restent indisponibles. Un écart entre groupes n'en établit pas les causes. Les résultats du SAFF de 2022 utilisent un groupe de comparaison différent de celui de la vue de 2024. Les limites et les sources sont précisées sur la page.
 
 Les données constituent un portrait daté. Elles ne se mettent pas à jour automatiquement. La page est hébergée sur le site GitHub du RAAR et n'est pas un site ministériel du gouvernement du Canada.
+
+## Contribution form
+
+The English and French form provides twelve contribution categories, optional ideas and experience, availability, preferred language, and a proposed first step. Name, email, a contribution category or idea, and permission to be contacted are required. Native checkboxes support selecting multiple categories. Labels, fieldsets, legends, inline errors, linked error summaries and focus management support keyboard and assistive technology use. Changing language retains entered values.
+
+Responses are processed only in the visitor's browser and are not saved to website storage. The review step shows the full response and exact recipient, georges.fattouche@ssc-spc.gc.ca, the existing contact from the network launch notice. The Send option opens a prefilled email; the visitor must select Send in their email application. This is not an automatic delivery service. Copy and plain-text download options support visitors without a configured email handler or where a long mailto message is not transferred completely. A blank text template is available. No third-party form service, database or email credentials are used.
+
+The founder's surname and email were not supplied or verified. No surname or new recipient address has been inferred. The existing network contact is retained for contribution routing.
