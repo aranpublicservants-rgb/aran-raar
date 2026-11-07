@@ -21,7 +21,7 @@ if(handoff&&handoff.page===page&&Date.now()-handoff.at<60000){
  $('#global-status').textContent=tr('Language changed to English. Your form entries have been kept.','La langue est maintenant le français. Vos réponses ont été conservées.');
 }
 document.addEventListener('click',e=>{const link=e.target.closest('#language-link');if(!link)return;e.preventDefault();e.stopImmediatePropagation();const controls=$$('form input,form textarea,form select').filter(n=>n.type!=='submit'&&n.id!=='lesson-website').map(n=>({id:n.id||null,value:n.value,checked:n.checked}));const state={page,at:Date.now(),controls,formState:window.ARANForms?.exportState(),step:window.ARANLessonStep?.()};let stored=false;try{sessionStorage.setItem(key,JSON.stringify(state));stored=true;}catch{}
-const hasEntries=controls.some(n=>n.checked||n.value&&n.id&&!['vol-language','vol-availability','lesson-topic'].includes(n.id));
+const hasEntries=controls.some(n=>n.checked||n.value&&n.id&&!['vol-language','vol-availability','lesson-topic','lesson-language'].includes(n.id));
 if(!stored&&hasEntries){$('#global-status').classList.remove('sr-only');$('#global-status').textContent=tr('Browser storage is unavailable. Save or copy your form text before changing language.','Le stockage du navigateur est indisponible. Enregistrer ou copier le texte du formulaire avant de changer de langue.');$('#global-status').scrollIntoView();return;}
 const target=new URL(link.href,location.href);target.hash=location.hash;location.assign(target.href);
 },{capture:true});
