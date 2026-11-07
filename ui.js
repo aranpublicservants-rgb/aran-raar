@@ -1,11 +1,15 @@
 (()=>{'use strict';
 const U=window.ARANUX,{$,$$,tr,language}=U;
 const page=document.body.dataset.page,lang=language();
+const RELEASE='20261107-5';
+function versionLink(n){const u=new URL(n.href,location.href);if(u.origin===location.origin&&u.pathname.endsWith('.html')){u.searchParams.set('v',RELEASE);n.href=u.href;}}
 // Redirect legacy language parameters to the corresponding complete-language URL.
 const requested=new URLSearchParams(location.search).get('lang');
-if(['en','fr'].includes(requested)&&requested!==lang){const target=new URL(page==='draft'?(requested==='fr'?'working-draft-fr.html':'working-draft.html'):(requested==='fr'?'fr.html':'index.html'),location.href);target.hash=location.hash;location.replace(target.href);return;}
+if(['en','fr'].includes(requested)&&requested!==lang){const target=new URL(page==='draft'?(requested==='fr'?'working-draft-fr.html':'working-draft.html'):(requested==='fr'?'fr.html':'index.html'),location.href);target.hash=location.hash;target.searchParams.set('v',RELEASE);location.replace(target.href);return;}
 const home=lang==='fr'?'fr.html':'index.html',draft=lang==='fr'?'working-draft-fr.html':'working-draft.html';
 $$('.draft-link').forEach(n=>n.href=draft);
+$$('a[href]').forEach(versionLink);
+document.addEventListener('click',e=>{const link=e.target.closest('a[href]');if(link)versionLink(link);},{capture:true});
 const menu=$('#menu-toggle'),shell=$('.sticky-shell');
 if(menu){menu.hidden=false;document.body.classList.add('menu-ready');menu.addEventListener('click',()=>{const open=!document.body.classList.contains('menu-open');document.body.classList.toggle('menu-open',open);menu.setAttribute('aria-expanded',String(open));});$('#primary-nav').addEventListener('click',e=>{if(e.target.closest('a')){document.body.classList.remove('menu-open');menu.setAttribute('aria-expanded','false');}});document.addEventListener('keydown',e=>{if(e.key==='Escape'&&document.body.classList.contains('menu-open')){document.body.classList.remove('menu-open');menu.setAttribute('aria-expanded','false');menu.focus();}});}
 function measureHeader(){const sticky=shell&&getComputedStyle(shell).position==='sticky';document.documentElement.style.setProperty('--header-height',(sticky?shell.getBoundingClientRect().height:0)+'px');}
