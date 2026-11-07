@@ -1,0 +1,57 @@
+RAAR | Suivi d’une mesure et de ses résultats
+
+Utiliser une copie pour chaque mesure. Décrire le processus ou l’obstacle plutôt qu’un dossier personnel.
+
+Titre de la mesure :
+Référence :
+Date d’ouverture :
+Dernière mise à jour :
+
+Obstacle et changement visé
+Processus, politique ou pratique qui crée un obstacle :
+Personnes touchées, décrites sans permettre leur identification :
+Données probantes à l’appui de la préoccupation :
+Lacunes ou limites des données probantes :
+Résultat à atteindre :
+
+Mesure proposée
+Changement précis à apporter :
+Rôle ayant le pouvoir de décider :
+Rôle responsable de réaliser le travail :
+Personnes ou réseaux à associer à l’élaboration et à l’examen du changement :
+Décision ou approbation nécessaire :
+
+Réalisation
+Premier jalon et date cible :
+Jalon suivant et date cible :
+Date d’achèvement visée :
+Temps, financement, expertise ou autres ressources nécessaires :
+Dépendances et obstacles possibles :
+Première étape concrète à entreprendre maintenant :
+
+Mesure des progrès
+Indicateur et raison de son choix :
+Situation de départ et date :
+Résultat visé et date :
+Source des données et limites :
+Façon d’examiner les résultats selon les groupes touchés, s’il y a lieu :
+Façon de protéger la confidentialité :
+Rôle responsable d’examiner les données probantes :
+
+Compte rendu d’examen
+Date de l’examen :
+État : proposé, convenu, en cours, bloqué, terminé ou fermé
+Travail réalisé :
+Changement observé et données probantes à l’appui :
+Questions non résolues :
+Décision nécessaire et rôle responsable :
+Prochaine mesure et date cible :
+Date du prochain examen :
+
+Répéter cette section au besoin.
+
+Bilan
+Le résultat visé a-t-il été atteint?
+Qu’est-ce qui nécessite encore une intervention?
+Que devrait savoir une autre équipe avant d’essayer cette approche?
+Quel rôle maintiendra le changement et vérifiera qu’il continue de fonctionner?

@@ -1,0 +1,47 @@
+ARAN | Accessible event planning checklist
+
+Event title:
+Date, time and time zone:
+Format: online, in person or hybrid
+Planning lead:
+Access contact:
+
+Before inviting participants
+Confirm the purpose, intended audience and participation options.
+Choose a venue or platform that supports the access needs identified.
+Check routes, entrances, seating and washrooms for an in-person event.
+Test keyboard access, audio, captions and shared materials for an online event.
+Confirm the languages of the event and any interpretation or captioning arrangements.
+Plan breaks and an alternative way to contribute.
+
+Invitation and registration
+Provide clear joining or travel instructions and the event’s start and end time.
+Describe the accessibility arrangements that are actually available.
+Give a contact and a private way to request an adjustment or another format.
+Ask what support is needed to participate. Do not ask for a diagnosis.
+Explain any registration information being collected and who will receive it.
+State whether recording is planned and how it will be used.
+
+Materials and speakers
+Share accessible materials in advance when possible.
+Use descriptive headings, readable text, sufficient contrast and meaningful link text.
+Describe visual information that is needed to understand the discussion.
+Provide text alternatives for relevant images and an alternative to scanned text.
+Ask speakers to use a microphone, speak clearly and explain unfamiliar terms.
+Confirm how participants can ask questions or contribute in writing.
+
+During the event
+Explain participation, captioning, language and access options at the start.
+Test the microphone and caption display with participants.
+Identify speakers and read relevant questions from chat aloud.
+Keep to the planned pace and breaks. Allow people to leave and return.
+Address access problems without asking participants to explain personal circumstances publicly.
+
+After the event
+Share accessible notes or materials through the agreed channel.
+Review recordings or transcripts for accuracy before sharing them.
+Offer a private way to give access feedback.
+Record improvements for the next event without retaining unnecessary personal details.
+
+Unresolved access needs and next steps:
+Responsible role and review date:

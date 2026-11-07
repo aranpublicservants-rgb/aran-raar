@@ -1,0 +1,57 @@
+ARAN | Action and follow-up tracker
+
+Use one copy for each action. Describe the process or barrier rather than an individual case.
+
+Action title:
+Reference:
+Date opened:
+Last updated:
+
+Barrier and intended change
+Process, policy or practice creating a barrier:
+People affected, described without identifying individuals:
+Evidence supporting the concern:
+Evidence gaps or limits:
+Result to achieve:
+
+Proposed action
+Specific change to make:
+Role with authority to decide:
+Role responsible for carrying out the work:
+People or networks to involve in developing and reviewing the change:
+Required decision or approval:
+
+Delivery
+First milestone and target date:
+Next milestone and target date:
+Completion target:
+Time, funding, expertise or other resources required:
+Dependencies and possible obstacles:
+Practical first step that can be taken now:
+
+Measure progress
+Measure and reason for choosing it:
+Starting position and date:
+Intended result and date:
+Data source and limits:
+How results will be examined across affected groups, where appropriate:
+How confidentiality will be protected:
+Who will review the evidence:
+
+Review entry
+Review date:
+Status: proposed, agreed, underway, blocked, completed or closed
+What was done:
+What changed and what evidence supports that conclusion:
+What remains unresolved:
+Decision needed and responsible role:
+Next action and target date:
+Next review date:
+
+Repeat the review entry section as needed.
+
+Closing record
+Was the intended result achieved?
+What still needs attention?
+What should another team know before trying this approach?
+Who will maintain the change and check that it continues to work?
