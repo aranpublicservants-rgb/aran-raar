@@ -35,4 +35,4 @@ Sources were reviewed on 6 November 2026. The reference periods vary by dataset.
 
 Les sources ont été examinées le 6 novembre 2026. Les périodes de référence varient selon le jeu de données. `sources.json` consigne les sources officielles et les versions des dix dépôts du RAAR examinés. Ce site ne rend pas publics les fichiers privés de Google Drive.
 
-Contact: aranpublicservants@gmail.com
+ARAN website: https://aranpublicservants-rgb.github.io/aran-raar/
