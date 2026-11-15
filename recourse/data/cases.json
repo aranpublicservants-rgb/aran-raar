@@ -1,0 +1,497 @@
+{
+  "title": "Federal public service recourse — curated case-law index",
+  "lastPrepared": "2026-11-15",
+  "languages": [
+    "en",
+    "fr"
+  ],
+  "status": "Initial curated selection, not a comprehensive database",
+  "methodology": "Case information selected from official court, tribunal and board decisions or annual case summaries. Public links may lead to a case summary rather than a full decision; verify linked source and appeal status before relying on it. Federal employment and broader precedents are identified using the scope field. Status refers to the indexed ruling, not a forecast, and an unsuccessful procedural complaint does not establish that the underlying discrimination allegation was false.",
+  "fields": [
+    "id",
+    "title",
+    "citation",
+    "body",
+    "issues",
+    "grounds",
+    "status",
+    "scope",
+    "what",
+    "factors",
+    "outcome",
+    "what_fr",
+    "factors_fr",
+    "outcome_fr",
+    "url",
+    "sourceType"
+  ],
+  "cases": [
+    {
+      "id": "meiorin",
+      "title": "British Columbia (Public Service Employee Relations Commission) v. BCGSEU",
+      "citation": "1999 SCC 48",
+      "body": "Supreme Court of Canada",
+      "issues": [
+        "accommodation",
+        "safety",
+        "performance",
+        "classification"
+      ],
+      "what": "An apparently neutral fitness standard had an adverse impact on women. The employer failed to justify the standard as reasonably necessary.",
+      "what_fr": "Une norme d’aptitude apparemment neutre désavantageait les femmes. L’employeur n’a pas justifié sa nécessité raisonnable.",
+      "factors": "Job-related purpose, good faith, genuine necessity, individual alternatives and undue hardship.",
+      "factors_fr": "Objectif lié au travail, bonne foi, nécessité réelle, solutions individuelles et contrainte excessive.",
+      "outcome": "The Court restored an arbitration award of reinstatement and lost wages and benefits.",
+      "outcome_fr": "La Cour a rétabli l’ordonnance de réintégration et l’indemnisation des salaires et avantages perdus.",
+      "url": "https://www.scc-csc.ca/cases-dossiers/search-recherche/26274/",
+      "grounds": [
+        "sex"
+      ],
+      "status": "allowed",
+      "scope": "General legal precedent"
+    },
+    {
+      "id": "fraser",
+      "title": "Fraser v. Canada (Attorney General)",
+      "citation": "2020 SCC 28",
+      "body": "Supreme Court of Canada",
+      "issues": [
+        "accommodation",
+        "benefits",
+        "telework",
+        "wfa"
+      ],
+      "what": "A pension-credit rule for RCMP job-sharing members disproportionately disadvantaged women, engaging Charter equality rights.",
+      "what_fr": "Une règle sur les crédits de pension des membres de la GRC partageant un poste désavantageait les femmes de façon disproportionnée.",
+      "factors": "Disparate impact, contextual evidence and whether a rule perpetuates pre-existing disadvantage.",
+      "factors_fr": "Effet disproportionné, preuve contextuelle et perpétuation de désavantages préexistants.",
+      "outcome": "The appeal was allowed; the Court found the pension rule discriminatory, with entitlement implications for buyback credit.",
+      "outcome_fr": "L’appel a été accueilli; la règle de pension était discriminatoire, avec des conséquences sur les crédits rachetables.",
+      "url": "https://scc-csc.ca/judgments-jugements/cb/2020/38505/",
+      "grounds": [
+        "sex"
+      ],
+      "status": "allowed",
+      "scope": "Federal public sector"
+    },
+    {
+      "id": "cn",
+      "title": "Canadian National Railway Co. v. Canada (Human Rights Commission)",
+      "citation": "[1987] 1 SCR 1114",
+      "body": "Supreme Court of Canada",
+      "issues": [
+        "group",
+        "staffexternal",
+        "staffinternal"
+      ],
+      "what": "A systemic pattern of excluding women from non-traditional jobs justified a special employment program.",
+      "what_fr": "Un schéma systémique d’exclusion des femmes de postes non traditionnels justifiait un programme spécial d’emploi.",
+      "factors": "Workforce patterns, barriers in recruitment and promotion, nature and scope of systemic discrimination and necessary corrective action.",
+      "factors_fr": "Répartition des emplois, obstacles au recrutement et à la promotion, discrimination systémique et mesures correctives nécessaires.",
+      "outcome": "The Court upheld authority for systemic remedial measures, not merely individual damages.",
+      "outcome_fr": "La Cour a confirmé le pouvoir d’imposer des mesures correctives systémiques, et non seulement des indemnités individuelles.",
+      "url": "https://scc-csc.lexum.com/scc-csc/scc-csc/en/item/6280/index.do",
+      "grounds": [
+        "sex"
+      ],
+      "status": "allowed",
+      "scope": "Other federally regulated employment"
+    },
+    {
+      "id": "tibbs",
+      "title": "Tibbs v. Deputy Minister of National Defence",
+      "citation": "2006 PSST 8",
+      "body": "Public Service Staffing Tribunal (FPSLREB predecessor)",
+      "issues": [
+        "staffinternal",
+        "serlo",
+        "performance"
+      ],
+      "what": "A staffing challenge clarified five broad categories of abuse of authority; the complainant did not prove abuse on the facts.",
+      "what_fr": "Une contestation de dotation a clarifié cinq catégories d’abus de pouvoir; la plaignante n’a pas démontré d’abus dans les faits.",
+      "factors": "Improper intention, inadequate evidence, improper result, legal error and unlawfully fettered discretion.",
+      "factors_fr": "Intention illégitime, preuve insuffisante, résultat irrégulier, erreur de droit et exercice entravé du pouvoir discrétionnaire.",
+      "outcome": "The complaint was dismissed. The categories help identify possible legal errors but are not proof by themselves.",
+      "outcome_fr": "La plainte a été rejetée. Les catégories aident à reconnaître les erreurs possibles, mais ne suffisent pas à les prouver.",
+      "url": "https://www.fpslreb-crtespf.gc.ca/en/resources/faq.html",
+      "grounds": [],
+      "status": "dismissed",
+      "scope": "Federal public service"
+    },
+    {
+      "id": "johnstone",
+      "title": "Canada (Attorney General) v. Johnstone",
+      "citation": "2014 FCA 110",
+      "body": "Federal Court of Appeal",
+      "issues": [
+        "accommodation",
+        "telework",
+        "benefits"
+      ],
+      "what": "A CBSA scheduling policy interfered with parental childcare obligations. The court upheld the family-status discrimination finding.",
+      "what_fr": "L’horaire de l’ASFC entravait les obligations parentales de garde d’enfants. La cour a confirmé la discrimination liée à la situation de famille.",
+      "factors": "Childcare legal responsibility, genuine need, available alternatives, non-trivial interference, and the employer’s accommodation response.",
+      "factors_fr": "Obligations légales de garde, besoin réel, solutions disponibles, entrave non négligeable et réponse de l’employeur.",
+      "outcome": "The court upheld the finding of family-status discrimination but varied some remedies, including how lost wages and employer-policy consultation were addressed.",
+      "outcome_fr": "La cour a confirmé la discrimination liée à la situation de famille, tout en modifiant certaines réparations, notamment les salaires perdus et la consultation sur la politique de l’employeur.",
+      "url": "https://www.canlii.org/en/ca/fca/doc/2014/2014fca110/2014fca110.html",
+      "grounds": [
+        "family"
+      ],
+      "status": "mixed",
+      "scope": "Federal public sector"
+    },
+    {
+      "id": "sidhu",
+      "title": "Sidhu & Kopeck v. International Longshore and Warehouse Union Local 500",
+      "citation": "2025 CHRT 11",
+      "body": "Canadian Human Rights Tribunal",
+      "issues": [
+        "benefits",
+        "union",
+        "group"
+      ],
+      "what": "Union dispatch and pension-related rules disadvantaged older workers based on age.",
+      "what_fr": "Des règles syndicales liées à la répartition du travail et aux pensions désavantageaient les personnes plus âgées.",
+      "factors": "Effect of neutral policy on older workers, treatment of people receiving pensions, the prohibited ground of age.",
+      "factors_fr": "Effet d’une politique neutre sur les travailleurs âgés, traitement des pensionnés et motif protégé de l’âge.",
+      "outcome": "The Tribunal found age discrimination at the liability stage; a separate remedy stage was required. The decision was subject to a Federal Court judicial-review application (T-833-25). Check current status before relying on it.",
+      "outcome_fr": "Le Tribunal a conclu à la discrimination fondée sur l’âge quant à la responsabilité; les réparations nécessitaient une autre étape. La décision faisait l’objet d’une demande de contrôle judiciaire à la Cour fédérale (T-833-25). Vérifiez le statut actuel.",
+      "url": "https://www.chrt-tcdp.gc.ca/en/human-rights/search-human-rights-decisions",
+      "grounds": [
+        "age"
+      ],
+      "status": "review",
+      "scope": "Other federally regulated employment"
+    },
+    {
+      "id": "molyneaux",
+      "title": "Molyneaux v. National Arts Centre Corporation",
+      "citation": "2025 CHRT 84",
+      "body": "Canadian Human Rights Tribunal",
+      "issues": [
+        "accommodation",
+        "wellbeing",
+        "performance"
+      ],
+      "what": "The employee alleged a failure to accommodate disabilities; the Tribunal found that the employer had provided reasonable solutions.",
+      "what_fr": "L’employé alléguait un refus d’adaptation lié à un handicap; le Tribunal a constaté des solutions raisonnables offertes par l’employeur.",
+      "factors": "Adverse effect, connection to disability, substance of accommodation requests and reasonableness of employer responses.",
+      "factors_fr": "Effet préjudiciable, lien avec le handicap, demandes d’adaptation et caractère raisonnable des réponses.",
+      "outcome": "The complaint was dismissed. A disability alone does not automatically prove an adverse impact or a failure to accommodate.",
+      "outcome_fr": "La plainte a été rejetée. Un handicap ne prouve pas à lui seul un effet défavorable ou un manquement à l’obligation d’adaptation.",
+      "url": "https://www.chrt-tcdp.gc.ca/en/about-us/publications/annual-report-2025",
+      "grounds": [
+        "disability"
+      ],
+      "status": "dismissed",
+      "scope": "Federal public sector"
+    },
+    {
+      "id": "vavilov",
+      "title": "Canada (Minister of Citizenship and Immigration) v. Vavilov",
+      "citation": "2019 SCC 65",
+      "body": "Supreme Court of Canada",
+      "issues": [
+        "staffinternal",
+        "staffexternal",
+        "discipline",
+        "classification",
+        "privacy",
+        "language",
+        "whistle"
+      ],
+      "what": "A leading administrative-law case about how courts review reasonableness of decisions and reasons. It was not an employment complaint.",
+      "what_fr": "Arrêt majeur sur le contrôle judiciaire de la raisonnabilité et des motifs. Il ne s’agissait pas d’une plainte d’emploi.",
+      "factors": "Rational and coherent reasons, legal and factual constraints, justification in light of the record and decision-making context.",
+      "factors_fr": "Motifs rationnels et cohérents, contraintes juridiques et factuelles, justification selon le dossier et le contexte.",
+      "outcome": "The decision under review was set aside; the case established the modern reasonableness framework.",
+      "outcome_fr": "La décision contrôlée a été annulée; l’arrêt a établi le cadre moderne de la raisonnabilité.",
+      "url": "https://www.scc-csc.ca/judgments-jugements/cb/2019/37748/",
+      "grounds": [],
+      "status": "precedent",
+      "scope": "General legal precedent"
+    },
+    {
+      "id": "dorais",
+      "title": "Dorais v. Canadian Armed Forces",
+      "citation": "2025 CHRT 96",
+      "body": "Canadian Human Rights Tribunal",
+      "issues": [
+        "accommodation",
+        "staffexternal",
+        "performance",
+        "wellbeing"
+      ],
+      "what": "The Canadian Armed Forces rejected an applicant for re-enrolment as a nurse based on an inadequate individual medical assessment. The Tribunal found disability discrimination even though the medical standard itself was not discriminatory.",
+      "what_fr": "Les Forces armées canadiennes ont refusé la réinscription d’un candidat infirmier après une évaluation médicale individuelle insuffisante. Le Tribunal a constaté une discrimination liée au handicap, bien que la norme médicale ne soit pas elle-même discriminatoire.",
+      "factors": "The evidence available to assess functional limitations, whether the applicant knew what medical proof was needed, individualized assessment and accommodation short of undue hardship.",
+      "factors_fr": "Les preuves nécessaires pour évaluer les limitations fonctionnelles, les renseignements médicaux demandés, l’évaluation individualisée et l’adaptation sans contrainte excessive.",
+      "outcome": "The Tribunal ordered $9,000 for pain and suffering and $4,000 as special compensation. This is a real monetary award, not a standard entitlement.",
+      "outcome_fr": "Le Tribunal a accordé 9 000 $ pour préjudice moral et 4 000 $ en indemnité spéciale. Il s’agit d’une réparation propre au dossier, et non d’un droit automatique.",
+      "url": "https://www.chrt-tcdp.gc.ca/en/about-us/publications/annual-report-2025",
+      "grounds": [
+        "disability"
+      ],
+      "status": "mixed",
+      "scope": "Federal public sector"
+    },
+    {
+      "id": "kim",
+      "title": "Kim v. Correctional Service Canada",
+      "citation": "2025 CHRT 39",
+      "body": "Canadian Human Rights Tribunal",
+      "issues": [
+        "reprisal",
+        "privacy",
+        "whistle"
+      ],
+      "what": "The complainant alleged retaliation due to previous human-rights complaints, based on a psychologist's risk report. The Tribunal found insufficient evidence that the psychologist knew of the earlier human-rights complaints.",
+      "what_fr": "Le plaignant alléguait des représailles liées à de précédentes plaintes en droits de la personne, en lien avec un rapport psychologique. Le Tribunal a constaté l’absence de preuve suffisante que le psychologue connaissait ces plaintes.",
+      "factors": "Actual or inferred knowledge of protected complaints, causal connection, access to records, competing explanations and evidence of retaliation.",
+      "factors_fr": "Connaissance réelle ou déduite des plaintes protégées, lien causal, accès au dossier, autres explications et preuves de représailles.",
+      "outcome": "The Tribunal dismissed the retaliation complaint. A judicial-review application was filed (Federal Court T-1964-25); check current status.",
+      "outcome_fr": "Le Tribunal a rejeté la plainte pour représailles. Une demande de contrôle judiciaire a été déposée (Cour fédérale T-1964-25); vérifiez le statut actuel.",
+      "url": "https://www.chrt-tcdp.gc.ca/en/about-us/publications/annual-report-2025",
+      "grounds": [
+        "retaliation"
+      ],
+      "status": "dismissed",
+      "scope": "Not an employment dispute"
+    },
+    {
+      "id": "abadi",
+      "title": "Abadi v. TST Overland Express",
+      "citation": "2023 CHRT 30",
+      "body": "Canadian Human Rights Tribunal",
+      "issues": [
+        "race",
+        "harassment",
+        "accommodation"
+      ],
+      "grounds": [
+        "race",
+        "religion",
+        "disability"
+      ],
+      "status": "mixed",
+      "scope": "Other federally regulated employment",
+      "what": "Long-running workplace harassment related to actual or perceived race, origin and religion; a later termination involved disability discrimination.",
+      "factors": "The employer failed to answer repeated harassment or justify refusing short medical leave. Race and religion were not proven factors in the termination itself.",
+      "outcome": "Harassment and disability discrimination established; the Tribunal awarded lost wages, $17,000 for pain and suffering and $12,000 in special compensation, with further calculations and interest.",
+      "what_fr": "Le harcèlement prolongé était lié à la race, à l’origine ou à la religion réelles ou perçues; le licenciement impliquait une discrimination liée au handicap.",
+      "factors_fr": "L’employeur n’a pas répondu au harcèlement ni justifié le refus de congé médical. La race et la religion n’ont pas été établies comme facteurs du licenciement.",
+      "outcome_fr": "Harcèlement et discrimination liée au handicap établis; salaires perdus, 17 000 $ pour préjudice moral et 12 000 $ d’indemnité spéciale, avec calculs et intérêts.",
+      "url": "https://www.chrt-tcdp.gc.ca/en/about-us/publications/annual-report-2023",
+      "sourceType": "official-summary"
+    },
+    {
+      "id": "johnson-membertou",
+      "title": "Johnson v. Membertou First Nation",
+      "citation": "2024 CHRT 16",
+      "body": "Canadian Human Rights Tribunal",
+      "issues": [
+        "race",
+        "discipline"
+      ],
+      "grounds": [
+        "race"
+      ],
+      "status": "dismissed",
+      "scope": "Other federally regulated employment",
+      "what": "A manager alleged her race, colour or origin played a role in termination and that a discriminatory preference policy existed.",
+      "factors": "The Tribunal accepted performance and insubordination as the reasons for dismissal; evidence did not establish the alleged link to protected grounds or discriminatory policy.",
+      "outcome": "Race-related employment complaint dismissed.",
+      "what_fr": "Une gestionnaire alléguait un congédiement fondé sur la race, la couleur ou l’origine et une politique préférentielle discriminatoire.",
+      "factors_fr": "Le Tribunal a retenu le rendement et l’insubordination; aucun lien avec un motif protégé ni politique discriminatoire n’a été démontré.",
+      "outcome_fr": "Plainte de discrimination raciale en emploi rejetée.",
+      "url": "https://www.chrt-tcdp.gc.ca/en/about-us/publications/annual-report-2024",
+      "sourceType": "official-summary"
+    },
+    {
+      "id": "sm-rcmp",
+      "title": "SM, SV and JR v. RCMP (later judicial review)",
+      "citation": "2024 CHRT 113; 2025 FC 1893",
+      "body": "Canadian Human Rights Tribunal / Federal Court",
+      "issues": [
+        "race",
+        "staffinternal"
+      ],
+      "grounds": [
+        "race"
+      ],
+      "status": "review",
+      "scope": "Federal public sector",
+      "what": "Three South Asian RCMP members alleged discriminatory promotion decisions. The Tribunal initially dismissed their complaints.",
+      "factors": "The initial decision found insufficient evidence linking the decisions to race. The Federal Court subsequently set it aside and returned three complaints to the Tribunal.",
+      "outcome": "Not a final unsuccessful discrimination case: the Tribunal's 2025 report confirms the 2024 dismissals were set aside by 2025 FC 1893.",
+      "what_fr": "Trois membres sud-asiatiques de la GRC alléguent une discrimination dans les promotions; les plaintes avaient été initialement rejetées.",
+      "factors_fr": "Le Tribunal estimait le lien avec la race insuffisamment prouvé. La Cour fédérale a ensuite annulé sa décision et renvoyé les plaintes.",
+      "outcome_fr": "Le rejet de 2024 n’est pas définitif : le rapport 2025 confirme l’annulation par 2025 CF 1893.",
+      "url": "https://www.chrt-tcdp.gc.ca/en/about-us/publications/annual-report-2025",
+      "sourceType": "official-summary"
+    },
+    {
+      "id": "bedirian",
+      "title": "Bedirian v. Treasury Board (Global Affairs Canada)",
+      "citation": "2024 FPSLREB 58",
+      "body": "Federal Public Sector Labour Relations and Employment Board",
+      "issues": [
+        "accommodation",
+        "discipline"
+      ],
+      "grounds": [
+        "religion"
+      ],
+      "status": "dismissed",
+      "scope": "Federal public service",
+      "what": "An employee challenged refusal of a religious exemption from the federal COVID-19 vaccination policy.",
+      "factors": "The Board found conscience-based objection insufficiently connected to religion, while other asserted religious grounds lacked consistent, persuasive evidence of sincere belief.",
+      "outcome": "Religious accommodation grievance dismissed.",
+      "what_fr": "Un employé conteste le refus d’une exemption religieuse à la politique fédérale de vaccination contre la COVID-19.",
+      "factors_fr": "Une objection de conscience n’était pas suffisamment liée à la religion; les autres motifs ne reposaient pas sur une preuve cohérente de croyances sincères.",
+      "outcome_fr": "Grief d’accommodement religieux rejeté.",
+      "url": "https://decisions.fpslreb-crtespf.gc.ca/fpslreb-crtespf/d/en/item/521187/index.do",
+      "sourceType": "full-decision"
+    },
+    {
+      "id": "lemay",
+      "title": "Lemay v. Treasury Board (Public Safety)",
+      "citation": "2024 FPSLREB 175",
+      "body": "Federal Public Sector Labour Relations and Employment Board",
+      "issues": [
+        "accommodation",
+        "discipline"
+      ],
+      "grounds": [
+        "religion"
+      ],
+      "status": "allowed",
+      "scope": "Federal public service",
+      "what": "An employee challenged the refusal of religious accommodation from the federal COVID-19 vaccination policy.",
+      "factors": "The Board accepted the sincerely held religious belief and found exclusion from work was a substantial interference. Remedies were reserved.",
+      "outcome": "Religious accommodation grievance allowed; remedy to be addressed separately.",
+      "what_fr": "Un employé conteste le refus d’un accommodement religieux à la politique fédérale de vaccination contre la COVID-19.",
+      "factors_fr": "La Commission a reconnu une croyance religieuse sincère et une atteinte importante découlant de l’exclusion du travail; la réparation a été réservée.",
+      "outcome_fr": "Grief d’accommodement religieux accueilli; réparation à examiner séparément.",
+      "url": "https://decisions.fpslreb-crtespf.gc.ca/fpslreb-crtespf/d/en/item/521313/index.do",
+      "sourceType": "full-decision"
+    },
+    {
+      "id": "harkness",
+      "title": "Harkness v. Deputy Head (Correctional Service of Canada)",
+      "citation": "2025 FPSLREB 7",
+      "body": "Federal Public Sector Labour Relations and Employment Board",
+      "issues": [
+        "staffinternal",
+        "accommodation"
+      ],
+      "grounds": [
+        "disability"
+      ],
+      "status": "mixed",
+      "scope": "Federal public service",
+      "what": "An employee contested a non-advertised appointment for abuse of authority, favouritism and alleged disability discrimination.",
+      "factors": "Missing records, procedural unfairness and deficient merit assessment established abuse of authority; the evidence did not establish discrimination or personal favouritism.",
+      "outcome": "Staffing complaint allowed and appointment revoked, but the discrimination allegation was not proven.",
+      "what_fr": "Une employée conteste une nomination non annoncée pour abus de pouvoir, favoritisme et discrimination alléguée fondée sur le handicap.",
+      "factors_fr": "Les dossiers incomplets et l’évaluation déficiente du mérite prouvent l’abus de pouvoir; la discrimination et le favoritisme ne sont pas démontrés.",
+      "outcome_fr": "Plainte de dotation accueillie et nomination révoquée, mais la discrimination n’est pas établie.",
+      "url": "https://decisions.fpslreb-crtespf.gc.ca/fpslreb-crtespf/d/en/item/521334/index.do",
+      "sourceType": "full-decision"
+    },
+    {
+      "id": "kemp",
+      "title": "Kemp v. Public Service Alliance of Canada",
+      "citation": "2024 FPSLREB 87",
+      "body": "Federal Public Sector Labour Relations and Employment Board",
+      "issues": [
+        "union",
+        "accommodation",
+        "harassment"
+      ],
+      "grounds": [
+        "disability"
+      ],
+      "status": "dismissed",
+      "scope": "Federal public service",
+      "what": "A member alleged unfair union representation after the union withdrew support for an underlying disability-related grievance.",
+      "factors": "The Board found no arguable breach of the union's duty of fair representation. It did not decide whether the employer's alleged disability discrimination occurred.",
+      "outcome": "Unfair-representation complaint dismissed, without a ruling on the merits of the employer discrimination allegation.",
+      "what_fr": "Un membre allègue une représentation syndicale injuste après le retrait du soutien à un grief lié au handicap.",
+      "factors_fr": "La Commission n’a trouvé aucune violation défendable du devoir de représentation juste; elle n’a pas statué sur la discrimination alléguée par l’employeur.",
+      "outcome_fr": "Plainte de représentation rejetée, sans décision sur le fond de l’allégation contre l’employeur.",
+      "url": "https://decisions.fpslreb-crtespf.gc.ca/fpslreb-crtespf/d/en/item/518891/index.do",
+      "sourceType": "full-decision"
+    },
+    {
+      "id": "milinkovich",
+      "title": "Milinkovich v. Treasury Board (Transport Canada)",
+      "citation": "2024 FPSLREB 50",
+      "body": "Federal Public Sector Labour Relations and Employment Board",
+      "issues": [
+        "accommodation",
+        "telework"
+      ],
+      "grounds": [
+        "family"
+      ],
+      "status": "dismissed",
+      "scope": "Federal public service",
+      "what": "Employee challenged shift scheduling and denial of accommodation for childcare responsibilities.",
+      "factors": "The Board found no serious efforts to reconcile childcare conflicts and, applying an alternative legal test, no adverse employment-related impact.",
+      "outcome": "Family-status accommodation grievance dismissed.",
+      "what_fr": "Un employé conteste les horaires et le refus d’accommodement pour obligations de garde d’enfants.",
+      "factors_fr": "La Commission a constaté l’absence d’efforts sérieux de conciliation et, selon l’autre critère juridique, aucun effet préjudiciable lié à l’emploi.",
+      "outcome_fr": "Grief d’accommodement pour situation de famille rejeté.",
+      "url": "https://www.fpslreb-crtespf.gc.ca/en/about-us/annual-reports/2024-2025/fpslreb-ar-2024-2025.html",
+      "sourceType": "official-summary"
+    },
+    {
+      "id": "bergevin",
+      "title": "Commission scolaire régionale de Chambly v. Bergevin",
+      "citation": "[1994] 2 SCR 525",
+      "body": "Supreme Court of Canada",
+      "issues": [
+        "accommodation",
+        "group"
+      ],
+      "grounds": [
+        "religion"
+      ],
+      "status": "allowed",
+      "scope": "General legal precedent",
+      "what": "Jewish teachers lost pay when observing Yom Kippur, unlike employees whose religious holidays matched the work calendar.",
+      "factors": "A neutral work calendar had a discriminatory effect; the collective agreement and past practice showed paid accommodation was feasible without undue hardship.",
+      "outcome": "The Supreme Court upheld the employees' entitlement to reasonable accommodation and pay for the religious observance.",
+      "what_fr": "Des enseignants juifs perdaient leur salaire à Yom Kippour, contrairement aux collègues dont les fêtes correspondaient au calendrier.",
+      "factors_fr": "Le calendrier neutre avait un effet discriminatoire; la convention et la pratique antérieure permettaient l’accommodement sans contrainte excessive.",
+      "outcome_fr": "La Cour suprême a confirmé le droit à un accommodement raisonnable et à la rémunération pour cette journée.",
+      "url": "https://www.scc-csc.ca/cases-dossiers/search-recherche/23188/",
+      "sourceType": "official-docket"
+    },
+    {
+      "id": "omalley",
+      "title": "Ontario Human Rights Commission v. Simpsons-Sears Ltd. (O'Malley)",
+      "citation": "[1985] 2 SCR 536",
+      "body": "Supreme Court of Canada",
+      "issues": [
+        "accommodation",
+        "group"
+      ],
+      "grounds": [
+        "religion"
+      ],
+      "status": "allowed",
+      "scope": "General legal precedent",
+      "what": "A Seventh-day Adventist employee was moved from full-time to part-time work because she could not work Saturdays.",
+      "factors": "The Court recognized adverse-effect religious discrimination from a neutral scheduling rule and required accommodation unless undue hardship was shown.",
+      "outcome": "The Supreme Court awarded compensation for lost full-time earnings.",
+      "what_fr": "Une employée adventiste du septième jour a été transférée d’un poste à temps plein à un poste à temps partiel parce qu’elle ne pouvait travailler le samedi.",
+      "factors_fr": "La Cour a reconnu une discrimination religieuse indirecte découlant d’un horaire neutre et exigé l’accommodement, sauf contrainte excessive.",
+      "outcome_fr": "La Cour suprême a ordonné une indemnisation pour la perte de revenus du poste à temps plein.",
+      "url": "https://www.scc-csc.ca/cases-dossiers/search-recherche/17328/",
+      "sourceType": "official-docket"
+    }
+  ]
+}
