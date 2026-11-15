@@ -90,14 +90,17 @@ html[lang="en"] .recourse-fr,html[lang="fr"] .recourse-en{display:none!important
 <div><label for="decision-search"><span class="recourse-en">Search decisions, factors or possible outcomes</span><span class="recourse-fr" lang="fr">Rechercher des décisions, facteurs ou résultats possibles</span></label><input type="search" id="decision-search" autocomplete="off" placeholder="e.g. reinstatement, discrimination, staffing, abuse of authority"></div>
 <div><label for="decision-topic"><span class="recourse-en">Concern</span><span class="recourse-fr" lang="fr">Préoccupation</span></label><select id="decision-topic"><option value="">All concerns / Toutes les préoccupations</option></select></div>
 <div><label for="decision-body"><span class="recourse-en">Decision-maker</span><span class="recourse-fr" lang="fr">Organisme décisionnel</span></label><select id="decision-body"><option value="">All bodies / Tous les organismes</option></select></div>
+<div><label for="case-ground"><span class="recourse-en">Ground or subject</span><span class="recourse-fr" lang="fr">Motif ou sujet</span></label><select id="case-ground"><option value="">All grounds / Tous les motifs</option></select></div>
+<div><label for="case-status"><span class="recourse-en">Outcome</span><span class="recourse-fr" lang="fr">Résultat</span></label><select id="case-status"><option value="">All outcomes / Tous les résultats</option></select></div>
+<div><label for="case-scope"><span class="recourse-en">Employment context</span><span class="recourse-fr" lang="fr">Contexte d’emploi</span></label><select id="case-scope"><option value="">All contexts / Tous les contextes</option></select></div>
 </div>
 <h3><span class="recourse-en">What can the decision-maker actually order?</span><span class="recourse-fr" lang="fr">Que peut réellement ordonner l’organisme décisionnel?</span></h3>
 <p><span class="recourse-en">Remedies are powers granted by law—not guaranteed results. Some processes have no authority to award money or reinstate an employee.</span><span class="recourse-fr" lang="fr">Les réparations sont des pouvoirs prévus par la loi, pas des résultats garantis. Certains processus ne peuvent accorder d’argent ni réintégrer un employé.</span></p>
 <p id="remedy-count" class="hint" role="status" aria-live="polite"></p>
 <div class="remedy-grid" id="remedy-results"></div><button type="button" class="btn secondary" id="remedy-more"><span class="recourse-en">Show all remedy pathways</span><span class="recourse-fr" lang="fr">Afficher toutes les voies de réparation</span></button>
-<h3><span class="recourse-en">Selected real cases and factors considered</span><span class="recourse-fr" lang="fr">Décisions réelles sélectionnées et facteurs examinés</span></h3>
+<h3><span class="recourse-en">Case-law library: outcomes and reasons</span><span class="recourse-fr" lang="fr">Jurisprudence : résultats et motifs</span></h3>
 <p><span class="recourse-en">These summaries are for learning. A case may come from a different employment jurisdiction and may not be directly applicable.</span><span class="recourse-fr" lang="fr">Ces résumés servent à comprendre le droit. Une décision peut provenir d’un autre régime d’emploi et ne pas s’appliquer directement.</span></p>
-<p id="case-count" class="hint" role="status" aria-live="polite"></p><div class="case-grid" id="case-results"></div>
+<p id="case-count" class="hint" role="status" aria-live="polite"></p><div class="case-grid" id="case-results"></div><p><button type="button" class="btn secondary" id="case-download"><span class="recourse-en">Download matching cases (CSV)</span><span class="recourse-fr" lang="fr">Télécharger les décisions affichées (CSV)</span></button></p><p class="hint"><span class="recourse-en">This reviewed selection is not exhaustive. Check appeals and later decisions. Other federally regulated employers and broader legal precedents are identified separately.</span><span class="recourse-fr" lang="fr">Cette sélection n’est pas exhaustive. Vérifiez les appels et les décisions ultérieures. Les autres employeurs sous réglementation fédérale et les précédents juridiques plus larges sont identifiés séparément.</span></p>
 <h3><span class="recourse-en">Search the official and free decision databases</span><span class="recourse-fr" lang="fr">Rechercher dans les bases officielles et gratuites</span></h3>
 <p><span class="recourse-en">For newer or additional decisions, open the relevant organization's decision database and enter your topic or a case citation. The tool above searches a reviewed local index and does not claim to search the entire internet.</span><span class="recourse-fr" lang="fr">Pour des décisions plus récentes ou supplémentaires, ouvrez la base de l’organisme compétent et entrez un thème ou une référence. L’outil ci-dessus cherche dans un index local vérifié et non dans tout Internet.</span></p>
 <ul class="decision-portals" id="decision-portals"></ul>
@@ -368,31 +371,50 @@ $('language').addEventListener('click',()=>{translate();});translate();if(new UR
 
 </script>
 <script>
+
 (()=>{'use strict';
 const D=JSON.parse(document.getElementById('data-json').textContent);
-const $=id=>document.getElementById(id),T=(a,b)=>document.documentElement.lang==='fr'?b:a,E=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const $=id=>document.getElementById(id);
+const T=(a,b)=>document.documentElement.lang==='fr'?b:a;
+const E=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const link=(url,label)=>'<a href="'+E(url)+'" target="_blank" rel="noopener noreferrer">'+E(label)+'</a>';
-let showAll=false;
 const topic=$('decision-topic'),body=$('decision-body'),q=$('decision-search');
+const ground=$('case-ground'),status=$('case-status'),scope=$('case-scope');
+let showAll=false;
+const groundNames={race:['Race, colour or origin','Race, couleur ou origine'],religion:['Religion or creed','Religion ou croyance'],disability:['Disability','Handicap'],sex:['Sex','Sexe'],age:['Age','Âge'],family:['Family status','Situation de famille'],retaliation:['Retaliation','Représailles']};
+const statusNames={allowed:['Allowed','Accueilli'],dismissed:['Dismissed','Rejeté'],mixed:['Partially successful or mixed findings','Partiellement accueilli ou conclusions mixtes'],review:['Judicial review / decision set aside or challenged','Contrôle judiciaire / décision annulée ou contestée'],precedent:['General legal precedent','Précédent juridique général']};
+const scopeNames={'Federal public service':['Federal public service','Fonction publique fédérale'],'Federal public sector':['Other federal public-sector employment','Autre emploi du secteur public fédéral'],'Other federally regulated employment':['Other federally regulated employment','Autre emploi de compétence fédérale'],'General legal precedent':['General legal precedent','Précédent juridique général'],'Not an employment dispute':['Not an employment dispute','Litige non lié à l’emploi']};
 for(const x of D.issues){const o=document.createElement('option');o.value=x.id;o.textContent=T(x.en,x.fr);topic.appendChild(o)}
 for(const name of [...new Set(D.cases.map(x=>x.body))].sort()){const o=document.createElement('option');o.value=name;o.textContent=name;body.appendChild(o)}
+for(const [el,names] of [[ground,groundNames],[status,statusNames],[scope,scopeNames]])for(const key of Object.keys(names)){const o=document.createElement('option');o.value=key;o.textContent=T(...names[key]);el.appendChild(o)}
+const text=x=>[x.en,x.fr,x.body,x.body_fr,x.can,x.can_fr,x.limits,x.limits_fr,x.factors,x.factors_fr,x.title,x.citation,x.what,x.what_fr,x.outcome,x.outcome_fr,x.scope,x.status,x.sourceType,...(x.grounds||[])].filter(Boolean).join(' ').toLocaleLowerCase();
+const caseMatch=x=>(!topic.value||x.issues.includes(topic.value))&&(!body.value||x.body===body.value)&&(!ground.value||x.grounds?.includes(ground.value))&&(!status.value||x.status===status.value)&&(!scope.value||x.scope===scope.value)&&(!q.value.trim()||text(x).includes(q.value.trim().toLocaleLowerCase()));
 function render(){
 for(const o of topic.options){if(!o.value)continue;const x=D.issues.find(y=>y.id===o.value);o.textContent=T(x.en,x.fr)}
-const query=q.value.trim().toLocaleLowerCase(),focus=topic.value,decisionBody=body.value;
-const text=x=>[x.en,x.fr,x.body,x.body_fr,x.can,x.can_fr,x.limits,x.limits_fr,x.factors,x.factors_fr,x.title,x.citation,x.what,x.what_fr,x.outcome,x.outcome_fr].filter(Boolean).join(' ').toLocaleLowerCase();
+for(const [el,names] of [[ground,groundNames],[status,statusNames],[scope,scopeNames]])for(const o of el.options){if(o.value&&names[o.value])o.textContent=T(...names[o.value])}
+const query=q.value.trim().toLocaleLowerCase(),focus=topic.value;
 const remedies=D.remedies.filter(x=>(!focus||x.issues.includes(focus))&&(!query||text(x).includes(query)));
-const cases=D.cases.filter(x=>(!focus||x.issues.includes(focus))&&(!decisionBody||x.body===decisionBody)&&(!query||text(x).includes(query)));
+const cases=D.cases.filter(caseMatch);
 $('remedy-count').textContent=T(remedies.length+' remedy pathway(s) match.',remedies.length+' voie(s) de réparation correspondent.');
-$('case-count').textContent=T(cases.length+' verified examples match.',cases.length+' exemples vérifiés correspondent.');
+$('case-count').textContent=T(cases.length+' of '+D.cases.length+' indexed cases match.',cases.length+' décisions correspondantes sur '+D.cases.length+'.');
 const visible=showAll?remedies:remedies.slice(0,6);
-$('remedy-more').hidden=remedies.length<=6;$('remedy-more').textContent=T(showAll?'Show fewer pathways':'Show all '+remedies.length+' pathways',showAll?'Afficher moins de voies':'Afficher les '+remedies.length+' voies');
+$('remedy-more').hidden=remedies.length<=6;
+$('remedy-more').textContent=T(showAll?'Show fewer pathways':'Show all '+remedies.length+' pathways',showAll?'Afficher moins de voies':'Afficher les '+remedies.length+' voies');
 $('remedy-results').innerHTML=visible.map(x=>'<article class="card"><h4>'+E(T(x.en,x.fr))+'</h4><p class="case-tag">'+E(T(x.body,x.body_fr))+'</p><p><strong>'+E(T('What may be ordered:','Ce qui peut être ordonné :'))+'</strong> '+E(T(x.can,x.can_fr))+'</p><p><strong>'+E(T('What this cannot guarantee:','Ce qui n’est pas garanti :'))+'</strong> '+E(T(x.limits,x.limits_fr))+'</p><details><summary>'+E(T('Factors considered','Facteurs examinés'))+'</summary><p>'+E(T(x.factors,x.factors_fr))+'</p></details><p>'+link(D.sources[x.source],T('Read the official rule or guidance','Consulter la règle ou le guide officiel'))+'</p></article>').join('')||'<p>'+E(T('No matching pathway. Clear filters or try another term.','Aucune voie correspondante. Effacez les filtres ou essayez un autre mot.'))+'</p>';
-$('case-results').innerHTML=cases.map(x=>'<article class="card"><h4>'+E(x.title)+'</h4><p class="case-tag">'+E(x.citation)+'</p><p class="hint">'+E(x.body)+'</p><p>'+E(T(x.what,x.what_fr))+'</p><p><strong>'+E(T('Factors considered:','Facteurs examinés :'))+'</strong> '+E(T(x.factors,x.factors_fr))+'</p><p><strong>'+E(T('What happened:','Résultat :'))+'</strong> '+E(T(x.outcome,x.outcome_fr))+'</p><p>'+link(x.url,T('Read the cited decision or official summary','Lire la décision citée ou le résumé officiel'))+'</p></article>').join('')||'<p>'+E(T('No matching case in this selected index. Try an official database below.','Aucune décision correspondante dans cet index. Consultez une base officielle ci-dessous.'))+'</p>';
+$('case-results').innerHTML=cases.map(x=>'<article class="card"><h4>'+E(x.title)+'</h4><p class="case-tag">'+E(x.citation)+' · '+E(x.body)+'</p><p><strong>'+E(T('Outcome:','Résultat :'))+'</strong> '+E(T(...(statusNames[x.status]||['Decision','Décision'])))+'</p><p class="hint">'+E(T(...(scopeNames[x.scope]||[x.scope,x.scope])))+' · '+E((x.grounds||[]).map(k=>T(...(groundNames[k]||[k,k]))).join(', ')||T('Other legal issue','Autre question juridique'))+'</p><p>'+E(T(x.what,x.what_fr))+'</p><p><strong>'+E(T('Why the case succeeded or did not:','Pourquoi la cause a été accueillie ou rejetée :'))+'</strong> '+E(T(x.factors,x.factors_fr))+'</p><p><strong>'+E(T('Decision and remedy:','Décision et réparation :'))+'</strong> '+E(T(x.outcome,x.outcome_fr))+'</p><p>'+link(x.url,T(x.sourceType==='full-decision'?'Read full decision':'Read official case record or summary',x.sourceType==='full-decision'?'Lire la décision intégrale':'Lire le dossier ou le résumé officiel'))+'</p></article>').join('')||'<p>'+E(T('No matching cases. Clear a filter or search an official database below.','Aucune décision correspondante. Effacez un filtre ou consultez une base officielle ci-dessous.'))+'</p>';
 $('decision-portals').innerHTML=D.decisionPortals.map(x=>'<li>'+link(x.url,T(x.en,x.fr))+'<small>'+E(T(x.body,x.body_fr))+'</small></li>').join('');
 }
-for(const id of ['decision-search','decision-topic','decision-body'])$(id).addEventListener(id==='decision-search'?'input':'change',()=>{showAll=false;render()});
+for(const id of ['decision-search','decision-topic','decision-body','case-ground','case-status','case-scope'])$(id).addEventListener(id==='decision-search'?'input':'change',()=>{showAll=false;render()});
 $('remedy-more').addEventListener('click',()=>{showAll=!showAll;render()});
 $('language').addEventListener('click',render);
+$('case-download').addEventListener('click',()=>{
+const rows=D.cases.filter(caseMatch);
+const cols=['Citation','Case','Decision-maker','Protected ground','Outcome category','Employment context','Issue','Reasons','Decision and remedy','Official source','Source type'];
+const quote=v=>'"'+String(v??'').replace(/"/g,'""').replace(/\s+/g,' ').trim()+'"';
+const csv='\uFEFF'+[cols,...rows.map(x=>[x.citation,x.title,x.body,(x.grounds||[]).join('; '),x.status,x.scope,T(x.what,x.what_fr),T(x.factors,x.factors_fr),T(x.outcome,x.outcome_fr),x.url,x.sourceType])].map(row=>row.map(quote).join(',')).join('\r\n');
+const blob=new Blob([csv],{type:'text/csv;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');
+a.href=url;a.download='recourse-case-law.csv';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
+});
 render();
 })();
 </script>
