@@ -3,111 +3,81 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="Independent bilingual, equity-informed public-service recourse assistant: practical steps, comparable decisions, and private peer-outreach guidance.">
+<meta name="description" content="A supportive, equity-informed assistant to explore workplace concerns, understand recourse options and prepare a message to share.">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="color-scheme" content="light">
-<title>Recourse Assistant | Equity-informed workplace support / Assistant aux recours</title>
-<link rel="stylesheet" href="./companion.css?v=20261116-1">
-<script src="./companion.js?v=20261116-1" defer></script>
+<title>Recourse Assistant / Assistant aux recours</title>
+<link rel="stylesheet" href="./companion.css?v=20261116-3">
+<script src="./companion.js?v=20261116-3" defer></script>
 </head>
 <body>
-<a class="skip" href="#main" data-en="Skip to the assistant" data-fr="Aller à l'assistant">Skip to the assistant</a>
-<header class="topbar"><div class="wrap head">
-<a class="brand" href="../"><span class="logo" aria-hidden="true">R</span><span><strong data-en="Recourse Assistant" data-fr="Assistant aux recours">Recourse Assistant</strong><small data-en="Independent support for federal workers" data-fr="Soutien indépendant pour le personnel fédéral">Independent support for federal workers</small></span></a>
-<div class="top-actions"><a class="headlink" href="../" data-en="Recourse guide" data-fr="Guide des recours">Recourse guide</a><a class="headlink" href="../../" data-en="ARAN network" data-fr="Réseau RAAR">ARAN network</a><button id="lang-btn" class="lang-btn" type="button" aria-label="Switch language to French / Changer la langue en français">Français</button></div>
+<a class="skip-link" href="#conversation" data-en="Skip to the conversation" data-fr="Passer à la conversation">Skip to the conversation</a>
+<header class="topbar"><div class="page-width top-row">
+ <a href="../" class="brand" aria-label="Recourse guide / Guide des recours"><span class="mark" aria-hidden="true">R</span><span data-en="Recourse Assistant" data-fr="Assistant aux recours">Recourse Assistant</span></a>
+ <div class="header-links"><a href="../" data-en="Recourse guide" data-fr="Guide des recours">Recourse guide</a><button type="button" id="switch-language" lang="fr" aria-label="Change language / Changer de langue">Français</button></div>
 </div></header>
-<main id="main" class="wrap">
-<section class="intro" aria-labelledby="page-title">
-<p class="eyebrow" data-en="Independent · Equity-informed · Free to use" data-fr="Indépendant · Sensible à l'équité · Gratuit">Independent · Equity-informed · Free to use</p>
-<h1 id="page-title" data-en="You deserve clear options and someone to turn to." data-fr="Vous méritez des recours clairs et du soutien.">You deserve clear options and someone to turn to.</h1>
-<p class="lead" data-en="Ask about racism, disability discrimination, religious accommodation, retaliation or another workplace concern. Explore real decisions, identify practical steps, and learn how to approach a trusted peer who has experience with recourse processes." data-fr="Parlez de racisme, de discrimination liée au handicap, d'accommodement religieux, de représailles ou d'un autre problème au travail. Explorez les décisions, les prochaines étapes et comment joindre une personne de confiance ayant vécu un processus de recours.">Ask about racism, disability discrimination, religious accommodation, retaliation or another workplace concern. Explore real decisions, identify practical steps, and learn how to approach a trusted peer who has experience with recourse processes.</p>
-<div class="trustline"><span data-en="No account" data-fr="Sans compte">No account</span><span data-en="No paid AI service" data-fr="Aucun service d'IA payant">No paid AI service</span><span data-en="English and French" data-fr="Français et anglais">English and French</span><span data-en="Your story is not published" data-fr="Votre histoire n'est pas publiée">Your story is not published</span></div>
-</section>
-<div class="layout">
-<div class="workspace">
-<section class="panel chat-panel" aria-labelledby="chat-heading">
-<div class="panel-head"><div><p class="micro" data-en="ONE PLACE TO START" data-fr="UN SEUL POINT DE DÉPART">ONE PLACE TO START</p><h2 id="chat-heading" data-en="Ask the Recourse Assistant" data-fr="Consulter l'assistant aux recours">Ask the Recourse Assistant</h2></div><span class="private-indicator" data-en="Private in this tab" data-fr="Privé dans cet onglet">Private in this tab</span></div>
-<div id="chat-history" class="chat-history" role="log" aria-live="polite" aria-relevant="additions text" aria-label="Conversation / Conversation"></div>
-<div class="prompt-area">
-<p class="field-label" data-en="Common questions — choose one, or write your own" data-fr="Questions fréquentes — choisissez ou écrivez la vôtre">Common questions — choose one, or write your own</p>
-<div class="quick" id="quick-questions">
-<button type="button" data-topic="race" data-en="I experienced racism" data-fr="J'ai vécu du racisme">I experienced racism</button>
-<button type="button" data-topic="disability" data-en="My accommodation was refused" data-fr="Mon accommodement a été refusé">My accommodation was refused</button>
-<button type="button" data-topic="religion" data-en="My religious needs were dismissed" data-fr="Mes besoins religieux sont ignorés">My religious needs were dismissed</button>
-<button type="button" data-topic="harassment" data-en="I'm experiencing harassment" data-fr="Je subis du harcèlement">I'm experiencing harassment</button>
-<button type="button" data-topic="staffing" data-en="I think a staffing decision was unfair" data-fr="Une décision de dotation me semble injuste">I think a staffing decision was unfair</button>
-<button type="button" data-topic="reprisal" data-en="I'm worried about reprisal" data-fr="Je crains des représailles">I'm worried about reprisal</button>
-<button type="button" data-topic="cases" data-en="Find cases like mine" data-fr="Trouver des causes semblables">Find cases like mine</button>
-<button type="button" data-topic="peer" data-en="Connect with a peer" data-fr="Échanger avec un pair">Connect with a peer</button>
-</div>
-<form id="ask-form">
-<label for="question" class="field-label" data-en="What would you like help understanding?" data-fr="Que souhaitez-vous mieux comprendre?">What would you like help understanding?</label>
-<textarea id="question" rows="3" maxlength="1500" placeholder="Describe the concern without names, medical details or identifying information." aria-describedby="privacy-tip"></textarea>
-<div class="form-actions"><button type="submit" class="primary" id="ask-button" data-en="Find my options" data-fr="Voir mes recours">Find my options</button><button type="button" id="reset-chat" class="quiet" data-en="Clear conversation" data-fr="Effacer la conversation">Clear conversation</button></div>
-</form>
-<p class="privacy-tip" id="privacy-tip" data-en="Use general descriptions, not names, case numbers, medical records or confidential workplace documents. Guidance runs in your browser; no conversation is submitted to ARAN. Case searches send only search terms to an independent legal-data provider when you choose that feature." data-fr="Utilisez des descriptions générales, sans noms, numéros de dossier, dossiers médicaux ni documents de travail confidentiels. Les conseils s'affichent dans votre navigateur; aucune conversation n'est envoyée au RAAR. Une recherche juridique externe transmet uniquement vos mots-clés lorsque vous l'utilisez.">Use general descriptions, not names, case numbers, medical records or confidential workplace documents. Guidance runs in your browser; no conversation is submitted to ARAN. Case searches send only search terms to an independent legal-data provider when you choose that feature.</p>
-</div></section>
-
-<section class="panel result-panel" aria-labelledby="options-heading" id="results">
-<div class="panel-head"><div><p class="micro" data-en="YOUR NEXT STEPS" data-fr="VOS PROCHAINES ÉTAPES">YOUR NEXT STEPS</p><h2 id="options-heading" data-en="Possible paths and practical steps" data-fr="Recours possibles et démarches utiles">Possible paths and practical steps</h2></div><button type="button" class="quiet" id="copy-plan" data-en="Copy summary" data-fr="Copier le résumé">Copy summary</button></div>
-<div id="plan-content" aria-live="polite">
-<p class="empty" data-en="Choose an issue or ask a question to see tailored routes, things to document, what to avoid, and sources." data-fr="Choisissez une question pour voir des recours possibles, les documents à conserver, les précautions et les sources.">Choose an issue or ask a question to see tailored routes, things to document, what to avoid, and sources.</p></div>
+<main class="page-width">
+<section class="introduction">
+ <p class="eyebrow" data-en="EQUITY-INFORMED WORKPLACE SUPPORT" data-fr="SOUTIEN ÉCLAIRÉ PAR L'ÉQUITÉ">EQUITY-INFORMED WORKPLACE SUPPORT</p>
+ <h1 data-en="Tell me what's happening. We'll work through it." data-fr="Parlez-moi de ce qui se passe. Examinons vos options.">Tell me what's happening. We'll work through it.</h1>
+ <p data-en="Whether it's racism, disability discrimination, religious accommodation or another workplace concern, you can talk it through, understand your options and prepare a message to share with someone you choose." data-fr="Qu'il s'agisse de racisme, de discrimination fondée sur le handicap, d'accommodement religieux ou d'une autre préoccupation au travail, vous pouvez en parler, comprendre vos recours et préparer un message à transmettre à la personne de votre choix.">Whether it's racism, disability discrimination, religious accommodation or another workplace concern, you can talk it through, understand your options and prepare a message to share with someone you choose.</p>
 </section>
 
-<section class="panel cases-panel" id="similar-cases" aria-labelledby="case-heading">
-<div class="panel-head"><div><p class="micro" data-en="LEARN FROM DECISIONS" data-fr="TIRER DES LEÇONS DES DÉCISIONS">LEARN FROM DECISIONS</p><h2 id="case-heading" data-en="Decisions worth comparing" data-fr="Décisions à comparer">Decisions worth comparing</h2></div><span id="case-count" class="case-count"></span></div>
-<p class="meta" data-en="See what the decision-maker examined, what was decided, and whether the source is a full decision or only a summary. An unsuccessful case does not mean someone else's experience was unreal." data-fr="Voyez les éléments examinés, les conclusions et si la source est une décision intégrale ou un résumé. Une plainte rejetée ne signifie pas que le vécu d'une autre personne est irréel.">See what the decision-maker examined, what was decided, and whether the source is a full decision or only a summary. An unsuccessful case does not mean someone else's experience was unreal.</p>
-<div class="casebar"><label for="case-keywords" data-en="Search cases" data-fr="Rechercher des décisions">Search cases</label><input id="case-keywords" type="search" placeholder="e.g. race promotion disability religion"><label for="case-outcome" data-en="Outcome" data-fr="Résultat">Outcome</label><select id="case-outcome"><option value="" data-en="Any" data-fr="Tous">Any</option><option value="allowed" data-en="Allowed" data-fr="Accueillie">Allowed</option><option value="dismissed" data-en="Dismissed" data-fr="Rejetée">Dismissed</option><option value="mixed" data-en="Mixed" data-fr="Mixte">Mixed</option><option value="review" data-en="Under review" data-fr="En révision">Under review</option><option value="procedural" data-en="Procedural" data-fr="Procédurale">Procedural</option></select></div>
-<div id="case-results" class="case-grid" aria-live="polite"></div>
-<div class="case-footer"><button type="button" id="more-cases" class="quiet" hidden data-en="Show more related cases" data-fr="Afficher d'autres décisions">Show more related cases</button><a href="../cases/#all-published-decisions" data-en="Search all published decisions" data-fr="Rechercher toutes les décisions publiées">Search all published decisions</a></div>
-</section>
+<section id="conversation" class="conversation" aria-labelledby="conversation-heading">
+<div class="conversation-top">
+ <h2 id="conversation-heading" data-en="Your conversation" data-fr="Votre conversation">Your conversation</h2>
+ <button type="button" id="clear" class="text-button" data-en="Start over" data-fr="Recommencer">Start over</button>
 </div>
+<div id="conversation-log" class="conversation-log" role="log" aria-live="polite" aria-relevant="additions text"></div>
+<div class="entry-area">
+ <p class="field-label" data-en="You can start with a topic" data-fr="Vous pouvez commencer par un sujet">You can start with a topic</p>
+ <div id="suggestions" class="suggestions">
+  <button type="button" data-topic="race" data-en="I'm experiencing racism" data-fr="Je vis du racisme">I'm experiencing racism</button>
+  <button type="button" data-topic="disability" data-en="My accommodation was denied" data-fr="Mon accommodement a été refusé">My accommodation was denied</button>
+  <button type="button" data-topic="religion" data-en="My religious needs aren't respected" data-fr="Mes besoins religieux ne sont pas respectés">My religious needs aren't respected</button>
+  <button type="button" data-topic="harassment" data-en="I'm being harassed" data-fr="Je vis du harcèlement">I'm being harassed</button>
+ </div>
+ <form id="message-form">
+  <label class="field-label" for="user-message" data-en="Or tell me in your own words" data-fr="Ou expliquez-moi dans vos mots">Or tell me in your own words</label>
+  <textarea id="user-message" rows="3" maxlength="1600" aria-describedby="privacy-text" data-placeholder-en="What happened, and what would you like help with?" data-placeholder-fr="Que s'est-il passé et de quel soutien avez-vous besoin?"></textarea>
+  <div class="send-row">
+   <button type="submit" class="primary-button" id="send" data-en="Send message" data-fr="Envoyer le message">Send message</button>
+   <span id="assistant-state" class="state-text" role="status" aria-live="polite"></span>
+  </div>
+ </form>
+</div>
+</section>
 
-<aside class="side" aria-label="Support and tools / Soutien et outils">
-<section class="panel human-panel" id="peer-support" aria-labelledby="peer-heading">
-<p class="micro" data-en="PEOPLE HELP PEOPLE" data-fr="SOUTIEN ENTRE PERSONNES">PEOPLE HELP PEOPLE</p>
-<h2 id="peer-heading" data-en="Connect with someone who has been there" data-fr="Échanger avec une personne ayant vécu un recours">Connect with someone who has been there</h2>
-<p data-en="Choose someone you trust, such as a colleague with recourse experience, an employee network you already belong to, or a union representative. You decide whom to contact. This website does not collect, match, forward, or report your experience to ARAN. Peers can share what helped them, not provide legal advice." data-fr="Choisissez une personne de confiance, par exemple un collègue ayant vécu un recours, un réseau d’employés dont vous faites déjà partie ou une personne syndicale. Vous choisissez le destinataire. Ce site ne recueille, ne transmet et ne signale aucune expérience au RAAR et n’effectue aucun jumelage. Les pairs partagent leur expérience sans fournir de conseils juridiques.">Choose someone you trust, such as a colleague with recourse experience, an employee network you already belong to, or a union representative. You decide whom to contact. This website does not collect, match, forward, or report your experience to ARAN. Peers can share what helped them, not provide legal advice.</p>
-<div class="peer-actions"><button type="button" class="primary" id="request-peer" data-en="Prepare a message for a trusted peer" data-fr="Préparer un message à une personne de confiance">Prepare a message for a trusted peer</button><button type="button" class="outline" id="offer-peer" data-en="Prepare an offer to share experience" data-fr="Préparer une offre de partage d'expérience">Prepare an offer to share experience</button></div>
-<div id="peer-draft" class="peer-draft" hidden>
-<label class="field-label" for="peer-copy-text" data-en="Your optional outreach message (not sent anywhere)" data-fr="Votre message facultatif (non envoyé)">Your optional outreach message (not sent anywhere)</label>
-<textarea id="peer-copy-text" rows="7" readonly aria-describedby="peer-feedback"></textarea>
-<p id="peer-feedback" class="meta" role="status" aria-live="polite"></p>
-</div>
-<p class="meta" data-en="Messages are prepared only in your browser. Nothing is sent to ARAN, a peer, or anyone else. You decide whether to copy a message and whom to contact. Do not include confidential case details. This is not a formal complaint." data-fr="Les messages sont rédigés uniquement dans votre navigateur. Rien n’est transmis au RAAR, à des pairs ni à quiconque. Vous choisissez si vous souhaitez copier un message et qui contacter. Ne communiquez aucun détail confidentiel. Ce n’est pas une plainte officielle.">Messages are prepared only in your browser. Nothing is sent to ARAN, a peer, or anyone else. You decide whether to copy a message and whom to contact. Do not include confidential case details. This is not a formal complaint.</p>
+<section class="share-panel" id="share-section" aria-labelledby="share-heading">
+ <div class="section-heading"><div><p class="eyebrow" data-en="WHEN YOU'RE READY" data-fr="QUAND VOUS SEREZ PRÊT">WHEN YOU'RE READY</p><h2 id="share-heading" data-en="Put it into words for someone you trust" data-fr="Trouver les mots pour en parler à quelqu'un de confiance">Put it into words for someone you trust</h2></div>
+ <button id="prepare-message" type="button" class="secondary-button" data-en="Write a message I can share" data-fr="Rédiger un message à partager">Write a message I can share</button></div>
+ <div id="draft-panel" hidden>
+ <label for="audience" class="field-label" data-en="Who is this message for?" data-fr="À qui s'adresse le message?">Who is this message for?</label>
+ <select id="audience">
+   <option value="trusted" data-en="Someone I trust" data-fr="Une personne de confiance">Someone I trust</option>
+   <option value="union" data-en="A union representative" data-fr="Une personne représentante syndicale">A union representative</option>
+   <option value="manager" data-en="My manager or supervisor" data-fr="Mon gestionnaire ou superviseur">My manager or supervisor</option>
+   <option value="advisor" data-en="An ombuds or workplace adviser" data-fr="Un ombuds ou conseiller au travail">An ombuds or workplace adviser</option>
+ </select>
+ <label for="draft-text" class="field-label" data-en="Your message (you can edit it)" data-fr="Votre message (modifiable)">Your message (you can edit it)</label>
+ <textarea id="draft-text" rows="9" maxlength="3400"></textarea>
+ <div class="draft-actions"><button type="button" id="copy-draft" class="primary-button" data-en="Copy message" data-fr="Copier le message">Copy message</button><span id="draft-status" role="status" aria-live="polite"></span></div>
+ <p class="small-note" data-en="You decide whether, when and with whom to share it. Review the text and remove personal details before sending." data-fr="Vous décidez si, quand et avec qui le partager. Relisez-le et retirez les renseignements personnels avant de l'envoyer.">You decide whether, when and with whom to share it. Review the text and remove personal details before sending.</p>
+ </div>
 </section>
-<section class="panel model-panel" aria-labelledby="ai-heading">
-<p class="micro" data-en="OPTIONAL PRIVATE AI" data-fr="IA PRIVÉE FACULTATIVE">OPTIONAL PRIVATE AI</p>
-<h2 id="ai-heading" data-en="Explain it with on-device AI" data-fr="Obtenir une explication avec l'IA locale">Explain it with on-device AI</h2>
-<p data-en="The assistant's verified pathways and case links work without AI. On supported devices, a small language model can help explain the selected information in plain language. The model runs on your device, not a paid cloud API." data-fr="Les recours et les décisions fonctionnent sans IA. Sur un appareil compatible, un petit modèle linguistique peut expliquer les informations choisies en langage clair. Il fonctionne sur votre appareil, sans API infonuagique payante.">The assistant's verified pathways and case links work without AI. On supported devices, a small language model can help explain the selected information in plain language. The model runs on your device, not a paid cloud API.</p>
-<button type="button" id="ai-enable" class="outline" data-en="Enable on-device AI" data-fr="Activer l'IA sur cet appareil">Enable on-device AI</button>
-<p id="ai-status" class="meta" role="status" aria-live="polite" data-en="Optional. Requires a compatible graphics-enabled browser and a substantial one-time model download. It may not work on every phone or workplace device." data-fr="Facultatif. Nécessite un navigateur compatible et un téléchargement important du modèle. Certains téléphones ou ordinateurs professionnels ne sont pas compatibles.">Optional. Requires a compatible graphics-enabled browser and a substantial one-time model download. It may not work on every phone or workplace device.</p>
-<div id="ai-answer" class="ai-answer" hidden aria-live="polite"><h3 data-en="AI explanation — verify against sources" data-fr="Explication de l'IA — vérifiez les sources">AI explanation — verify against sources</h3><p id="ai-text"></p></div>
+
+<section class="evidence" id="reference-section" aria-labelledby="reference-heading">
+ <div class="section-heading"><div><p class="eyebrow" data-en="UNDERSTAND YOUR OPTIONS" data-fr="COMPRENDRE VOS OPTIONS">UNDERSTAND YOUR OPTIONS</p><h2 id="reference-heading" data-en="Helpful information and decisions" data-fr="Renseignements et décisions utiles">Helpful information and decisions</h2></div></div>
+ <div id="route-results" class="route-results" aria-live="polite"></div>
+ <details id="cases-details">
+  <summary data-en="View related decisions" data-fr="Voir les décisions connexes">View related decisions</summary>
+  <p class="small-note" data-en="These decisions illustrate legal reasoning; they do not predict the outcome of your situation. Check the original decision and any later review." data-fr="Ces décisions illustrent le raisonnement juridique; elles ne prédisent pas le résultat de votre situation. Vérifiez la décision originale et toute révision ultérieure.">These decisions illustrate legal reasoning; they do not predict the outcome of your situation. Check the original decision and any later review.</p>
+  <div id="related-cases" class="case-list"></div>
+  <a class="inline-link" href="../cases/#all-published-decisions" data-en="Search more published decisions" data-fr="Rechercher d'autres décisions publiées">Search more published decisions</a>
+ </details>
+ <p class="footnote" id="privacy-text" data-en="Avoid including names, medical records or confidential documents. This assistant offers information and support, not a legal determination. Informal conversations do not stop filing deadlines." data-fr="Évitez d'inclure des noms, des dossiers médicaux ou des documents confidentiels. Cet assistant offre de l'information et du soutien, et non une conclusion juridique. Les échanges informels ne suspendent pas les délais.">Avoid including names, medical records or confidential documents. This assistant offers information and support, not a legal determination. Informal conversations do not stop filing deadlines.</p>
 </section>
-<section class="panel check-panel">
-<p class="micro" data-en="IMPORTANT TO KNOW" data-fr="À SAVOIR">IMPORTANT TO KNOW</p>
-<h2 data-en="What this cannot do" data-fr="Ce que cet outil ne fait pas">What this cannot do</h2>
-<ul>
-<li data-en="It cannot decide whether discrimination legally occurred." data-fr="Il ne peut pas établir juridiquement une discrimination.">It cannot decide whether discrimination legally occurred.</li>
-<li data-en="It cannot file grievances, preserve deadlines or contact your employer." data-fr="Il ne peut ni déposer un grief, ni suspendre un délai, ni contacter votre employeur.">It cannot file grievances, preserve deadlines or contact your employer.</li>
-<li data-en="It does not replace a union representative, lawyer, human-rights commission or qualified support person." data-fr="Il ne remplace ni un représentant syndical, ni un juriste, ni une commission des droits de la personne.">It does not replace a union representative, lawyer, human-rights commission or qualified support person.</li>
-<li data-en="A peer connection is not a confidential ombuds or legal service." data-fr="Le soutien entre pairs n'est ni un service d'ombuds confidentiel ni un service juridique.">A peer connection is not a confidential ombuds or legal service.</li>
-</ul>
-</section>
-<section class="panel source-panel">
-<h2 data-en="Official reference points" data-fr="Sources officielles">Official reference points</h2>
-<ul>
-<li><a href="https://www.chrc-ccdp.gc.ca/en/complaints/make-a-complaint" target="_blank" rel="noopener noreferrer" data-en="Canadian Human Rights Commission" data-fr="Commission canadienne des droits de la personne">Canadian Human Rights Commission</a></li>
-<li><a href="https://www.fpslreb-crtespf.gc.ca/en/index.html" target="_blank" rel="noopener noreferrer" data-en="Federal Public Sector Labour Relations and Employment Board" data-fr="Commission des relations de travail et de l'emploi dans le secteur public fédéral">Federal Public Sector Labour Relations and Employment Board</a></li>
-<li><a href="https://www.canada.ca/en/government/publicservice/wellness-inclusion-diversity-public-service/diversity-inclusion-public-service/working-government-canada-duty-accommodate-right-non-discrimination/duty-accommodate-general-process-managers.html" target="_blank" rel="noopener noreferrer" data-en="Duty to accommodate process" data-fr="Processus d'accommodement">Duty to accommodate process</a></li>
-<li><a href="https://www.canada.ca/en/employment-social-development/programs/workplace-health-safety/harassment-violence-prevention.html" target="_blank" rel="noopener noreferrer" data-en="Workplace harassment and violence prevention" data-fr="Prévention du harcèlement et de la violence">Workplace harassment and violence prevention</a></li>
-<li><a href="https://www.clo-ocol.gc.ca/en" target="_blank" rel="noopener noreferrer" data-en="Commissioner of Official Languages" data-fr="Commissaire aux langues officielles">Commissioner of Official Languages</a></li>
-</ul>
-</section>
-</aside>
-</div>
-<section class="bottom-nav" aria-label="Explore more / Autres ressources"><a href="../" data-en="Full recourse guide" data-fr="Guide complet des recours">Full recourse guide</a><a href="../cases/" data-en="176 explained decisions" data-fr="176 décisions expliquées">176 explained decisions</a><a href="../../" data-en="ARAN network" data-fr="Réseau RAAR">ARAN network</a></section>
-<footer><p data-en="Independent resource supported by ARAN volunteers. Information only, not an official government service or legal advice. No tracking or account is required." data-fr="Ressource indépendante appuyée par les bénévoles du RAAR. Renseignements généraux, non un service gouvernemental officiel ni un avis juridique. Aucun suivi ni compte requis.">Independent resource supported by ARAN volunteers. Information only, not an official government service or legal advice. No tracking or account is required.</p></footer>
+<footer><a href="../" data-en="Full recourse guide" data-fr="Guide complet des recours">Full recourse guide</a><span aria-hidden="true"> · </span><a href="../cases/" data-en="Decision library" data-fr="Bibliothèque des décisions">Decision library</a></footer>
 </main>
 </body>
 </html>
