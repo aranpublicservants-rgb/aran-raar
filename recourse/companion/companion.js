@@ -174,7 +174,7 @@ turn('user',msg);
 if(risk(msg)){var safety=B('If anyone is in immediate danger, call 911. In Canada, call or text 988 for suicide crisis support. Workplace peer support is not an emergency service. You can also contact your EAP.','En cas de danger immédiat, composez le 911. Au Canada, appelez ou textez le 988 pour le soutien en cas de crise suicidaire. Le soutien entre pairs n’est pas un service d’urgence. Vous pouvez aussi contacter votre PAE.');turn('assistant',safety);var p=get('plan-content');p.replaceChildren();node('p',safety,'priority-note',p);anchor(p,B('Find Employee Assistance Program support','Trouver le Programme d’aide aux employés'),sources.eap);return}
 S.terms=[...detect(msg,selected||S.topic)];S.show=6;
 var plan=planFor(S.terms);renderPlan(plan);
-turn('assistant',B('I have identified possible recourse routes and practical steps based on your concern. A legal finding depends on evidence and the right decision-maker. See the options and comparable decisions below. You can ask another question or request peer support.','J’ai repéré des recours et des démarches possibles. Une conclusion juridique dépend de la preuve et de l’organisme compétent. Consultez les options et les décisions comparables ci-dessous. Vous pouvez poser une autre question ou demander du soutien entre pairs.'));
+turn('assistant',B('I have identified possible recourse routes and practical steps based on your concern. A legal finding depends on evidence and the right decision-maker. See the options and comparable decisions below. You can ask another question or prepare a message for a trusted person of your choice.','J’ai repéré des recours et des démarches possibles. Une conclusion juridique dépend de la preuve et de l’organisme compétent. Consultez les options et les décisions comparables ci-dessous. Vous pouvez poser une autre question ou préparer un message pour une personne de confiance de votre choix.'));
 renderCases();
 if(S.terms.includes('peer'))get('peer-support').scrollIntoView({behavior:'smooth',block:'start'});
 if(S.terms.includes('cases'))get('similar-cases').scrollIntoView({behavior:'smooth',block:'start'});
@@ -192,11 +192,22 @@ renderCases();
 async function loadCases(){
 try{var resp=await fetch('../data/cases.json',{credentials:'omit'});if(!resp.ok)throw Error('failed');var data=await resp.json();if(!Array.isArray(data.cases))throw Error('invalid');S.cases=data.cases.filter(c=>c&&c.id&&c.citation&&c.what&&c.url)}catch(err){S.cases=[]}renderCases();
 }
-function peerMail(offer){
-var subject=offer?'ARAN | Volunteer peer recourse support / Bénévolat pour les recours':'ARAN | Request for peer recourse support / Demande de soutien entre pairs';
-var body=offer?B('Hello ARAN,\n\nI may be able to share my experience of workplace recourse processes as an informal peer volunteer. Please let me know whether a coordinated program exists and what safeguards apply.\n\nI understand this is not legal advice or representation.\n\nThank you.','Bonjour le RAAR,\n\nJe pourrais partager mon expérience des recours en milieu de travail comme bénévole. Merci de préciser si un programme coordonné existe et quelles mesures de protection s’appliquent.\n\nJe comprends que ce n’est ni un conseil ni une représentation juridique.\n\nMerci.'):
-B('Hello ARAN,\n\nI would like to ask whether an experienced peer volunteer could help me understand workplace recourse options. Please let me know whether support is available, the privacy arrangements and the next steps.\n\nI have not included confidential details.\n\nThank you.','Bonjour le RAAR,\n\nJe souhaite savoir si une personne bénévole expérimentée peut m’aider à comprendre les recours possibles au travail. Merci de m’indiquer si ce soutien existe, comment la vie privée est protégée et les prochaines étapes.\n\nJe n’ai inclus aucun détail confidentiel.\n\nMerci.');
-location.href='mailto:aranpublicservants@gmail.com?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);
+async function peerDraft(offer){
+var msg=offer
+?B('Hello,\n\nI have some experience navigating workplace recourse processes and am willing to share practical lessons informally, if that would be helpful. I would like to understand the boundaries and preferences for a respectful conversation.\n\nI am not offering legal advice or representation, and no confidential case details are needed to start.\n\nThank you.',
+'Bonjour,\n\nJ’ai de l’expérience des démarches de recours en milieu de travail et je pourrais partager des leçons pratiques de manière informelle, si cela pouvait être utile. J’aimerais convenir des limites et des attentes d’une conversation respectueuse.\n\nJe n’offre ni conseils ni représentation juridiques, et aucun détail confidentiel n’est nécessaire pour commencer.\n\nMerci.')
+:B('Hello,\n\nI would appreciate speaking informally with someone I already trust who has experience navigating workplace recourse processes. I am looking to understand practical steps, questions to ask and lessons learned, rather than legal representation.\n\nWould you be comfortable sharing general experience? We can first agree on privacy expectations. I will not send sensitive case details in this message.\n\nThank you.',
+'Bonjour,\n\nJ’aimerais échanger de façon informelle avec une personne de confiance qui connaît les démarches de recours en milieu de travail. Je souhaite comprendre les étapes pratiques, les questions à poser et les leçons retenues, sans demander de représentation juridique.\n\nSeriez-vous à l’aise de partager une expérience générale? Nous pourrions d’abord convenir des attentes en matière de confidentialité. Je ne transmets aucun détail confidentiel dans ce message.\n\nMerci.');
+get('peer-draft').hidden=false;
+get('peer-copy-text').value=msg;
+get('peer-copy-text').focus();
+try{
+if(!navigator.clipboard||typeof navigator.clipboard.writeText!=='function')throw Error('clipboard unavailable');
+await navigator.clipboard.writeText(msg);
+get('peer-feedback').textContent=B('Message copied. You decide if, when and to whom you send it. Nothing was sent by this site.','Message copié. Vous choisissez si, quand et à qui l’envoyer. Ce site n’a rien transmis.');
+}catch(e){
+get('peer-feedback').textContent=B('Draft prepared. Select and copy the text manually if you wish. Nothing was sent.','Brouillon préparé. Vous pouvez sélectionner et copier le texte. Rien n’a été transmis.');
+}
 }
 async function explainAI(message,plan){
 if(!S.ai||S.aiBusy)return;
@@ -249,8 +260,8 @@ try{await navigator.clipboard.writeText(txt);get('copy-plan').textContent=B('Cop
 get('case-keywords').addEventListener('input',()=>{S.show=6;renderCases()});
 get('case-outcome').addEventListener('change',()=>{S.show=6;renderCases()});
 get('more-cases').addEventListener('click',()=>{S.show+=8;renderCases()});
-get('request-peer').addEventListener('click',()=>peerMail(false));
-get('offer-peer').addEventListener('click',()=>peerMail(true));
+get('request-peer').addEventListener('click',()=>peerDraft(false));
+get('offer-peer').addEventListener('click',()=>peerDraft(true));
 get('lang-btn').addEventListener('click',()=>{S.lang=S.lang==='en'?'fr':'en';retranslate()});
 get('ai-enable').addEventListener('click',enableAI);
 if(new URLSearchParams(location.search).get('lang')==='fr'){S.lang='fr'}
