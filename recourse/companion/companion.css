@@ -10,3 +10,7 @@
 @media(max-width:960px){.layout{grid-template-columns:minmax(0,1fr)}.side{grid-template-columns:repeat(2,minmax(0,1fr));align-items:start}.human-panel{grid-row:span 2}}
 @media(max-width:600px){.wrap{width:min(100% - 1.5rem,1290px)}.head{min-height:70px}.brand small{display:none}.top-actions{gap:.45rem;flex-wrap:wrap;justify-content:flex-end}.headlink{font-size:.76rem}.lang-btn{padding:.4rem .5rem}.intro{padding:1.55rem 0 1rem}.layout,.workspace,.side{gap:.9rem}.side{grid-template-columns:1fr}.panel{padding:.95rem}.chat-history{min-height:120px;max-height:400px}.private-indicator{font-size:.68rem}.casebar{grid-template-columns:1fr 1fr}.casebar label{grid-column:span 2}.casebar input,.casebar select{grid-column:span 2}.form-actions{flex-direction:column;align-items:stretch}.form-actions button{width:100%}.case-footer{align-items:stretch;flex-direction:column}.intro h1{font-size:2.02rem}.trustline{gap:.38rem}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+/* Private peer-outreach drafts are created only on the visitor's device. */
+.peer-draft{margin-top:1rem;padding:1rem;border:1px solid #bcd4cb;background:#fff;border-radius:10px}
+.peer-draft textarea{width:100%;max-width:100%;min-height:155px;resize:vertical;border:1px solid #9fb5bf;border-radius:8px;padding:.7rem;white-space:pre-wrap;background:#f9fbfc;color:#1b3444}
+.peer-draft p{margin:.45rem 0 0}
