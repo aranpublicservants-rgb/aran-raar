@@ -85,6 +85,7 @@ if(chosen&&topicNames[chosen])out.add(chosen);
 return out;
 }
 function planFor(issues){
+issues=new Set(issues);
 var keys=[...issues].filter(x=>topicNames[x]&&x!=='cases'&&x!=='peer');
 var intro=keys.length?B('Your concern may relate to: ','Votre situation peut concerner : ')+keys.map(k=>topicNames[k][S.lang==='fr'?1:0]).join(', ')+'. '+B('These are possibilities, not findings that discrimination legally occurred.','Il s’agit de possibilités, non d’une conclusion juridique de discrimination.')
 :B('You can ask about options without deciding first whether conduct meets a legal definition.','Vous pouvez explorer vos recours sans déterminer d’abord si la conduite répond à une définition juridique.');
