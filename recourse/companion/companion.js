@@ -224,9 +224,10 @@ async function startAI(message,baseline,answer,version){
  state.inferencing=true;
  try{
    const context=promptFor(message);
-   const output=await engine.chat.completions.create({messages:[{role:'system',content:systemPrompt(state.lang==='fr'?'French':'English')},{role:'user',content:'Use this source-based context and respond to the person: '+context}],temperature:0.15,max_tokens:430});
+   const output=await engine.chat.completions.create({messages:[{role:'system',content:systemPrompt(state.lang==='fr'?'French':'English')},{role:'user',content:'/no_think\nUse this source-based context and respond to the person: '+context}],temperature:0.15,max_tokens:430});
    const raw=output?.choices?.[0]?.message?.content||'';
-   const text=raw.replace(/<think>[\s\S]*?<\/think>/gi,'').replace(/<\/?think>/gi,'').trim();
+   const finalText=raw.includes('</think>')?raw.split('</think>').slice(-1)[0]:raw;
+   const text=finalText.replace(/<think>[\s\S]*?<\/think>/gi,'').replace(/<think>[\s\S]*$/gi,'').replace(/<\/?think>/gi,'').trim();
    if(text&&version===state.answerVersion&&text.length>=35){
      answer.textContent=text;
      if(state.history.length&&state.history[state.history.length-1].role==='assistant')state.history[state.history.length-1].content=text;
