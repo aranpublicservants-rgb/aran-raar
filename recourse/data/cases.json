@@ -6,7 +6,7 @@
     "fr"
   ],
   "status": "Expanded, source-labelled case and published administrative-findings index; not an exhaustive census",
-  "methodology": "Includes every previously indexed case plus additional decisions drawn from official federal Board and CHRT annual reports or linked full decisions. Case status distinguishes successful, unsuccessful, mixed and procedural outcomes; a procedural ruling does not decide discrimination. Official annual report summaries are linked when a validated direct case URL is not available. Court appeals and later rulings may change outcomes. This finite case index is not an exhaustive census of every published decision and cannot include confidential settlements or unpublished complaints. A separate official-source directory links to searchable full decision collections. Historical statutory remedies and tribunal jurisdictions can differ from current law. Entries with direct court judgments are distinguishable from official summaries; confidential settlements and unpublished CHRC files are not included. This expansion incorporates 115 additional entries from a user-supplied HTML library, preserving the previous 49 structured entries without alteration. Their facts, reasons, outcomes, citations, protected grounds, issues, decision bodies, scopes and source links were reconstructed directly from the supplied HTML; source-specific notes not displayed in that HTML cannot be recovered. For new non-procedural cases, the separate 'finding' field is marked 'not-separately-classified' to avoid inventing a legal classification. 'status' accurately carries the uploaded outcome label. Some CanLII links were not directly opened by the original researchers. Links and appeals require independent checking. Independent supplemental search on 2026-11-15 added recent Board, Tribunal, Federal Court, Official Languages Commissioner and RCMP External Review Committee records. Five cases link to secondary reporting because a direct official full-decision URL was not retrievable. For those cases, an officialDecisionSearch URL is supplied separately. Administrative investigations and ERC recommendations are explicitly labelled and must not be treated as court orders. Distinguish human-rights decisions, staffing grievances, judicial review, administrative investigations and non-final recommendations.",
+  "methodology": "Includes every previously indexed case plus additional decisions drawn from official federal Board and CHRT annual reports or linked full decisions. Case status distinguishes successful, unsuccessful, mixed and procedural outcomes; a procedural ruling does not decide discrimination. Official annual report summaries are linked when a validated direct case URL is not available. Court appeals and later rulings may change outcomes. This finite case index is not an exhaustive census of every published decision and cannot include confidential settlements or unpublished complaints. A separate official-source directory links to searchable full decision collections. Historical statutory remedies and tribunal jurisdictions can differ from current law. Entries with direct court judgments are distinguishable from official summaries; confidential settlements and unpublished CHRC files are not included. This expansion incorporates 115 additional entries from a user-supplied HTML library, preserving the previous 49 structured entries without alteration. Their facts, reasons, outcomes, citations, protected grounds, issues, decision bodies, scopes and source links were reconstructed directly from the supplied HTML; source-specific notes not displayed in that HTML cannot be recovered. For new non-procedural cases, the separate 'finding' field is marked 'not-separately-classified' to avoid inventing a legal classification. 'status' accurately carries the uploaded outcome label. Some CanLII links were not directly opened by the original researchers. Links and appeals require independent checking. Independent supplemental search on 2026-11-15 added recent Board, Tribunal, Federal Court, Official Languages Commissioner and RCMP External Review Committee records. Five cases link to secondary reporting because a direct official full-decision URL was not retrievable. For those cases, an officialDecisionSearch URL is supplied separately. Administrative investigations and ERC recommendations are explicitly labelled and must not be treated as court orders. Distinguish human-rights decisions, staffing grievances, judicial review, administrative investigations and non-final recommendations. Two additional Federal Court workplace-investigation fairness decisions, Marentette (2024 FC 676) and Brown (2024 FC 823), were identified in Treasury Board policy references, union materials and practitioner analysis, with direct full rulings yet to be checked.",
   "fields": [
     "id",
     "title",
@@ -4750,15 +4750,70 @@
       "sourceType": "official-summary",
       "sourceNote": "Official ERC recommendation only. Do not represent as a final binding adjudication or an adjudicated CHRA discrimination claim.",
       "appliesTo": "Federal public-sector review route; confirm employer-specific legislation"
+    },
+    {
+      "id": "marentette-cbsa-2024",
+      "title": "Marentette v. Canada (Attorney General)",
+      "citation": "2024 FC 676",
+      "body": "Federal Court",
+      "issues": [
+        "harassment",
+        "investigation",
+        "sexual-orientation"
+      ],
+      "grounds": [
+        "sexual-orientation"
+      ],
+      "status": "allowed",
+      "finding": "other-success",
+      "scope": "Federal public service",
+      "route": "court-review",
+      "what": "A CBSA officer challenged a harassment and violence investigation that rejected incidents he alleged were discriminatory, including concerns about sexual orientation. The investigator did not give him a meaningful opportunity to respond to adverse evidence or the preliminary report.",
+      "factors": "The Court considered the employer's investigation checklist and procedural fairness obligations. Witness and respondent evidence contrary to the complaint was not adequately put to the officer, and the investigation did not fairly analyze relevant evidence.",
+      "outcome": "Judicial review allowed; a new investigation with a different investigator was ordered. The ruling established a procedural-fairness violation, not that the underlying discrimination allegations were proven.",
+      "what_fr": "Un agent de l’ASFC a contesté une enquête sur le harcèlement et la violence qui avait rejeté des incidents allégués, notamment liés à son orientation sexuelle. Il n’avait pas pu répondre de façon significative aux éléments contraires ni au rapport préliminaire.",
+      "factors_fr": "La Cour a examiné les procédures de l’employeur et les obligations d’équité. Les témoignages contraires n’avaient pas été adéquatement communiqués et des éléments pertinents n’avaient pas été appréciés équitablement.",
+      "outcome_fr": "Contrôle judiciaire accueilli; nouvelle enquête ordonnée avec un autre enquêteur. La décision constate un vice de procédure, sans établir les allégations sous-jacentes de discrimination.",
+      "url": "https://ciu-sdi.ca/en/procedural-fairness-paramount-in-workplace-violence-investigations-federal-court/",
+      "sourceType": "representative-statement",
+      "officialDecisionSearch": "https://decisions.fct-cf.gc.ca/fc-cf/en/nav.do",
+      "sourceNote": "Detailed union statement and published legal commentary; official Treasury Board privacy guidance also cites the ruling. Direct court judgment not independently retrieved.",
+      "appliesTo": "Direct federal public service case"
+    },
+    {
+      "id": "brown-hv-2024",
+      "title": "Brown v. Canada (Attorney General)",
+      "citation": "2024 FC 823",
+      "body": "Federal Court",
+      "issues": [
+        "harassment",
+        "investigation"
+      ],
+      "grounds": [],
+      "status": "allowed",
+      "finding": "other-success",
+      "scope": "Federal public service",
+      "route": "court-review",
+      "what": "The Court considered procedural-fairness defects in a substantial federal workplace-harassment investigation with numerous interviews and reports.",
+      "factors": "The parties and the Court considered whether fairness defects could be corrected without discarding an extensive investigation and worsening substantial delay.",
+      "outcome": "The Court ordered the matter reinvestigated from the point where procedural fairness was breached, preserving earlier investigation work. Later decisions, including Qi, distinguish this fact-specific remedy; no merits finding of harassment or discrimination should be inferred.",
+      "what_fr": "La Cour a examiné les manquements à l’équité procédurale dans une importante enquête fédérale sur le harcèlement, comportant de nombreuses entrevues et plusieurs rapports.",
+      "factors_fr": "Les parties et la Cour ont examiné si les lacunes pouvaient être corrigées sans reprendre toute une enquête complexe ni accentuer les délais.",
+      "outcome_fr": "La Cour a ordonné la reprise de l’enquête à partir du moment où l’équité procédurale avait été compromise, préservant les étapes antérieures. Des décisions ultérieures, dont Qi, distinguent cette réparation propre aux faits; aucune conclusion sur le fond du harcèlement ou de la discrimination n’en découle.",
+      "url": "https://www.clausework.ca/post/another-lesson-in-procedural-fairness-in-investigations",
+      "sourceType": "secondary-summary",
+      "officialDecisionSearch": "https://decisions.fct-cf.gc.ca/fc-cf/en/nav.do",
+      "sourceNote": "The ruling and remedy are described in published Qi/Carreau analysis and cited by Treasury Board privacy guidance; direct judgment not independently retrieved.",
+      "appliesTo": "Direct federal public service case"
     }
   ],
   "coverage": {
-    "included": 174,
+    "included": 176,
     "checkedAsOf": "2026-11-15",
     "sourceCoverage": "All 164 entries from the user-uploaded self-contained HTML. Previous 49 structured records were retained unchanged; 115 new records reconstructed from the HTML.",
     "excluded": "Unpublished decisions, confidential settlements and records not publicly released.",
     "byRoute": {
-      "court-review": 55,
+      "court-review": 57,
       "fpslreb-staffing": 8,
       "chrc-chrt": 54,
       "fpslreb-grievance": 27,
@@ -4779,11 +4834,11 @@
       "General legal precedent": 38,
       "Federal public sector": 23,
       "Other federally regulated employment": 26,
-      "Federal public service": 79,
+      "Federal public service": 81,
       "Not an employment dispute": 8
     },
     "byStatus": {
-      "allowed": 72,
+      "allowed": 74,
       "dismissed": 53,
       "mixed": 19,
       "review": 7,
@@ -4798,7 +4853,7 @@
       "retaliation": 10,
       "race": 42,
       "religion": 19,
-      "sexual-orientation": 7,
+      "sexual-orientation": 8,
       "gender-identity": 3
     }
   },
