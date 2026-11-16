@@ -4,6 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Federal public service recourse: case-law library / Bibliothèque de jurisprudence sur les recours dans la fonction publique fédérale</title>
+<meta name="robots" content="noindex,follow">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <style>
 body { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; line-height: 1.55; color: #1a1a1a; max-width: 960px; margin: 0 auto; padding: 1rem; }
 h1 { font-size: 1.7rem; } h2 { font-size: 1.3rem; margin-top: 2rem; border-top: 2px solid #333; padding-top: 1rem; } h3 { font-size: 1.05rem; margin-bottom: 0.2rem; }
@@ -59,6 +61,7 @@ input:focus-visible,select:focus-visible,button:focus-visible,a:focus-visible{ou
 </section>
 <section class="a2aj-live" id="all-published-decisions" aria-labelledby="all-published-title">
 <h2 id="all-published-title">Search the broader published case-law collections / Rechercher dans les collections complètes de jurisprudence</h2>
+<p class="a2aj-lead">The A2AJ source catalog listed 62,164 published records across the ten selected federal and higher-court collections as checked on 15 November 2026. Those totals include cases unrelated to workplace equity. Choose “All Canadian” to search wider provincial precedents. Source collection totals change as the provider updates. / <span lang="fr">Le catalogue A2AJ comptait 62 164 dossiers publiés dans ces dix collections au 15 novembre 2026. Ce total comprend de nombreuses affaires sans lien avec l’équité au travail. L’option « Toutes les collections canadiennes » permet de rechercher également des précédents provinciaux.</span></p>
 <p class="a2aj-lead">Search across the published federal and higher-court collections, beyond the 176 decisions explained below. Results come from the open A2AJ legal-data service and link to the original publisher where supplied. There is no additional paid account or service to operate this search.</p>
 <p lang="fr">Recherchez dans les collections fédérales et les tribunaux supérieurs, au-delà des 176 dossiers expliqués ci-dessous. Les résultats proviennent du service ouvert A2AJ et mènent, lorsqu'il est disponible, au site de publication original. Ce moteur ne nécessite aucun compte payant supplémentaire.</p>
 <form id="a2aj-form" role="search">
@@ -67,6 +70,7 @@ input:focus-visible,select:focus-visible,button:focus-visible,a:focus-visible{ou
 <input type="search" id="a2aj-query" autocomplete="off" placeholder="e.g. systemic racism AND promotion" required maxlength="350"></div>
 <div class="a2aj-field"><label for="a2aj-source">Which tribunal or court? / Quel tribunal ou quelle cour?</label><select id="a2aj-source">
 <option value="">All relevant federal collections / Toutes les collections fédérales pertinentes</option>
+<option value="all">All Canadian court and tribunal collections / Toutes les collections canadiennes</option>
 <option value="labour">Employment and labour boards / Relations de travail</option>
 <option value="rights">Human rights and reviewing courts / Droits de la personne</option>
 <option value="safety">Health and safety, plus courts / Santé et sécurité</option>
@@ -98,6 +102,7 @@ input:focus-visible,select:focus-visible,button:focus-visible,a:focus-visible{ou
 <div class="a2aj-field"><label for="a2aj-start">From date / Depuis</label><input type="date" id="a2aj-start" min="1877-01-01" max="2027-12-31"></div>
 <div class="a2aj-field"><label for="a2aj-end">To date / Jusqu'au</label><input type="date" id="a2aj-end" min="1877-01-01" max="2027-12-31"></div>
 </div>
+<p class="a2aj-small">Search terms are sent from your browser to the independent A2AJ API when you submit the form. Queries are not stored by this GitHub page. / <span lang="fr">Les mots-clés sont transmis directement au service A2AJ indépendant lorsque vous lancez la recherche. Cette page GitHub ne les conserve pas.</span></p>
 <p class="a2aj-small">Try: <strong>"racial discrimination" AND promotion</strong>, <strong>accommodation AND disability</strong>, <strong>religious accommodation</strong>, or a known neutral citation. Do not enter confidential workplace details or names that are not already in a public decision. / Ne saisissez aucun renseignement professionnel confidentiel ni le nom de personnes non mentionnées dans une décision publique.</p>
 <div class="a2aj-topic-buttons" aria-label="Example searches / Recherches suggérées">
 <button type="button" data-a2aj-topic='"racial discrimination" AND promotion' data-a2aj-body="rights">Racism / Racisme</button>
