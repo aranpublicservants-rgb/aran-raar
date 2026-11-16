@@ -28,7 +28,9 @@
     "sourceNote",
     "applicability",
     "caseType",
-    "reviewStatus"
+    "reviewStatus",
+    "finding",
+    "appliesTo"
   ],
   "cases": [
     {
@@ -53,7 +55,11 @@
         "sex"
       ],
       "status": "allowed",
-      "scope": "General legal precedent"
+      "scope": "General legal precedent",
+      "route": "court-review",
+      "finding": "discrimination-established",
+      "appliesTo": "General legal precedent; jurisdiction and facts may differ",
+      "sourceType": "official-summary"
     },
     {
       "id": "fraser",
@@ -77,7 +83,11 @@
         "sex"
       ],
       "status": "allowed",
-      "scope": "Federal public sector"
+      "scope": "Federal public sector",
+      "route": "court-review",
+      "finding": "discrimination-established",
+      "appliesTo": "Federal public-sector or military context; confirm applicable employment statute",
+      "sourceType": "official-summary"
     },
     {
       "id": "cn",
@@ -100,7 +110,11 @@
         "sex"
       ],
       "status": "allowed",
-      "scope": "Other federally regulated employment"
+      "scope": "Other federally regulated employment",
+      "route": "court-review",
+      "finding": "discrimination-established",
+      "appliesTo": "Federally regulated employment outside the core public service",
+      "sourceType": "full-decision"
     },
     {
       "id": "tibbs",
@@ -121,7 +135,11 @@
       "url": "https://www.fpslreb-crtespf.gc.ca/en/resources/faq.html",
       "grounds": [],
       "status": "dismissed",
-      "scope": "Federal public service"
+      "scope": "Federal public service",
+      "route": "fpslreb-staffing",
+      "finding": "other-success",
+      "appliesTo": "Direct federal public service case",
+      "sourceType": "official-summary"
     },
     {
       "id": "johnstone",
@@ -144,7 +162,11 @@
         "family"
       ],
       "status": "mixed",
-      "scope": "Federal public sector"
+      "scope": "Federal public sector",
+      "route": "court-review",
+      "finding": "discrimination-established",
+      "appliesTo": "Federal public-sector or military context; confirm applicable employment statute",
+      "sourceType": "full-decision"
     },
     {
       "id": "sidhu",
@@ -167,7 +189,11 @@
         "age"
       ],
       "status": "review",
-      "scope": "Other federally regulated employment"
+      "scope": "Other federally regulated employment",
+      "route": "chrc-chrt",
+      "finding": "review",
+      "appliesTo": "Federally regulated employment outside the core public service",
+      "sourceType": "official-summary"
     },
     {
       "id": "molyneaux",
@@ -190,7 +216,11 @@
         "disability"
       ],
       "status": "dismissed",
-      "scope": "Federal public sector"
+      "scope": "Federal public sector",
+      "route": "chrc-chrt",
+      "finding": "discrimination-not-established",
+      "appliesTo": "Federal public-sector or military context; confirm applicable employment statute",
+      "sourceType": "official-summary"
     },
     {
       "id": "vavilov",
@@ -215,7 +245,11 @@
       "url": "https://www.scc-csc.ca/judgments-jugements/cb/2019/37748/",
       "grounds": [],
       "status": "precedent",
-      "scope": "General legal precedent"
+      "scope": "General legal precedent",
+      "route": "court-review",
+      "finding": "precedent",
+      "appliesTo": "General legal precedent; jurisdiction and facts may differ",
+      "sourceType": "official-summary"
     },
     {
       "id": "dorais",
@@ -239,7 +273,11 @@
         "disability"
       ],
       "status": "mixed",
-      "scope": "Federal public sector"
+      "scope": "Federal public sector",
+      "route": "chrc-chrt",
+      "finding": "discrimination-established",
+      "appliesTo": "Federal public-sector or military context; confirm applicable employment statute",
+      "sourceType": "official-summary"
     },
     {
       "id": "kim",
@@ -262,7 +300,11 @@
         "retaliation"
       ],
       "status": "dismissed",
-      "scope": "Not an employment dispute"
+      "scope": "Not an employment dispute",
+      "route": "chrc-chrt",
+      "finding": "discrimination-not-established",
+      "appliesTo": "Not an employee dispute; useful only for a procedural or legal principle",
+      "sourceType": "official-summary"
     },
     {
       "id": "abadi",
@@ -288,7 +330,10 @@
       "factors_fr": "L’employeur n’a pas répondu au harcèlement ni justifié le refus de congé médical. La race et la religion n’ont pas été établies comme facteurs du licenciement.",
       "outcome_fr": "Harcèlement et discrimination liée au handicap établis; salaires perdus, 17 000 $ pour préjudice moral et 12 000 $ d’indemnité spéciale, avec calculs et intérêts.",
       "url": "https://www.chrt-tcdp.gc.ca/en/about-us/publications/annual-report-2023",
-      "sourceType": "official-summary"
+      "sourceType": "official-summary",
+      "route": "chrc-chrt",
+      "finding": "discrimination-established",
+      "appliesTo": "Federally regulated employment outside the core public service"
     },
     {
       "id": "johnson-membertou",
@@ -311,7 +356,10 @@
       "factors_fr": "Le Tribunal a retenu le rendement et l’insubordination; aucun lien avec un motif protégé ni politique discriminatoire n’a été démontré.",
       "outcome_fr": "Plainte de discrimination raciale en emploi rejetée.",
       "url": "https://www.chrt-tcdp.gc.ca/en/about-us/publications/annual-report-2024",
-      "sourceType": "official-summary"
+      "sourceType": "official-summary",
+      "route": "chrc-chrt",
+      "finding": "discrimination-not-established",
+      "appliesTo": "Federally regulated employment outside the core public service"
     },
     {
       "id": "sm-rcmp",
@@ -334,7 +382,10 @@
       "factors_fr": "Le Tribunal estimait le lien avec la race insuffisamment prouvé. La Cour fédérale a ensuite annulé sa décision et renvoyé les plaintes.",
       "outcome_fr": "Le rejet de 2024 n’est pas définitif : le rapport 2025 confirme l’annulation par 2025 CF 1893.",
       "url": "https://www.chrt-tcdp.gc.ca/en/about-us/publications/annual-report-2025",
-      "sourceType": "official-summary"
+      "sourceType": "official-summary",
+      "route": "chrc-chrt",
+      "finding": "review",
+      "appliesTo": "Federal public-sector or military context; confirm applicable employment statute"
     },
     {
       "id": "bedirian",
@@ -357,7 +408,10 @@
       "factors_fr": "Une objection de conscience n’était pas suffisamment liée à la religion; les autres motifs ne reposaient pas sur une preuve cohérente de croyances sincères.",
       "outcome_fr": "Grief d’accommodement religieux rejeté.",
       "url": "https://decisions.fpslreb-crtespf.gc.ca/fpslreb-crtespf/d/en/item/521187/index.do",
-      "sourceType": "full-decision"
+      "sourceType": "full-decision",
+      "route": "fpslreb-grievance",
+      "finding": "discrimination-not-established",
+      "appliesTo": "Direct federal public service case"
     },
     {
       "id": "lemay",
@@ -380,7 +434,10 @@
       "factors_fr": "La Commission a reconnu une croyance religieuse sincère et une atteinte importante découlant de l’exclusion du travail; la réparation a été réservée.",
       "outcome_fr": "Grief d’accommodement religieux accueilli; réparation à examiner séparément.",
       "url": "https://decisions.fpslreb-crtespf.gc.ca/fpslreb-crtespf/d/en/item/521313/index.do",
-      "sourceType": "full-decision"
+      "sourceType": "full-decision",
+      "route": "fpslreb-grievance",
+      "finding": "discrimination-established",
+      "appliesTo": "Direct federal public service case"
     },
     {
       "id": "harkness",
@@ -403,7 +460,10 @@
       "factors_fr": "Les dossiers incomplets et l’évaluation déficiente du mérite prouvent l’abus de pouvoir; la discrimination et le favoritisme ne sont pas démontrés.",
       "outcome_fr": "Plainte de dotation accueillie et nomination révoquée, mais la discrimination n’est pas établie.",
       "url": "https://decisions.fpslreb-crtespf.gc.ca/fpslreb-crtespf/d/en/item/521334/index.do",
-      "sourceType": "full-decision"
+      "sourceType": "full-decision",
+      "route": "fpslreb-staffing",
+      "finding": "other-success",
+      "appliesTo": "Direct federal public service case"
     },
     {
       "id": "kemp",
@@ -427,7 +487,10 @@
       "factors_fr": "La Commission n’a trouvé aucune violation défendable du devoir de représentation juste; elle n’a pas statué sur la discrimination alléguée par l’employeur.",
       "outcome_fr": "Plainte de représentation rejetée, sans décision sur le fond de l’allégation contre l’employeur.",
       "url": "https://decisions.fpslreb-crtespf.gc.ca/fpslreb-crtespf/d/en/item/518891/index.do",
-      "sourceType": "full-decision"
+      "sourceType": "full-decision",
+      "route": "fpslreb-unfair",
+      "finding": "discrimination-not-established",
+      "appliesTo": "Direct federal public service case"
     },
     {
       "id": "milinkovich",
@@ -450,7 +513,10 @@
       "factors_fr": "La Commission a constaté l’absence d’efforts sérieux de conciliation et, selon l’autre critère juridique, aucun effet préjudiciable lié à l’emploi.",
       "outcome_fr": "Grief d’accommodement pour situation de famille rejeté.",
       "url": "https://www.fpslreb-crtespf.gc.ca/en/about-us/annual-reports/2024-2025/fpslreb-ar-2024-2025.html",
-      "sourceType": "official-summary"
+      "sourceType": "official-summary",
+      "route": "fpslreb-grievance",
+      "finding": "discrimination-not-established",
+      "appliesTo": "Direct federal public service case"
     },
     {
       "id": "bergevin",
@@ -473,7 +539,10 @@
       "factors_fr": "Le calendrier neutre avait un effet discriminatoire; la convention et la pratique antérieure permettaient l’accommodement sans contrainte excessive.",
       "outcome_fr": "La Cour suprême a confirmé le droit à un accommodement raisonnable et à la rémunération pour cette journée.",
       "url": "https://www.scc-csc.ca/cases-dossiers/search-recherche/23188/",
-      "sourceType": "official-docket"
+      "sourceType": "official-docket",
+      "route": "court-review",
+      "finding": "discrimination-established",
+      "appliesTo": "General legal precedent; jurisdiction and facts may differ"
     },
     {
       "id": "omalley",
@@ -496,7 +565,10 @@
       "factors_fr": "La Cour a reconnu une discrimination religieuse indirecte découlant d’un horaire neutre et exigé l’accommodement, sauf contrainte excessive.",
       "outcome_fr": "La Cour suprême a ordonné une indemnisation pour la perte de revenus du poste à temps plein.",
       "url": "https://www.scc-csc.ca/cases-dossiers/search-recherche/17328/",
-      "sourceType": "official-docket"
+      "sourceType": "official-docket",
+      "route": "court-review",
+      "finding": "discrimination-established",
+      "appliesTo": "General legal precedent; jurisdiction and facts may differ"
     },
     {
       "id": "sahadeo",
@@ -524,7 +596,9 @@
       "outcome_fr": "Réintégration accordée et plusieurs sanctions annulées ou réduites; grief de discrimination rejeté. Demande de contrôle judiciaire déposée (A-78-24).",
       "url": "https://www.fpslreb-crtespf.gc.ca/en/about-us/annual-reports/2023-2024/fpslreb-ar-202324.html",
       "sourceType": "official-summary",
-      "sourceNote": ""
+      "sourceNote": "",
+      "finding": "other-success",
+      "appliesTo": "Direct federal public service case"
     },
     {
       "id": "moniz",
@@ -550,7 +624,9 @@
       "outcome_fr": "Grief accueilli; interprétation discriminatoire établie. La Commission a conservé sa compétence sur les réparations.",
       "url": "https://www.fpslreb-crtespf.gc.ca/en/about-us/annual-reports/2023-2024/fpslreb-ar-202324.html",
       "sourceType": "official-summary",
-      "sourceNote": ""
+      "sourceNote": "",
+      "finding": "discrimination-established",
+      "appliesTo": "Direct federal public service case"
     },
     {
       "id": "schiller",
@@ -573,7 +649,9 @@
       "outcome_fr": "Objection de compétence rejetée; aucune conclusion sur le fond de la discrimination dans cette décision.",
       "url": "https://www.fpslreb-crtespf.gc.ca/en/about-us/annual-reports/2023-2024/fpslreb-ar-202324.html",
       "sourceType": "official-summary",
-      "sourceNote": "Interlocutory jurisdiction decision; protected grounds not established in official annual summary."
+      "sourceNote": "Interlocutory jurisdiction decision; protected grounds not established in official annual summary.",
+      "finding": "procedural",
+      "appliesTo": "Direct federal public service case"
     },
     {
       "id": "diop",
@@ -598,7 +676,9 @@
       "outcome_fr": "Grief de discrimination fondée sur le sexe rejeté.",
       "url": "https://www.fpslreb-crtespf.gc.ca/en/about-us/annual-reports/2023-2024/fpslreb-ar-202324.html",
       "sourceType": "official-summary",
-      "sourceNote": ""
+      "sourceNote": "",
+      "finding": "discrimination-not-established",
+      "appliesTo": "Direct federal public service case"
     },
     {
       "id": "mcnabb",
@@ -606,8 +686,7 @@
       "citation": "2024 FPSLREB 143",
       "body": "Federal Public Sector Labour Relations and Employment Board",
       "grounds": [
-        "disability",
-        "family"
+        "disability"
       ],
       "issues": [
         "accommodation",
@@ -624,7 +703,9 @@
       "outcome_fr": "Griefs accueillis concernant l’adaptation, le licenciement et le congé; réparation examinée séparément.",
       "url": "https://decisions.fpslreb-crtespf.gc.ca/fpslreb-crtespf/d/en/item/521289/index.do",
       "sourceType": "full-decision",
-      "sourceNote": ""
+      "sourceNote": "",
+      "finding": "discrimination-established",
+      "appliesTo": "Direct federal public service case"
     },
     {
       "id": "harnois",
@@ -647,7 +728,9 @@
       "outcome_fr": "Abus de pouvoir déclaré. Nominations maintenues; dommages examinés à une autre audience.",
       "url": "https://decisions.fpslreb-crtespf.gc.ca/fpslreb-crtespf/d/en/item/521225/index.do",
       "sourceType": "full-decision",
-      "sourceNote": ""
+      "sourceNote": "",
+      "finding": "other-success",
+      "appliesTo": "Direct federal public service case"
     },
     {
       "id": "bolton",
@@ -670,7 +753,9 @@
       "outcome_fr": "Plainte de dotation accueillie; abus de pouvoir déclaré et recommandations formulées; nomination maintenue.",
       "url": "https://decisions.fpslreb-crtespf.gc.ca/fpslreb-crtespf/d/en/item/521299/index.do",
       "sourceType": "full-decision",
-      "sourceNote": ""
+      "sourceNote": "",
+      "finding": "other-success",
+      "appliesTo": "Direct federal public service case"
     },
     {
       "id": "samson",
@@ -693,7 +778,9 @@
       "outcome_fr": "Abus de pouvoir déclaré dans l’évaluation du mérite; nomination non révoquée.",
       "url": "https://www.fpslreb-crtespf.gc.ca/en/about-us/annual-reports/2024-2025/fpslreb-ar-2024-2025.html",
       "sourceType": "official-summary",
-      "sourceNote": ""
+      "sourceNote": "",
+      "finding": "other-success",
+      "appliesTo": "Direct federal public service case"
     },
     {
       "id": "kline",
@@ -716,7 +803,9 @@
       "outcome_fr": "Grief accueilli, réintégration et dommages-intérêts aggravés de 35 000 $ et punitifs de 75 000 $.",
       "url": "https://decisions.fpslreb-crtespf.gc.ca/fpslreb-crtespf/d/en/item/521231/index.do",
       "sourceType": "full-decision",
-      "sourceNote": ""
+      "sourceNote": "",
+      "finding": "other-success",
+      "appliesTo": "Direct federal public service case"
     },
     {
       "id": "psac-csis",
@@ -739,7 +828,9 @@
       "outcome_fr": "Plainte de pratique déloyale accueillie; pas une conclusion de discrimination raciale ou liée au handicap.",
       "url": "https://www.fpslreb-crtespf.gc.ca/en/about-us/annual-reports/2024-2025/fpslreb-ar-2024-2025.html",
       "sourceType": "official-summary",
-      "sourceNote": ""
+      "sourceNote": "",
+      "finding": "other-success",
+      "appliesTo": "Direct federal public service case"
     },
     {
       "id": "mason",
@@ -764,7 +855,9 @@
       "outcome_fr": "Discrimination établie; salaires perdus, indemnités et mesures d’intérêt public ordonnés.",
       "url": "https://www.chrt-tcdp.gc.ca/en/about-us/publications/annual-report-2024",
       "sourceType": "official-summary",
-      "sourceNote": ""
+      "sourceNote": "",
+      "finding": "discrimination-established",
+      "appliesTo": "Federally regulated employment outside the core public service"
     },
     {
       "id": "starr-stevens",
@@ -788,7 +881,9 @@
       "outcome_fr": "Harcèlement établi; indemnités individuelles, formation et autres ordonnances imposées.",
       "url": "https://www.chrt-tcdp.gc.ca/en/about-us/publications/annual-report-2024",
       "sourceType": "official-summary",
-      "sourceNote": ""
+      "sourceNote": "",
+      "finding": "discrimination-established",
+      "appliesTo": "Federally regulated employment outside the core public service"
     },
     {
       "id": "karas",
@@ -812,7 +907,9 @@
       "outcome_fr": "Plainte rejetée pour compétence; aucune conclusion sur une discrimination en emploi.",
       "url": "https://www.chrt-tcdp.gc.ca/en/about-us/publications/annual-report-2024",
       "sourceType": "official-summary",
-      "sourceNote": ""
+      "sourceNote": "",
+      "finding": "procedural",
+      "appliesTo": "Not an employee dispute; useful only for a procedural or legal principle"
     },
     {
       "id": "marcovecchio",
@@ -837,7 +934,9 @@
       "outcome_fr": "Discrimination établie par le Tribunal et confirmée par la Cour fédérale en 2024 CF 1639.",
       "url": "https://www.chrt-tcdp.gc.ca/en/about-us/publications/annual-report-2024",
       "sourceType": "official-summary",
-      "sourceNote": ""
+      "sourceNote": "",
+      "finding": "discrimination-established",
+      "appliesTo": "Federally regulated employment outside the core public service"
     },
     {
       "id": "mccargar",
@@ -859,7 +958,9 @@
       "outcome_fr": "Plaintes rejetées pour abus de procédure, sans jugement sur le fond de la discrimination alléguée.",
       "url": "https://www.chrt-tcdp.gc.ca/en/about-us/publications/annual-report-2025",
       "sourceType": "official-summary",
-      "sourceNote": ""
+      "sourceNote": "",
+      "finding": "procedural",
+      "appliesTo": "Not an employee dispute; useful only for a procedural or legal principle"
     },
     {
       "id": "richards57",
@@ -887,7 +988,9 @@
       "outcome_fr": "Deux témoins exclus; aucune décision sur le fond de la discrimination.",
       "url": "https://www.chrt-tcdp.gc.ca/en/about-us/publications/annual-report-2025",
       "sourceType": "official-summary",
-      "sourceNote": ""
+      "sourceNote": "",
+      "finding": "procedural",
+      "appliesTo": "Not an employee dispute; useful only for a procedural or legal principle"
     },
     {
       "id": "sargeant",
@@ -913,7 +1016,9 @@
       "outcome_fr": "Des éléments des actes et réparations proposés ont été radiés; la discrimination raciale n’a pas été tranchée.",
       "url": "https://www.chrt-tcdp.gc.ca/en/about-us/publications/annual-report-2025",
       "sourceType": "official-summary",
-      "sourceNote": ""
+      "sourceNote": "",
+      "finding": "procedural",
+      "appliesTo": "Not an employee dispute; useful only for a procedural or legal principle"
     },
     {
       "id": "liu-ipco",
@@ -938,7 +1043,9 @@
       "outcome_fr": "Décision procédurale; aucune conclusion sur le fond de la discrimination systémique.",
       "url": "https://www.chrt-tcdp.gc.ca/en/about-us/publications/annual-report-2025",
       "sourceType": "official-summary",
-      "sourceNote": ""
+      "sourceNote": "",
+      "finding": "procedural",
+      "appliesTo": "Not an employee dispute; useful only for a procedural or legal principle"
     },
     {
       "id": "richards93",
@@ -961,7 +1068,9 @@
       "outcome_fr": "Modification refusée et plaintes regroupées; fond des représailles non tranché.",
       "url": "https://www.chrt-tcdp.gc.ca/en/about-us/publications/annual-report-2025",
       "sourceType": "official-summary",
-      "sourceNote": ""
+      "sourceNote": "",
+      "finding": "procedural",
+      "appliesTo": "Not an employee dispute; useful only for a procedural or legal principle"
     },
     {
       "id": "coalition-first-nation-adults",
@@ -988,7 +1097,9 @@
       "outcome_fr": "Exposé à préciser; aucune conclusion sur le fond de la discrimination.",
       "url": "https://www.chrt-tcdp.gc.ca/en/about-us/publications/annual-report-2025",
       "sourceType": "official-summary",
-      "sourceNote": ""
+      "sourceNote": "",
+      "finding": "procedural",
+      "appliesTo": "Not an employee dispute; useful only for a procedural or legal principle"
     },
     {
       "id": "pitawanakwat",
@@ -1014,7 +1125,9 @@
       "factors_fr": "La preuve appuyait le harcèlement racial et la discrimination; la Cour a rejeté des limites arbitraires de réparation.",
       "outcome_fr": "Réexamen des dommages ordonné; excuses, emploi comparable et perte salariale figuraient dans les réparations.",
       "url": "https://epe.lac-bac.gc.ca/100/202/301/federal_court_reports/html/1994/v03/pitawanakwat/fc/1994/pub/v3/1994fca0298.html?nodisclaimer=1",
-      "sourceType": "full-decision"
+      "sourceType": "full-decision",
+      "finding": "discrimination-established",
+      "appliesTo": "Direct federal public service case"
     },
     {
       "id": "grover",
@@ -1040,7 +1153,9 @@
       "factors_fr": "Le Tribunal a constaté des obstacles raciaux systématiques et intentionnels et de l’intimidation de témoins.",
       "outcome_fr": "Ordonnances de cessation, excuses, poste de gestion, salaires perdus, correction du dossier et indemnisation selon les anciens plafonds.",
       "url": "https://publications.gc.ca/collections/Collection/HR21-56-2001E.pdf",
-      "sourceType": "official-summary"
+      "sourceType": "official-summary",
+      "finding": "discrimination-established",
+      "appliesTo": "Federal public-sector or military context; confirm applicable employment statute"
     },
     {
       "id": "ncarr",
@@ -1065,7 +1180,9 @@
       "factors_fr": "La décision combinait données de représentation, ségrégation des emplois, dotation subjective et accès inégal à la formation.",
       "outcome_fr": "Discrimination systémique établie; corrections de dotation, formation, affectations intérimaires, objectifs et reddition de comptes.",
       "url": "https://publications.gc.ca/collections/Collection/HR21-56-2001E.pdf",
-      "sourceType": "official-summary"
+      "sourceType": "official-summary",
+      "finding": "discrimination-established",
+      "appliesTo": "Direct federal public service case"
     },
     {
       "id": "uzoaba",
@@ -1091,7 +1208,9 @@
       "factors_fr": "L’employeur a repris les préjugés raciaux de tiers dans ses décisions officielles.",
       "outcome_fr": "La Cour a confirmé la discrimination et la réintégration à un niveau supérieur, avec indemnités.",
       "url": "https://epe.lac-bac.gc.ca/100/202/301/federal_court_reports/html/1995/v02/uzoaba/fc/1995/pub/v2/1995fca0191.html?nodisclaimer=1",
-      "sourceType": "full-decision"
+      "sourceType": "full-decision",
+      "finding": "discrimination-established",
+      "appliesTo": "Direct federal public service case"
     },
     {
       "id": "robichaud",
@@ -1115,7 +1234,9 @@
       "factors_fr": "La Cour a souligné l’objet réparateur de la loi et la responsabilité de l’employeur pour les actes d’un supérieur dans l’emploi.",
       "outcome_fr": "Appel accueilli; responsabilité de l’employeur reconnue, réparation distincte.",
       "url": "https://www.scc-csc.ca/cases-dossiers/search-recherche/19344/",
-      "sourceType": "official-docket"
+      "sourceType": "official-docket",
+      "finding": "discrimination-established",
+      "appliesTo": "Direct federal public service case"
     },
     {
       "id": "ab-cra",
@@ -1141,12 +1262,14 @@
       "factors_fr": "La Commission a examiné si la décision reposait sur la race ou la religion plutôt que sur les motifs de fiabilité documentés.",
       "outcome_fr": "Griefs de discrimination raciale et religieuse rejetés.",
       "url": "https://publications.gc.ca/collections/collection_2021/crtefp-pslreb/SV1-4-2020-eng.pdf",
-      "sourceType": "official-summary"
+      "sourceType": "official-summary",
+      "finding": "discrimination-not-established",
+      "appliesTo": "Direct federal public service case"
     },
     {
       "id": "basi",
       "title": "Basi v. Canadian National Railway",
-      "citation": "5 CHRR D/1927",
+      "citation": "(1988) 9 CHRR D/5029",
       "body": "Canadian Human Rights Tribunal",
       "grounds": [
         "race"
@@ -1165,7 +1288,9 @@
       "factors_fr": "Le Tribunal a examiné les incohérences entre les explications de l’employeur; la preuve indirecte peut établir la discrimination.",
       "outcome_fr": "Discrimination raciale établie; le résumé historique officiel ne précise pas toutes les réparations.",
       "url": "https://www.chrc-ccdp.gc.ca/our-work/anti-racism-work",
-      "sourceType": "official-summary"
+      "sourceType": "official-summary",
+      "finding": "discrimination-established",
+      "appliesTo": "Federally regulated employment outside the core public service"
     },
     {
       "id": "gannon",
@@ -1190,7 +1315,9 @@
       "factors_fr": "Le Tribunal a tenu compte du milieu empoisonné, de ses réactions aux insultes et de l’inaction de l’employeur.",
       "outcome_fr": "Discrimination établie; les parties ont réglé les réparations.",
       "url": "https://publications.gc.ca/collections/Collection/HR21-56-2001E.pdf",
-      "sourceType": "official-summary"
+      "sourceType": "official-summary",
+      "finding": "discrimination-established",
+      "appliesTo": "Federally regulated employment outside the core public service"
     },
     {
       "id": "swan",
@@ -1214,7 +1341,16 @@
       "factors_fr": "Le Tribunal a examiné le harcèlement et la réponse insuffisante; la Cour fédérale a renversé une restriction sur les salaires perdus.",
       "outcome_fr": "Discrimination établie, excuses et indemnité; question salariale renvoyée puis réglée. La voie militaire diffère des griefs civils.",
       "url": "https://publications.gc.ca/collections/Collection/HR21-56-2001E.pdf",
-      "sourceType": "official-summary"
+      "sourceType": "official-summary",
+      "finding": "discrimination-established",
+      "appliesTo": "Federal public-sector or military context; confirm applicable employment statute"
     }
-  ]
+  ],
+  "coverage": {
+    "included": 49,
+    "sourceCoverage": "Every case in the reviewed site dataset is included. This is not an exhaustive collection of Canadian tribunal or court decisions.",
+    "excluded": "Unpublished decisions, confidential settlements and records not publicly released",
+    "checkedAsOf": "2026-11-15",
+    "updatePolicy": "Manual editorial review required; not a live synchronization of tribunal websites"
+  }
 }
