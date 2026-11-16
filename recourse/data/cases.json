@@ -5,8 +5,8 @@
     "en",
     "fr"
   ],
-  "status": "Initial curated selection, not a comprehensive database",
-  "methodology": "Case information selected from official court, tribunal and board decisions or annual case summaries. Public links may lead to a case summary rather than a full decision; verify linked source and appeal status before relying on it. Federal employment and broader precedents are identified using the scope field. Status refers to the indexed ruling, not a forecast, and an unsuccessful procedural complaint does not establish that the underlying discrimination allegation was false.",
+  "status": "A sourced, curated and expanding index; not every decision issued by Canadian adjudicative bodies",
+  "methodology": "Includes every previously indexed case plus additional decisions drawn from official federal Board and CHRT annual reports or linked full decisions. Case status distinguishes successful, unsuccessful, mixed and procedural outcomes; a procedural ruling does not decide discrimination. Official annual report summaries are linked when a validated direct case URL is not available. Court appeals and later rulings may change outcomes. This finite case index is not an exhaustive census of every published decision and cannot include confidential settlements or unpublished complaints. A separate official-source directory links to searchable full decision collections.",
   "fields": [
     "id",
     "title",
@@ -23,7 +23,12 @@
     "factors_fr",
     "outcome_fr",
     "url",
-    "sourceType"
+    "sourceType",
+    "route",
+    "sourceNote",
+    "applicability",
+    "caseType",
+    "reviewStatus"
   ],
   "cases": [
     {
@@ -492,6 +497,500 @@
       "outcome_fr": "La Cour suprême a ordonné une indemnisation pour la perte de revenus du poste à temps plein.",
       "url": "https://www.scc-csc.ca/cases-dossiers/search-recherche/17328/",
       "sourceType": "official-docket"
+    },
+    {
+      "id": "sahadeo",
+      "title": "Sahadeo v. Deputy Head (CBSA)",
+      "citation": "2024 FPSLREB 12",
+      "body": "Federal Public Sector Labour Relations and Employment Board",
+      "grounds": [
+        "race",
+        "sex"
+      ],
+      "issues": [
+        "race",
+        "performance",
+        "discipline",
+        "accommodation"
+      ],
+      "status": "mixed",
+      "scope": "Federal public service",
+      "route": "fpslreb-grievance",
+      "what": "Discrimination was alleged in performance assessments and dismissal; several disciplinary penalties and the termination were also grieved.",
+      "factors": "The Board found inadequate coaching and feedback and bad faith in the termination process, but insufficient evidence linking adverse treatment to race or sex.",
+      "outcome": "The termination grievance was allowed and reinstatement ordered; several suspension grievances succeeded wholly or partly; discrimination grievance dismissed. Judicial review had been filed (A-78-24).",
+      "what_fr": "Une employée alléguait de la discrimination dans l’évaluation du rendement et le licenciement et contestait plusieurs suspensions.",
+      "factors_fr": "La Commission a conclu au manque de mentorat, de rétroaction et à la mauvaise foi dans le licenciement, mais pas de lien suffisamment démontré avec la race ou le sexe.",
+      "outcome_fr": "Réintégration accordée et plusieurs sanctions annulées ou réduites; grief de discrimination rejeté. Demande de contrôle judiciaire déposée (A-78-24).",
+      "url": "https://www.fpslreb-crtespf.gc.ca/en/about-us/annual-reports/2023-2024/fpslreb-ar-202324.html",
+      "sourceType": "official-summary",
+      "sourceNote": ""
+    },
+    {
+      "id": "moniz",
+      "title": "Moniz v. Treasury Board (Global Affairs Canada)",
+      "citation": "2023 FPSLREB 79",
+      "body": "Federal Public Sector Labour Relations and Employment Board",
+      "grounds": [
+        "sexual-orientation",
+        "family"
+      ],
+      "issues": [
+        "accommodation",
+        "benefits"
+      ],
+      "status": "allowed",
+      "scope": "Federal public service",
+      "route": "fpslreb-grievance",
+      "what": "Travel benefits for a foreign-posted employee and his husband to attend their child's birth through surrogacy were denied.",
+      "factors": "An added pregnancy-based condition did not appear in the Foreign Service Directive and disproportionately excluded the same-sex couple.",
+      "outcome": "The grievance was allowed; discriminatory interpretation of the directive established. The Board retained jurisdiction over remedies.",
+      "what_fr": "Des prestations de déplacement ont été refusées à un employé à l’étranger et à son mari pour la naissance de leur enfant par gestation pour autrui.",
+      "factors_fr": "Une condition liée à la grossesse, absente de la directive, excluait le couple de même sexe.",
+      "outcome_fr": "Grief accueilli; interprétation discriminatoire établie. La Commission a conservé sa compétence sur les réparations.",
+      "url": "https://www.fpslreb-crtespf.gc.ca/en/about-us/annual-reports/2023-2024/fpslreb-ar-202324.html",
+      "sourceType": "official-summary",
+      "sourceNote": ""
+    },
+    {
+      "id": "schiller",
+      "title": "Schiller v. Canadian Food Inspection Agency",
+      "citation": "2023 FPSLREB 112",
+      "body": "Federal Public Sector Labour Relations and Employment Board",
+      "grounds": [
+        "disability"
+      ],
+      "issues": [
+        "accommodation",
+        "discipline"
+      ],
+      "status": "procedural",
+      "scope": "Federal public service",
+      "route": "fpslreb-grievance",
+      "what": "The employer challenged the Board's power to hear allegations that non-renewal of a term appointment breached a collective agreement's nondiscrimination provisions.",
+      "factors": "The allegations concerned the collective agreement rather than only a free-standing human-rights claim; the Board found jurisdiction under FPSLRA section 209.",
+      "outcome": "The employer's jurisdictional objection was dismissed. No merits finding on discrimination was made in this ruling.",
+      "what_fr": "L’employeur contestait la compétence de la Commission pour examiner la non-reconduction d’un contrat à durée déterminée alléguée discriminatoire.",
+      "factors_fr": "Le grief invoquait une disposition de non-discrimination de la convention collective, relevant de l’article 209 de la loi.",
+      "outcome_fr": "Objection de compétence rejetée; aucune conclusion sur le fond de la discrimination dans cette décision.",
+      "url": "https://www.fpslreb-crtespf.gc.ca/en/about-us/annual-reports/2023-2024/fpslreb-ar-202324.html",
+      "sourceType": "official-summary",
+      "sourceNote": "Protected ground not specified in the official annual summary; tagged for accommodation issue only, not as a proven disability decision."
+    },
+    {
+      "id": "diop",
+      "title": "Diop v. Treasury Board (Public Works and Government Services)",
+      "citation": "2023 FPSLREB 81",
+      "body": "Federal Public Sector Labour Relations and Employment Board",
+      "grounds": [
+        "sex"
+      ],
+      "issues": [
+        "benefits",
+        "accommodation"
+      ],
+      "status": "dismissed",
+      "scope": "Federal public service",
+      "route": "fpslreb-grievance",
+      "what": "A mother challenged repayment of maternity and parental allowances after taking employment at another agency outside specified return-to-work employers.",
+      "factors": "The Board found the differential treatment turned on which employer received the employee's service, not the protected ground of sex.",
+      "outcome": "Sex-discrimination grievance dismissed.",
+      "what_fr": "Une mère contestait le remboursement d’allocations de maternité et parentales après avoir quitté certains employeurs désignés.",
+      "factors_fr": "La distinction retenue concernait l’employeur de retour, et non un motif protégé fondé sur le sexe.",
+      "outcome_fr": "Grief de discrimination fondée sur le sexe rejeté.",
+      "url": "https://www.fpslreb-crtespf.gc.ca/en/about-us/annual-reports/2023-2024/fpslreb-ar-202324.html",
+      "sourceType": "official-summary",
+      "sourceNote": ""
+    },
+    {
+      "id": "mcnabb",
+      "title": "McNabb v. Treasury Board (CBSA)",
+      "citation": "2024 FPSLREB 143",
+      "body": "Federal Public Sector Labour Relations and Employment Board",
+      "grounds": [
+        "disability",
+        "family"
+      ],
+      "issues": [
+        "accommodation",
+        "discipline"
+      ],
+      "status": "allowed",
+      "scope": "Federal public service",
+      "route": "fpslreb-grievance",
+      "what": "A permanently disabled border officer was terminated after the CBSA asserted he rejected accommodation offers; family-care leave was also denied.",
+      "factors": "The employer had not substantiated its claim that accommodation at nearby locations was impossible, did not adequately consult the employee, and treated his questions as a refusal.",
+      "outcome": "Accommodation, dismissal and leave-related grievances were allowed; remedy phase was separated.",
+      "what_fr": "Un agent frontalier handicapé de façon permanente a été congédié après des offres d’adaptation contestées; un congé pour soins familiaux a été refusé.",
+      "factors_fr": "L’employeur n’a pas démontré l’impossibilité d’un accommodement local, a peu consulté l’employé et a traité ses questions comme un refus.",
+      "outcome_fr": "Griefs accueillis concernant l’adaptation, le licenciement et le congé; réparation examinée séparément.",
+      "url": "https://decisions.fpslreb-crtespf.gc.ca/fpslreb-crtespf/d/en/item/521289/index.do",
+      "sourceType": "full-decision",
+      "sourceNote": ""
+    },
+    {
+      "id": "harnois",
+      "title": "Harnois v. Deputy Head (Transport)",
+      "citation": "2024 FPSLREB 106",
+      "body": "Federal Public Sector Labour Relations and Employment Board",
+      "grounds": [],
+      "issues": [
+        "staffinternal",
+        "performance"
+      ],
+      "status": "allowed",
+      "scope": "Federal public service",
+      "route": "fpslreb-staffing",
+      "what": "An advertised internal appointment used inconsistent reference checks and an assessment of teamwork challenged as biased.",
+      "factors": "The Board found a reasonable apprehension of bias, insufficient information and rigid application of flawed instructions.",
+      "outcome": "Abuse of authority declared. Appointments not revoked; damages question reserved for another hearing.",
+      "what_fr": "Une nomination interne annoncée comportait des vérifications de références incohérentes et une évaluation du travail d’équipe contestée.",
+      "factors_fr": "La Commission a constaté une crainte raisonnable de partialité, des renseignements insuffisants et des instructions mal appliquées.",
+      "outcome_fr": "Abus de pouvoir déclaré. Nominations maintenues; dommages examinés à une autre audience.",
+      "url": "https://decisions.fpslreb-crtespf.gc.ca/fpslreb-crtespf/d/en/item/521225/index.do",
+      "sourceType": "full-decision",
+      "sourceNote": ""
+    },
+    {
+      "id": "bolton",
+      "title": "Bolton v. Deputy Head (Department of Justice)",
+      "citation": "2024 FPSLREB 165",
+      "body": "Federal Public Sector Labour Relations and Employment Board",
+      "grounds": [],
+      "issues": [
+        "staffinternal",
+        "harassment"
+      ],
+      "status": "allowed",
+      "scope": "Federal public service",
+      "route": "fpslreb-staffing",
+      "what": "An employee who had reported harassment was assessed for promotion by a panel influenced by a director general involved in the complaint.",
+      "factors": "The workplace history, panel members' knowledge of the conflict and the interview context created a reasonable apprehension of bias.",
+      "outcome": "Staffing complaint allowed; abuse of authority declared and recommendations made; appointment not revoked.",
+      "what_fr": "Une employée ayant dénoncé du harcèlement a été évaluée par un comité influencé par un directeur général visé par la plainte.",
+      "factors_fr": "L’historique, la connaissance du conflit et les circonstances de l’entrevue créaient une crainte raisonnable de partialité.",
+      "outcome_fr": "Plainte de dotation accueillie; abus de pouvoir déclaré et recommandations formulées; nomination maintenue.",
+      "url": "https://decisions.fpslreb-crtespf.gc.ca/fpslreb-crtespf/d/en/item/521299/index.do",
+      "sourceType": "full-decision",
+      "sourceNote": ""
+    },
+    {
+      "id": "samson",
+      "title": "Samson v. Deputy Head (Correctional Service Canada)",
+      "citation": "2024 FPSLREB 177",
+      "body": "Federal Public Sector Labour Relations and Employment Board",
+      "grounds": [],
+      "issues": [
+        "staffinternal",
+        "union"
+      ],
+      "status": "allowed",
+      "scope": "Federal public service",
+      "route": "fpslreb-staffing",
+      "what": "A union local president was marked down in a staffing examination because a manager considered union representation incompatible with impartiality.",
+      "factors": "The assessor's written comments equated representing members with being partisan, supporting reasonable apprehension of bias.",
+      "outcome": "Abuse of authority in merit assessment declared; the appointment was not revoked.",
+      "what_fr": "La présidente locale d’un syndicat a perdu des points dans un concours parce que le gestionnaire associait la représentation syndicale à la partialité.",
+      "factors_fr": "Les commentaires écrits associaient la représentation des membres à un manque d’impartialité, révélant un risque de partialité.",
+      "outcome_fr": "Abus de pouvoir déclaré dans l’évaluation du mérite; nomination non révoquée.",
+      "url": "https://www.fpslreb-crtespf.gc.ca/en/about-us/annual-reports/2024-2025/fpslreb-ar-2024-2025.html",
+      "sourceType": "official-summary",
+      "sourceNote": ""
+    },
+    {
+      "id": "kline",
+      "title": "Kline v. Deputy Head (CBSA)",
+      "citation": "2024 FPSLREB 115",
+      "body": "Federal Public Sector Labour Relations and Employment Board",
+      "grounds": [],
+      "issues": [
+        "discipline",
+        "performance"
+      ],
+      "status": "allowed",
+      "scope": "Federal public service",
+      "route": "fpslreb-grievance",
+      "what": "CBSA dismissed an executive for alleged negligent customs-revenue decisions without a proper investigation.",
+      "factors": "The alleged negligence and just cause were not proven, and the employer's deficient, delayed process was conducted in bad faith.",
+      "outcome": "Termination grievance allowed and reinstatement ordered; $35,000 aggravated and $75,000 punitive damages awarded.",
+      "what_fr": "L’ASFC a licencié une cadre pour négligence alléguée dans la perception de droits sans enquête adéquate.",
+      "factors_fr": "Ni la négligence ni le motif de licenciement n’étaient prouvés; le processus était tardif et de mauvaise foi.",
+      "outcome_fr": "Grief accueilli, réintégration et dommages-intérêts aggravés de 35 000 $ et punitifs de 75 000 $.",
+      "url": "https://decisions.fpslreb-crtespf.gc.ca/fpslreb-crtespf/d/en/item/521231/index.do",
+      "sourceType": "full-decision",
+      "sourceNote": ""
+    },
+    {
+      "id": "psac-csis",
+      "title": "Public Service Alliance of Canada v. Canadian Security Intelligence Service",
+      "citation": "2024 FPSLREB 120",
+      "body": "Federal Public Sector Labour Relations and Employment Board",
+      "grounds": [],
+      "issues": [
+        "union",
+        "benefits"
+      ],
+      "status": "allowed",
+      "scope": "Federal public service",
+      "route": "fpslreb-unfair",
+      "what": "The bargaining agent challenged delayed collective-agreement ratification and preferential recognition payments for unrepresented staff.",
+      "factors": "The Board found unexplained delays and failure to share information required for informed bargaining.",
+      "outcome": "Unfair-labour-practice complaint succeeded on bargaining in good faith; not a finding of racial or disability discrimination.",
+      "what_fr": "Le syndicat contestait le retard de ratification d’une convention collective et une prime réservée au personnel non syndiqué.",
+      "factors_fr": "La Commission a relevé des retards injustifiés et un manque d’information pour une négociation éclairée.",
+      "outcome_fr": "Plainte de pratique déloyale accueillie; pas une conclusion de discrimination raciale ou liée au handicap.",
+      "url": "https://www.fpslreb-crtespf.gc.ca/en/about-us/annual-reports/2024-2025/fpslreb-ar-2024-2025.html",
+      "sourceType": "official-summary",
+      "sourceNote": ""
+    },
+    {
+      "id": "mason",
+      "title": "Mason v. St. Theresa Point First Nation",
+      "citation": "2024 CHRT 85",
+      "body": "Canadian Human Rights Tribunal",
+      "grounds": [
+        "sex"
+      ],
+      "issues": [
+        "harassment",
+        "discipline"
+      ],
+      "status": "allowed",
+      "scope": "Other federally regulated employment",
+      "route": "chrc-chrt",
+      "what": "A health authority employee alleged sex-related targeted discipline and termination by a supervisor associated with earlier sexual abuse.",
+      "factors": "The Tribunal found sex was a factor in disciplinary conduct and dismissal and that the employer recklessly relied on the supervisor's allegations.",
+      "outcome": "Discrimination established; lost wages, pain-and-suffering and special compensation and public-interest measures ordered.",
+      "what_fr": "Une employée des services de santé a allégué des mesures disciplinaires ciblées et un congédiement liés au sexe.",
+      "factors_fr": "Le Tribunal a jugé que le sexe avait contribué aux sanctions et au licenciement, l’employeur ayant suivi les accusations du supérieur sans vérification.",
+      "outcome_fr": "Discrimination établie; salaires perdus, indemnités et mesures d’intérêt public ordonnés.",
+      "url": "https://www.chrt-tcdp.gc.ca/en/about-us/publications/annual-report-2024",
+      "sourceType": "official-summary",
+      "sourceNote": ""
+    },
+    {
+      "id": "starr-stevens",
+      "title": "Starr et al. v. Stevens",
+      "citation": "2024 CHRT 127",
+      "body": "Canadian Human Rights Tribunal",
+      "grounds": [
+        "sex"
+      ],
+      "issues": [
+        "harassment"
+      ],
+      "status": "allowed",
+      "scope": "Other federally regulated employment",
+      "route": "chrc-chrt",
+      "what": "Three women employed at a band council office reported persistent unwelcome sexual harassment by an elected councillor/manager.",
+      "factors": "Repeated sexual remarks, gestures and unwanted touching created a poisoned workplace; harm persisted after complaints.",
+      "outcome": "Harassment established; individual damages for pain and suffering and wilful conduct, training and other orders imposed.",
+      "what_fr": "Trois femmes d’un conseil de bande ont signalé un harcèlement sexuel persistant commis par un élu et gestionnaire.",
+      "factors_fr": "Des paroles, gestes et contacts non consentis répétés ont empoisonné le milieu de travail et causé un préjudice.",
+      "outcome_fr": "Harcèlement établi; indemnités individuelles, formation et autres ordonnances imposées.",
+      "url": "https://www.chrt-tcdp.gc.ca/en/about-us/publications/annual-report-2024",
+      "sourceType": "official-summary",
+      "sourceNote": ""
+    },
+    {
+      "id": "karas",
+      "title": "Karas v. Health Canada",
+      "citation": "2024 CHRT 133",
+      "body": "Canadian Human Rights Tribunal",
+      "grounds": [
+        "sexual-orientation"
+      ],
+      "issues": [
+        "accommodation"
+      ],
+      "status": "dismissed",
+      "scope": "Not an employment dispute",
+      "route": "chrc-chrt",
+      "what": "A complainant challenged the regulator's role relating to a blood-donation policy affecting gay and bisexual men.",
+      "factors": "The Tribunal held Health Canada's regulatory oversight was not a CHRA service to this complainant; a regulation cannot be attacked directly through this complaint route.",
+      "outcome": "Complaint dismissed for jurisdictional reasons; no adjudicated finding that discrimination did or did not occur in employment.",
+      "what_fr": "Un plaignant contestait le rôle de Santé Canada dans une politique de don de sang.",
+      "factors_fr": "Le Tribunal a estimé que la surveillance réglementaire ne constituait pas un service au sens de la Loi et qu’un règlement ne pouvait être attaqué directement par ce recours.",
+      "outcome_fr": "Plainte rejetée pour compétence; aucune conclusion sur une discrimination en emploi.",
+      "url": "https://www.chrt-tcdp.gc.ca/en/about-us/publications/annual-report-2024",
+      "sourceType": "official-summary",
+      "sourceNote": ""
+    },
+    {
+      "id": "marcovecchio",
+      "title": "Marcovecchio v. Air Canada; Air Canada v. Marcovecchio",
+      "citation": "2023 CHRT 56; 2024 FC 1639",
+      "body": "Canadian Human Rights Tribunal / Federal Court",
+      "grounds": [
+        "disability"
+      ],
+      "issues": [
+        "accommodation",
+        "staffinternal"
+      ],
+      "status": "allowed",
+      "scope": "Other federally regulated employment",
+      "route": "chrc-chrt",
+      "what": "An employee with a hearing-related disability lost a job offer without individualized assessment of his limitations or possible accommodation.",
+      "factors": "The employer relied on an unsupported assumption that the new role was unsuitable; the Court upheld the Tribunal's fact-based accommodation analysis.",
+      "outcome": "Discrimination established by the CHRT and upheld on judicial review in 2024 FC 1639.",
+      "what_fr": "Un employé ayant un handicap auditif a perdu une offre d’emploi sans évaluation individualisée ni recherche d’accommodements.",
+      "factors_fr": "L’employeur présumait le poste inadapté; la Cour a confirmé l’analyse factuelle du Tribunal.",
+      "outcome_fr": "Discrimination établie par le Tribunal et confirmée par la Cour fédérale en 2024 CF 1639.",
+      "url": "https://www.chrt-tcdp.gc.ca/en/about-us/publications/annual-report-2024",
+      "sourceType": "official-summary",
+      "sourceNote": ""
+    },
+    {
+      "id": "mccargar",
+      "title": "McCargar v. Correctional Service Canada",
+      "citation": "2025 CHRT 15",
+      "body": "Canadian Human Rights Tribunal",
+      "grounds": [],
+      "issues": [
+        "investigation"
+      ],
+      "status": "procedural",
+      "scope": "Not an employment dispute",
+      "route": "chrc-chrt",
+      "what": "An inmate's complaints were dismissed following repeated failure to comply with Tribunal directions.",
+      "factors": "The Tribunal found case management and disclosure demands became abusive despite opportunities to correct them.",
+      "outcome": "Proceedings dismissed for abuse of process, not a finding on the merits of alleged discrimination.",
+      "what_fr": "Des plaintes d’un détenu ont été rejetées après des manquements répétés aux directives du Tribunal.",
+      "factors_fr": "Les demandes et manquements sont devenus abusifs malgré des occasions de les corriger.",
+      "outcome_fr": "Plaintes rejetées pour abus de procédure, sans jugement sur le fond de la discrimination alléguée.",
+      "url": "https://www.chrt-tcdp.gc.ca/en/about-us/publications/annual-report-2025",
+      "sourceType": "official-summary",
+      "sourceNote": ""
+    },
+    {
+      "id": "richards57",
+      "title": "Richards v. Correctional Service Canada",
+      "citation": "2025 CHRT 57",
+      "body": "Canadian Human Rights Tribunal",
+      "grounds": [
+        "race",
+        "religion",
+        "disability",
+        "sex"
+      ],
+      "issues": [
+        "race",
+        "investigation"
+      ],
+      "status": "procedural",
+      "scope": "Not an employment dispute",
+      "route": "chrc-chrt",
+      "what": "An inmate sought additional witnesses concerning alleged systemic discrimination experienced by others.",
+      "factors": "The proposed accounts were insufficiently connected to the particular complaint and would disproportionally expand the hearing.",
+      "outcome": "Two witnesses were excluded; discrimination allegations themselves were not decided.",
+      "what_fr": "Un détenu voulait présenter des témoins concernant la discrimination systémique vécue par d’autres.",
+      "factors_fr": "Le lien avec sa plainte était insuffisant et ces témoignages auraient allongé l’audience de façon disproportionnée.",
+      "outcome_fr": "Deux témoins exclus; aucune décision sur le fond de la discrimination.",
+      "url": "https://www.chrt-tcdp.gc.ca/en/about-us/publications/annual-report-2025",
+      "sourceType": "official-summary",
+      "sourceNote": ""
+    },
+    {
+      "id": "sargeant",
+      "title": "Sargeant v. Correctional Service Canada",
+      "citation": "2025 CHRT 77",
+      "body": "Canadian Human Rights Tribunal",
+      "grounds": [
+        "race",
+        "sex"
+      ],
+      "issues": [
+        "race",
+        "investigation"
+      ],
+      "status": "procedural",
+      "scope": "Not an employment dispute",
+      "route": "chrc-chrt",
+      "what": "A Black inmate's complaint raised antiracism evidence and broad systemic remedies beyond the original allegations.",
+      "factors": "The Tribunal limited the case to the referred allegations, permitted relevant contextual evidence, and applied parliamentary privilege to Senate committee material.",
+      "outcome": "Parts of the pleadings and proposed remedies were struck; race-discrimination liability was not decided.",
+      "what_fr": "Un détenu noir invoquait des éléments sur le racisme et des réparations systémiques dépassant sa plainte initiale.",
+      "factors_fr": "Le Tribunal a limité les questions aux allégations renvoyées, accepté le contexte pertinent et appliqué le privilège parlementaire.",
+      "outcome_fr": "Des éléments des actes et réparations proposés ont été radiés; la discrimination raciale n’a pas été tranchée.",
+      "url": "https://www.chrt-tcdp.gc.ca/en/about-us/publications/annual-report-2025",
+      "sourceType": "official-summary",
+      "sourceNote": ""
+    },
+    {
+      "id": "liu-ipco",
+      "title": "Liu (on behalf of IPCO) v. Public Safety Canada",
+      "citation": "2025 CHRT 90",
+      "body": "Canadian Human Rights Tribunal",
+      "grounds": [
+        "race"
+      ],
+      "issues": [
+        "race",
+        "investigation"
+      ],
+      "status": "procedural",
+      "scope": "Not an employment dispute",
+      "route": "chrc-chrt",
+      "what": "An organization representing Indigenous police chiefs challenged allegedly discriminatory federal policing-program funding.",
+      "factors": "The Tribunal required particularized claims (who, when, where and harm), imposed proportional limits on time period and expert witnesses, and rejected certain preliminary objections.",
+      "outcome": "Interlocutory case management ruling; the underlying systemic discrimination allegation was not established or dismissed.",
+      "what_fr": "Une organisation de chefs de police autochtones contestait le financement allégué discriminatoire d’un programme fédéral.",
+      "factors_fr": "Le Tribunal a exigé des précisions sur les personnes, dates, faits et préjudices et limité les preuves et témoins experts.",
+      "outcome_fr": "Décision procédurale; aucune conclusion sur le fond de la discrimination systémique.",
+      "url": "https://www.chrt-tcdp.gc.ca/en/about-us/publications/annual-report-2025",
+      "sourceType": "official-summary",
+      "sourceNote": ""
+    },
+    {
+      "id": "richards93",
+      "title": "Richards v. Correctional Service Canada",
+      "citation": "2025 CHRT 93",
+      "body": "Canadian Human Rights Tribunal",
+      "grounds": [],
+      "issues": [
+        "reprisal",
+        "investigation"
+      ],
+      "status": "procedural",
+      "scope": "Not an employment dispute",
+      "route": "chrc-chrt",
+      "what": "An inmate sought to expand retaliation complaints to introduce different service-discrimination allegations.",
+      "factors": "The Tribunal held an amendment cannot substitute an unrelated new complaint outside the Commission's referral.",
+      "outcome": "Amendment refused and retaliation complaints consolidated; no merits finding on retaliation.",
+      "what_fr": "Un détenu cherchait à transformer des plaintes de représailles en plaintes distinctes de discrimination dans les services.",
+      "factors_fr": "Une modification ne peut introduire une nouvelle plainte sans lien avec le renvoi de la Commission.",
+      "outcome_fr": "Modification refusée et plaintes regroupées; fond des représailles non tranché.",
+      "url": "https://www.chrt-tcdp.gc.ca/en/about-us/publications/annual-report-2025",
+      "sourceType": "official-summary",
+      "sourceNote": ""
+    },
+    {
+      "id": "coalition-first-nation-adults",
+      "title": "Coalition of First Nation Adults with Disabilities v. Indigenous Services Canada",
+      "citation": "2025 CHRT 115",
+      "body": "Canadian Human Rights Tribunal",
+      "grounds": [
+        "race",
+        "disability"
+      ],
+      "issues": [
+        "race",
+        "accommodation",
+        "investigation"
+      ],
+      "status": "procedural",
+      "scope": "Not an employment dispute",
+      "route": "chrc-chrt",
+      "what": "A coalition alleged decades of systemic discrimination against First Nations adults with disabilities in federal services.",
+      "factors": "The Tribunal required a more specific statement identifying affected persons, harm, periods and the link to protected grounds so the respondent could answer.",
+      "outcome": "The particulars had to be revised; underlying discrimination was neither proven nor rejected at this stage.",
+      "what_fr": "Une coalition alléguait des décennies de discrimination systémique contre les adultes des Premières Nations handicapés dans les services fédéraux.",
+      "factors_fr": "Le Tribunal a demandé plus de précisions sur les personnes, préjudices, périodes et liens avec les motifs protégés.",
+      "outcome_fr": "Exposé à préciser; aucune conclusion sur le fond de la discrimination.",
+      "url": "https://www.chrt-tcdp.gc.ca/en/about-us/publications/annual-report-2025",
+      "sourceType": "official-summary",
+      "sourceNote": ""
     }
   ]
 }
