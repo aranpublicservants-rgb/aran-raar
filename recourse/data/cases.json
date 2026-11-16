@@ -5,8 +5,8 @@
     "en",
     "fr"
   ],
-  "status": "A sourced, curated and expanding index; not every decision issued by Canadian adjudicative bodies",
-  "methodology": "Includes every previously indexed case plus additional decisions drawn from official federal Board and CHRT annual reports or linked full decisions. Case status distinguishes successful, unsuccessful, mixed and procedural outcomes; a procedural ruling does not decide discrimination. Official annual report summaries are linked when a validated direct case URL is not available. Court appeals and later rulings may change outcomes. This finite case index is not an exhaustive census of every published decision and cannot include confidential settlements or unpublished complaints. A separate official-source directory links to searchable full decision collections.",
+  "status": "Curated, non-exhaustive collection of identified published decisions and official summaries; source portals provide broader searches",
+  "methodology": "Includes every previously indexed case plus additional decisions drawn from official federal Board and CHRT annual reports or linked full decisions. Case status distinguishes successful, unsuccessful, mixed and procedural outcomes; a procedural ruling does not decide discrimination. Official annual report summaries are linked when a validated direct case URL is not available. Court appeals and later rulings may change outcomes. This finite case index is not an exhaustive census of every published decision and cannot include confidential settlements or unpublished complaints. A separate official-source directory links to searchable full decision collections. Historical statutory remedies and tribunal jurisdictions can differ from current law. Entries with direct court judgments are distinguishable from official summaries; confidential settlements and unpublished CHRC files are not included.",
   "fields": [
     "id",
     "title",
@@ -557,9 +557,7 @@
       "title": "Schiller v. Canadian Food Inspection Agency",
       "citation": "2023 FPSLREB 112",
       "body": "Federal Public Sector Labour Relations and Employment Board",
-      "grounds": [
-        "disability"
-      ],
+      "grounds": [],
       "issues": [
         "accommodation",
         "discipline"
@@ -575,7 +573,7 @@
       "outcome_fr": "Objection de compétence rejetée; aucune conclusion sur le fond de la discrimination dans cette décision.",
       "url": "https://www.fpslreb-crtespf.gc.ca/en/about-us/annual-reports/2023-2024/fpslreb-ar-202324.html",
       "sourceType": "official-summary",
-      "sourceNote": "Protected ground not specified in the official annual summary; tagged for accommodation issue only, not as a proven disability decision."
+      "sourceNote": "Interlocutory jurisdiction decision; protected grounds not established in official annual summary."
     },
     {
       "id": "diop",
@@ -991,6 +989,232 @@
       "url": "https://www.chrt-tcdp.gc.ca/en/about-us/publications/annual-report-2025",
       "sourceType": "official-summary",
       "sourceNote": ""
+    },
+    {
+      "id": "pitawanakwat",
+      "title": "Pitawanakwat v. Canada (Attorney General)",
+      "citation": "[1994] 3 FC 298; 19 CHRR D/110",
+      "body": "Federal Court / Canadian Human Rights Tribunal",
+      "grounds": [
+        "race"
+      ],
+      "issues": [
+        "race",
+        "harassment",
+        "discipline",
+        "reprisal"
+      ],
+      "status": "allowed",
+      "scope": "Federal public service",
+      "route": "chrc-chrt",
+      "what": "An Indigenous public servant faced racial slurs, stereotyped monitoring, secret management files and loss of employment.",
+      "factors": "The Tribunal found race-related harassment and workplace discrimination; on review the Court rejected arbitrary restrictions on the compensation analysis.",
+      "outcome": "Federal Court sent the matter back to reconsider damages; apology, comparable employment and wage-loss relief were among remedies.",
+      "what_fr": "Une fonctionnaire autochtone a subi des propos racistes, une surveillance stéréotypée, des dossiers secrets et a perdu son emploi.",
+      "factors_fr": "La preuve appuyait le harcèlement racial et la discrimination; la Cour a rejeté des limites arbitraires de réparation.",
+      "outcome_fr": "Réexamen des dommages ordonné; excuses, emploi comparable et perte salariale figuraient dans les réparations.",
+      "url": "https://epe.lac-bac.gc.ca/100/202/301/federal_court_reports/html/1994/v03/pitawanakwat/fc/1994/pub/v3/1994fca0298.html?nodisclaimer=1",
+      "sourceType": "full-decision"
+    },
+    {
+      "id": "grover",
+      "title": "Grover v. National Research Council of Canada",
+      "citation": "18 CHRR D/1",
+      "body": "Canadian Human Rights Tribunal",
+      "grounds": [
+        "race"
+      ],
+      "issues": [
+        "race",
+        "staffinternal",
+        "performance",
+        "reprisal"
+      ],
+      "status": "allowed",
+      "scope": "Federal public sector",
+      "route": "chrc-chrt",
+      "what": "An Indian-born research scientist was blocked from promotion, conferences, funding and development and later lost his position.",
+      "factors": "The Tribunal found intentional and systemic barriers linked to race and colour, with evidence of witness intimidation and discriminatory career management.",
+      "outcome": "Orders included cessation, apology, management appointment, wage loss, corrected personnel records and damages under the historic statutory limits.",
+      "what_fr": "Un chercheur né en Inde s’est vu refuser des promotions, des conférences et du financement avant de perdre son emploi.",
+      "factors_fr": "Le Tribunal a constaté des obstacles raciaux systématiques et intentionnels et de l’intimidation de témoins.",
+      "outcome_fr": "Ordonnances de cessation, excuses, poste de gestion, salaires perdus, correction du dossier et indemnisation selon les anciens plafonds.",
+      "url": "https://publications.gc.ca/collections/Collection/HR21-56-2001E.pdf",
+      "sourceType": "official-summary"
+    },
+    {
+      "id": "ncarr",
+      "title": "National Capital Alliance on Race Relations v. Canada (Health Canada)",
+      "citation": "28 CHRR D/179",
+      "body": "Canadian Human Rights Tribunal",
+      "grounds": [
+        "race"
+      ],
+      "issues": [
+        "race",
+        "group",
+        "staffinternal"
+      ],
+      "status": "allowed",
+      "scope": "Federal public service",
+      "route": "chrc-chrt",
+      "what": "Health Canada employment systems channelled racialized employees into lower-level jobs and limited access to management training and promotion.",
+      "factors": "The Tribunal considered representation by level, job segregation, subjective appointment practices, training access and biased management assumptions together.",
+      "outcome": "Systemic discrimination established; ordered equitable promotion practices, training, acting assignments, workforce-based targets and reporting.",
+      "what_fr": "Les systèmes d’emploi de Santé Canada cantonnaient les employés racisés aux postes subalternes et limitaient leur formation et promotion.",
+      "factors_fr": "La décision combinait données de représentation, ségrégation des emplois, dotation subjective et accès inégal à la formation.",
+      "outcome_fr": "Discrimination systémique établie; corrections de dotation, formation, affectations intérimaires, objectifs et reddition de comptes.",
+      "url": "https://publications.gc.ca/collections/Collection/HR21-56-2001E.pdf",
+      "sourceType": "official-summary"
+    },
+    {
+      "id": "uzoaba",
+      "title": "Canada (Attorney General) v. Uzoaba; Uzoaba v. Canada",
+      "citation": "[1995] 2 FC 569; 26 CHRR D/361",
+      "body": "Federal Court / Canadian Human Rights Tribunal",
+      "grounds": [
+        "race"
+      ],
+      "issues": [
+        "race",
+        "performance",
+        "discipline",
+        "harassment"
+      ],
+      "status": "allowed",
+      "scope": "Federal public service",
+      "route": "chrc-chrt",
+      "what": "CSC management relied on racially motivated inmate complaints to assess and restrict a Black employee's performance and career.",
+      "factors": "The employer adopted third-party racial prejudice into official workplace decisions, even though inmates themselves were not the employer.",
+      "outcome": "Court upheld the discrimination finding and higher-level reinstatement remedy; tribunal ordered wage-loss and other relief.",
+      "what_fr": "La gestion du SCC s’est fondée sur les plaintes racistes de détenus pour évaluer et limiter la carrière d’un employé noir.",
+      "factors_fr": "L’employeur a repris les préjugés raciaux de tiers dans ses décisions officielles.",
+      "outcome_fr": "La Cour a confirmé la discrimination et la réintégration à un niveau supérieur, avec indemnités.",
+      "url": "https://epe.lac-bac.gc.ca/100/202/301/federal_court_reports/html/1995/v02/uzoaba/fc/1995/pub/v2/1995fca0191.html?nodisclaimer=1",
+      "sourceType": "full-decision"
+    },
+    {
+      "id": "robichaud",
+      "title": "Robichaud v. Canada (Treasury Board)",
+      "citation": "[1987] 2 SCR 84",
+      "body": "Supreme Court of Canada",
+      "grounds": [
+        "sex"
+      ],
+      "issues": [
+        "harassment",
+        "discipline"
+      ],
+      "status": "allowed",
+      "scope": "Federal public service",
+      "route": "chrc-chrt",
+      "what": "A federal employee complained of sexual harassment by her supervisor and challenged the employer's legal responsibility.",
+      "factors": "The Court held that the remedial purpose of federal human-rights law requires employer responsibility for discriminatory acts by supervisors in the course of employment.",
+      "outcome": "Supreme Court allowed the appeal, recognizing employer liability; remedy assessment was a separate question.",
+      "what_fr": "Une fonctionnaire a dénoncé le harcèlement sexuel de son supérieur et contesté la responsabilité de l’employeur.",
+      "factors_fr": "La Cour a souligné l’objet réparateur de la loi et la responsabilité de l’employeur pour les actes d’un supérieur dans l’emploi.",
+      "outcome_fr": "Appel accueilli; responsabilité de l’employeur reconnue, réparation distincte.",
+      "url": "https://www.scc-csc.ca/cases-dossiers/search-recherche/19344/",
+      "sourceType": "official-docket"
+    },
+    {
+      "id": "ab-cra",
+      "title": "A.B. v. Canada Revenue Agency",
+      "citation": "2019 FPSLREB 53",
+      "body": "Federal Public Sector Labour Relations and Employment Board",
+      "grounds": [
+        "race",
+        "religion"
+      ],
+      "issues": [
+        "race",
+        "discipline",
+        "investigation"
+      ],
+      "status": "dismissed",
+      "scope": "Federal public service",
+      "route": "fpslreb-grievance",
+      "what": "A term CRA employee of Afghan origin and Muslim faith challenged termination after revocation of reliability status following public social-media posts.",
+      "factors": "The Board examined whether the security decision and dismissal had a nexus to race or religion rather than the employer's documented reliability concerns.",
+      "outcome": "The racial and religious discrimination grievances were dismissed.",
+      "what_fr": "Un employé temporaire de l’ARC, né en Afghanistan et musulman, a contesté son licenciement après la révocation de sa cote de fiabilité.",
+      "factors_fr": "La Commission a examiné si la décision reposait sur la race ou la religion plutôt que sur les motifs de fiabilité documentés.",
+      "outcome_fr": "Griefs de discrimination raciale et religieuse rejetés.",
+      "url": "https://publications.gc.ca/collections/collection_2021/crtefp-pslreb/SV1-4-2020-eng.pdf",
+      "sourceType": "official-summary"
+    },
+    {
+      "id": "basi",
+      "title": "Basi v. Canadian National Railway",
+      "citation": "5 CHRR D/1927",
+      "body": "Canadian Human Rights Tribunal",
+      "grounds": [
+        "race"
+      ],
+      "issues": [
+        "race",
+        "staffexternal"
+      ],
+      "status": "allowed",
+      "scope": "Other federally regulated employment",
+      "route": "chrc-chrt",
+      "what": "An Indian-descended candidate was denied an opportunity at CN Rail.",
+      "factors": "The Tribunal considered inconsistencies in the employer's explanations of interview and selection decisions; discrimination can be inferred from circumstantial evidence.",
+      "outcome": "Race discrimination established; official CHRC historical summary describes the finding without detailing all remedies.",
+      "what_fr": "Un candidat d’origine indienne n’a pas obtenu un emploi au CN.",
+      "factors_fr": "Le Tribunal a examiné les incohérences entre les explications de l’employeur; la preuve indirecte peut établir la discrimination.",
+      "outcome_fr": "Discrimination raciale établie; le résumé historique officiel ne précise pas toutes les réparations.",
+      "url": "https://www.chrc-ccdp.gc.ca/our-work/anti-racism-work",
+      "sourceType": "official-summary"
+    },
+    {
+      "id": "gannon",
+      "title": "Gannon v. Canadian Pacific Ltd.",
+      "citation": "22 CHRR D/97",
+      "body": "Canadian Human Rights Tribunal",
+      "grounds": [
+        "race"
+      ],
+      "issues": [
+        "race",
+        "harassment",
+        "discipline"
+      ],
+      "status": "allowed",
+      "scope": "Other federally regulated employment",
+      "route": "chrc-chrt",
+      "what": "A racialized employee was repeatedly racially harassed, unfairly disciplined, and ultimately dismissed.",
+      "factors": "The Tribunal considered a poisoned environment, the employee's reactive behaviour and the employer's failure to halt racism.",
+      "outcome": "Racial discrimination established; the parties settled remedies after the Tribunal's finding.",
+      "what_fr": "Un employé racisé a subi du harcèlement racial répété, des sanctions injustes et un licenciement.",
+      "factors_fr": "Le Tribunal a tenu compte du milieu empoisonné, de ses réactions aux insultes et de l’inaction de l’employeur.",
+      "outcome_fr": "Discrimination établie; les parties ont réglé les réparations.",
+      "url": "https://publications.gc.ca/collections/Collection/HR21-56-2001E.pdf",
+      "sourceType": "official-summary"
+    },
+    {
+      "id": "swan",
+      "title": "Swan v. Canadian Forces",
+      "citation": "25 CHRR D/312; 25 CHRR D/333",
+      "body": "Canadian Human Rights Tribunal / Federal Court",
+      "grounds": [
+        "race"
+      ],
+      "issues": [
+        "race",
+        "harassment"
+      ],
+      "status": "mixed",
+      "scope": "Federal public sector",
+      "route": "chrc-chrt",
+      "what": "An Indigenous military member experienced racially discriminatory treatment, comments and harassment.",
+      "factors": "The Tribunal examined racist treatment and ineffective management response; the Federal Court reversed a limit on lost-wage compensation.",
+      "outcome": "Discrimination and harassment established, apology and damages ordered, wage-loss question returned and settled; CAF military route differs from civilian FPSLREB.",
+      "what_fr": "Un militaire autochtone a subi du harcèlement et des traitements discriminatoires raciaux.",
+      "factors_fr": "Le Tribunal a examiné le harcèlement et la réponse insuffisante; la Cour fédérale a renversé une restriction sur les salaires perdus.",
+      "outcome_fr": "Discrimination établie, excuses et indemnité; question salariale renvoyée puis réglée. La voie militaire diffère des griefs civils.",
+      "url": "https://publications.gc.ca/collections/Collection/HR21-56-2001E.pdf",
+      "sourceType": "official-summary"
     }
   ]
 }
