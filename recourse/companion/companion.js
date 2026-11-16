@@ -33,7 +33,7 @@ language:/official language|langue officielle|bilingu|linguist|francophon|anglop
 const routes={
 rights:{label:['Human-rights complaint','Plainte en droits de la personne'],
 body:['The Canadian Human Rights Commission receives complaints involving prohibited grounds. A complaint is normally made within 12 months of the incident, subject to exceptions. The Commission screens complaints; the Canadian Human Rights Tribunal decides referred cases.',
-'La Commission canadienne des droits de la personne reçoit les plaintes liées aux motifs interdits. Le délai habituel est de 12 mois après les faits, sous réserve d’exceptions. La Commission examine les plaintes; le Tribunal se prononce sur les causes renvoyées.'],url:'https://www.chrc-ccdp.gc.ca/en/complaints/make-a-complaint'},
+'La Commission canadienne des droits de la personne reçoit les plaintes liées aux motifs interdits. Le délai habituel est de 12 mois après les faits, sous réserve d’exceptions. La Commission examine les plaintes; le Tribunal se prononce sur les causes renvoyées.'],url:'https://www.chrc-ccdp.gc.ca/find-help/file-discrimination-complaint'},
 accommodation:{label:['Individual accommodation process','Processus d’accommodement individuel'],
 body:['Explain the barrier and practical adjustments sought. Ask for an individualized assessment and written response. Medical information should be limited to what is necessary. Religious practices or beliefs may also require accommodation up to undue hardship.',
 'Décrivez l’obstacle et les mesures recherchées. Demandez une évaluation individuelle et une réponse écrite. Les renseignements médicaux devraient être limités au nécessaire. Les croyances ou pratiques religieuses peuvent aussi nécessiter un accommodement jusqu’à la contrainte excessive.'],
@@ -199,7 +199,7 @@ function promptFor(message){
  const prior=state.history.filter(x=>x.role==='user').slice(-4).map(x=>x.content);
  return JSON.stringify({currentConcern:message,previousUserMessages:prior,identifiedIssues:[...state.topics],practicalSteps:g.steps.slice(0,5),sourceLinkedRoutes:refs,relatedDecisions:relevant}).slice(0,10500);
 }
-const systemPrompt=(language)=>'You are an automated, equity-informed support companion for Canadian federal public servants experiencing possible racism, ableism, religious discrimination, retaliation, harassment or related barriers. Speak with the care, patience and experience of a supportive peer, but do not impersonate a human. Validate the concern without declaring discrimination proven. Consider how systemic barriers and power imbalances can affect someone. Avoid telling people to prove their feelings or minimize their experience. Be constructive, nonjudgmental, culturally sensitive and trauma-informed. Use the supplied grounded legal descriptions and cases ONLY. Do not invent case outcomes, rights, deadlines, contacts, legal tests or remedies. If a detail is missing, ask one useful question. No legal advice or predictions, no generic disclaimers repeated. Gently remind people to protect dates and avoid sharing confidential records. Answer in '+language+' in 110–190 words, 2–3 short paragraphs, with a single question at the end. Do not use headings, numbered lists or mention your model. Avoid claiming you can connect to volunteers or send messages.';
+const systemPrompt=(language)=>'You are an automated, equity-informed support companion for Canadian federal public servants experiencing possible racism, ableism, religious discrimination, retaliation, harassment or related barriers. Speak with the care, patience and experience of a supportive peer, but do not impersonate a human. Validate the concern without declaring discrimination proven. Consider how systemic barriers and power imbalances can affect someone. Avoid telling people to prove their feelings or minimize their experience. Be constructive, nonjudgmental, culturally sensitive and trauma-informed. Use the supplied grounded legal descriptions and cases ONLY. Do not invent case outcomes, rights, deadlines, contacts, legal tests or remedies. If a detail is missing, ask one useful question. No legal advice or predictions, no generic disclaimers repeated. Gently remind people to protect dates and avoid sharing confidential records. Answer in '+language+' in 110–190 words, 2–3 short paragraphs, with a single question at the end. Do not use headings, numbered lists or mention your model. Do not output reasoning tags or internal thinking. Avoid claiming you can connect to volunteers or send messages.';
 async function ensureAI(){
  if(state.engine)return state.engine;
  if(state.enginePromise)return state.enginePromise;
@@ -225,7 +225,8 @@ async function startAI(message,baseline,answer,version){
  try{
    const context=promptFor(message);
    const output=await engine.chat.completions.create({messages:[{role:'system',content:systemPrompt(state.lang==='fr'?'French':'English')},{role:'user',content:'Use this source-based context and respond to the person: '+context}],temperature:0.15,max_tokens:430});
-   const text=output?.choices?.[0]?.message?.content?.trim();
+   const raw=output?.choices?.[0]?.message?.content||'';
+   const text=raw.replace(/<think>[\s\S]*?<\/think>/gi,'').replace(/<\/?think>/gi,'').trim();
    if(text&&version===state.answerVersion&&text.length>=35){
      answer.textContent=text;
      if(state.history.length&&state.history[state.history.length-1].role==='assistant')state.history[state.history.length-1].content=text;
