@@ -137,9 +137,10 @@
       "status": "dismissed",
       "scope": "Federal public service",
       "route": "fpslreb-staffing",
-      "finding": "other-success",
+      "finding": "other-dismissed",
       "appliesTo": "Direct federal public service case",
-      "sourceType": "official-summary"
+      "sourceType": "official-summary",
+      "sourceNote": "Dismissed claim concerns staffing, union representation, or retaliation; not a finding that underlying employer discrimination allegations were disproven."
     },
     {
       "id": "johnstone",
@@ -302,9 +303,10 @@
       "status": "dismissed",
       "scope": "Not an employment dispute",
       "route": "chrc-chrt",
-      "finding": "discrimination-not-established",
+      "finding": "other-dismissed",
       "appliesTo": "Not an employee dispute; useful only for a procedural or legal principle",
-      "sourceType": "official-summary"
+      "sourceType": "official-summary",
+      "sourceNote": "Dismissed claim concerns staffing, union representation, or retaliation; not a finding that underlying employer discrimination allegations were disproven."
     },
     {
       "id": "abadi",
@@ -489,8 +491,9 @@
       "url": "https://decisions.fpslreb-crtespf.gc.ca/fpslreb-crtespf/d/en/item/518891/index.do",
       "sourceType": "full-decision",
       "route": "fpslreb-unfair",
-      "finding": "discrimination-not-established",
-      "appliesTo": "Direct federal public service case"
+      "finding": "other-dismissed",
+      "appliesTo": "Direct federal public service case",
+      "sourceNote": "Dismissed claim concerns staffing, union representation, or retaliation; not a finding that underlying employer discrimination allegations were disproven."
     },
     {
       "id": "milinkovich",
