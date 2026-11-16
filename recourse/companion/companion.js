@@ -1,39 +1,20 @@
-/* Source-grounded conversational assistance with optional local language generation. */
+/* Adaptive conversation, source-based guidance and the existing on-device language engine. */
 (()=>{'use strict';
-const $=id=>document.getElementById(id);
-const state={lang:'en',cases:[],history:[],topics:new Set(),lastConcern:'',currentPlan:null,engine:null,enginePromise:null,inferencing:false,answerVersion:0,chosenDraft:null};
+const $=id=>document.getElementById(id),F=window.RecourseFlow;
+const state={lang:'en',answers:{},notes:[],turns:[],history:[],topics:new Set(),cases:[],lastConcern:'',currentPlan:null,engine:null,enginePromise:null,inferencing:false,answerVersion:0,editId:null,forceComplete:false,pending:new Set(),pendingId:null,chosenDraft:null};
 const bilingual=(en,fr)=>state.lang==='fr'?fr:en;
-const elem=(tag,content,parent,className)=>{const x=document.createElement(tag);if(content!==null&&content!==undefined)x.textContent=content;if(className)x.className=className;if(parent)parent.appendChild(x);return x;};
-const urlOk=v=>typeof v==='string'&&(/^(https:\/\/|\.{1,2}\/)/.test(v));
-const sourceLink=(parent,label,url)=>{if(!urlOk(url))return;const x=elem('a',label,parent);x.href=url;if(url.startsWith('https://')){x.target='_blank';x.rel='noopener noreferrer'}return x};
+const elem=(tag,text,parent,className)=>{const x=document.createElement(tag);if(text!==null&&text!==undefined)x.textContent=text;if(className)x.className=className;if(parent)parent.appendChild(x);return x;};
+const urlOk=v=>typeof v==='string'&&/^(https:\/\/|\.{1,2}\/)/.test(v);
+const sourceLink=(parent,label,url)=>{if(!urlOk(url))return;const x=elem('a',label,parent);x.href=url;if(url.startsWith('https://')){x.target='_blank';x.rel='noopener noreferrer'}return x;};
 const clean=x=>String(x||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
 const words=x=>clean(x).split(/[^\p{L}\p{N}]+/u).filter(x=>x.length>3).slice(0,35);
-const labels={
-race:['racism and racial discrimination','racisme et discrimination raciale'],
-disability:['disability and accommodation','handicap et accommodement'],
-religion:['religious belief and accommodation','croyances religieuses et accommodement'],
-harassment:['harassment or violence','harcèlement ou violence'],
-staffing:['staffing or promotion','dotation ou promotion'],
-reprisal:['reprisals or retaliation','représailles'],
-sex:['sex-based discrimination','discrimination fondée sur le sexe'],
-family:['family-status responsibilities','responsabilités familiales'],
-language:['official-language rights','droits linguistiques']
-};
-const triggers={
-race:/racis|racial|black|noir|indigenous|autochton|racis[eé]|ethnic|couleur|microaggress|antiblack|anti.black|race|discriminat.*origin/i,
-disability:/disab|handicap|accommod|accommodement|adaptation|medical|m[eé]dic|health|sant[eé]|adhd|autis|ptsd|telework|t[eé]l[eé]travail|limitation|accessib/i,
-religion:/relig|faith|belief|croyance|sinc[eè]re|hijab|turban|sikh|prayer|pri[eè]re|musulman|muslim|ramadan|sabbath|shabbat|kosher|halal/i,
-harassment:/harass|harc[eè]l|bully|intimid|hostile|threat|menac|violence|humiliat|abusive|abusif/i,
-staffing:/staff|dotation|promot|promotion|appoint|nomination|hiring|embauch|selection|s[eé]lection|concours|poste|non.advertised|non.annonc/i,
-reprisal:/reprisal|retaliat|repr[eé]saill|punish|punition|whistle|divulg|signalement|retorsion/i,
-sex:/sexism|sexist|sexisme|pregnan|grossesse|maternit|gender discrimination|discriminat.*sex|sexual harass/i,
-family:/childcare|caregiv|parent|family status|situation de famille|familial|garde d.enfant|aidant/i,
-language:/official language|langue officielle|bilingu|linguist|francophon|anglophon|langue de travail/i
-};
+const L=pair=>pair[state.lang==='fr'?1:0];
+const value=id=>F.values(state.answers,id),has=(id,x)=>F.has(state.answers,id,x);
+const facts=()=>F.derive(state.answers);
 const routes={
 rights:{label:['Human-rights complaint','Plainte en droits de la personne'],
 body:['The Canadian Human Rights Commission receives complaints involving prohibited grounds. A complaint is normally made within 12 months of the incident, subject to exceptions. The Commission screens complaints; the Canadian Human Rights Tribunal decides referred cases.',
-'La Commission canadienne des droits de la personne reçoit les plaintes liées aux motifs interdits. Le délai habituel est de 12 mois après les faits, sous réserve d’exceptions. La Commission examine les plaintes; le Tribunal se prononce sur les causes renvoyées.'],url:'https://www.chrc-ccdp.gc.ca/find-help/file-discrimination-complaint'},
+'La Commission canadienne des droits de la personne reçoit les plaintes liées aux motifs interdits. Le délai habituel est de 12 mois après les faits, sous réserve d’exceptions. La Commission examine les plaintes; le Tribunal se prononce sur les causes renvoyées.'],url:'https://www.chrc-ccdp.gc.ca/node/73'},
 accommodation:{label:['Individual accommodation process','Processus d’accommodement individuel'],
 body:['Explain the barrier and practical adjustments sought. Ask for an individualized assessment and written response. Medical information should be limited to what is necessary. Religious practices or beliefs may also require accommodation up to undue hardship.',
 'Décrivez l’obstacle et les mesures recherchées. Demandez une évaluation individuelle et une réponse écrite. Les renseignements médicaux devraient être limités au nécessaire. Les croyances ou pratiques religieuses peuvent aussi nécessiter un accommodement jusqu’à la contrainte excessive.'],
@@ -63,143 +44,241 @@ body:['You can explore an informal conflict management service, a neutral ombuds
 'Vous pouvez consulter un service de gestion informelle des conflits, un bureau de l’ombuds lorsqu’il existe ou une personne de confiance. Ces discussions ne suspendent pas automatiquement les délais.'],
 url:'https://www.canada.ca/en/government/publicservice/wellness-inclusion-diversity-public-service/harassment-violence/informal-conflict-management-system-services/contact-icms-office.html'}
 };
-function identify(text){
- const s=clean(text),found=[];
- for(const [key,rx] of Object.entries(triggers))if(rx.test(s))found.push(key);
- return found;
+
+Object.assign(routes,{
+ external:{label:['External recruitment: check the PSC process','Recrutement externe : vérifier le processus de la CFP'],body:['An external federal appointment concern can have a different investigation route from an internal staffing complaint. Keep the posted criteria, screening reason and relevant notice; confirm the Public Service Commission’s jurisdiction and process.','Une préoccupation liée à une nomination externe fédérale peut suivre une voie d’enquête différente d’une plainte de dotation interne. Conservez les critères affichés, les motifs d’élimination et l’avis; confirmez la compétence et le processus de la Commission de la fonction publique.'],url:'https://www.canada.ca/en/public-service-commission/services/oversight-activities/investigations/appointment-process-investigations.html'},
+ representation:{label:['Concern about union representation','Préoccupation liée à la représentation syndicale'],body:['Ask the union for its reasons, any internal review process and any filing deadline. Where the duty of fair representation applies, arbitrary, discriminatory or bad-faith representation may be challenged. A disagreement with the union’s decision does not itself establish a breach.','Demandez au syndicat ses motifs, les possibilités de révision interne et les délais. Lorsque le devoir de représentation équitable s’applique, une représentation arbitraire, discriminatoire ou de mauvaise foi peut être contestée. Le désaccord avec la décision du syndicat n’établit pas en soi un manquement.'],url:'https://www.fpslreb-crtespf.gc.ca/en/resources/faq.html'},
+ employer:{label:['Confirm your employer’s recourse system','Confirmer le régime de recours de votre employeur'],body:['Crown corporations, parliamentary employers, military members and police members do not all use the same complaint or grievance procedures as federal public service employees. Confirm the legal employer, employment status and applicable process before choosing a filing route.','Les sociétés d’État, employeurs parlementaires, militaires et policiers n’utilisent pas tous les mêmes recours que les employés de la fonction publique fédérale. Confirmez l’employeur juridique, le statut d’emploi et le processus applicable avant de choisir un recours.'],url:'../#union'},
+ other:{label:['Confirm the correct human rights or labour authority','Confirmer l’autorité compétente en droits de la personne ou en travail'],body:['The federal public service procedures may not apply to this workplace. Identify the legal employer and the province or federal jurisdiction before filing. Ask the relevant human rights or labour authority which process covers your concern.','Les processus de la fonction publique fédérale peuvent ne pas s’appliquer à ce milieu. Identifiez l’employeur juridique et la compétence provinciale ou fédérale avant de déposer une plainte. Demandez à l’autorité compétente en droits de la personne ou en travail quel processus s’applique.'],url:'https://www.chrc-ccdp.gc.ca/node/73'},
+ benefits:{label:['Check the plan or payment decision','Vérifier le régime ou la décision de paiement'],body:['For an insurance or pension decision, read the decision letter and the plan’s review or appeal instructions. A plan appeal and an employment grievance can have different rules. Identify the administrator, the decision date and what review is available.','Pour une décision d’assurance ou de pension, consultez la lettre et les instructions de révision ou d’appel du régime. L’appel d’un régime et un grief d’emploi peuvent suivre des règles différentes. Identifiez l’administrateur, la date et les possibilités de révision.'],url:'../#finder'},
+ investigation:{label:['Prepare for the investigation or employment meeting','Se préparer à l’enquête ou à la rencontre liée à l’emploi'],body:['Ask for the purpose of the meeting, the allegations or decision being considered, the process and any response date. Seek representation or advice. An investigation, discipline and a harassment-prevention process can have different purposes and review routes.','Demandez l’objet de la rencontre, les allégations ou la décision envisagée, le processus et toute date de réponse. Cherchez de la représentation ou des conseils. L’enquête, la discipline et la prévention du harcèlement peuvent avoir des buts et des recours différents.'],url:'../#finder'}
+});
+function chosenRoutes(){
+ const f=facts(),t=new Set(f.topics),out=[];
+ if(!F.answered(state.answers,'issue'))return out;
+ if(f.employer==='other')return ['other'];
+ if(f.accommodation)out.push('accommodation');
+ if(t.has('staffing'))out.push(has('staffing','external')?'external':'staffing');
+ if(t.has('harassment'))out.push('harassment');
+ if(t.has('reprisal')&&has('reprisal','disclosure'))out.push('reprisal');
+ if(t.has('language'))out.push('language');
+ if(f.protectedConcern||f.discrimination)out.push('rights');
+ if(t.has('union'))out.push('representation');
+ if(['crown','parliament','regulated'].includes(f.employer)||(f.employer==='uniformed'&&f.service!=='civilian')||['casual','contractor','applicant'].includes(f.employment))out.push('employer');
+ else if(f.main!=='informal')out.push('grievance');
+ if(t.has('pay')&&(has('pay','benefits')||has('pay','pension')))out.push('benefits');
+ if(t.has('discipline')&&has('discipline','investigation'))out.push('investigation');
+ out.push('informal');return [...new Set(out)];
 }
-function chosenRoutes(topics){
- const ts=new Set(topics),out=[];
- if(ts.has('disability')||ts.has('religion')||ts.has('family'))out.push('accommodation');
- if(ts.has('staffing'))out.push('staffing');
- if(ts.has('harassment'))out.push('harassment');
- if(ts.has('reprisal'))out.push('reprisal');
- if(ts.has('language'))out.push('language');
- if(['race','disability','religion','sex','family','harassment','reprisal'].some(k=>ts.has(k)))out.push('rights');
- out.push('grievance','informal');return [...new Set(out)].slice(0,6);
+function createGuidance(){
+ const f=facts(),t=new Set(f.topics),steps=[],nextSteps=[],unknown=[];
+ const add=(en,fr)=>steps.push(bilingual(en,fr));
+ if(has('urgency','danger'))add('If there is immediate physical danger, get to a safe place and call 911. Ask the employer’s safety or designated response service about immediate protective measures.','En cas de danger physique immédiat, mettez-vous en sécurité et composez le 911. Demandez au service de sécurité ou au service désigné de l’employeur quelles mesures de protection immédiates sont possibles.');
+ if(has('notice','yes')||has('notice','verbal')||has('urgency','deadline')||has('urgency','job'))add('Keep the notice or decision and the date you received it or learned of it. Verify the actual filing instructions promptly; a verbal decision or earlier awareness can also matter.','Conservez l’avis ou la décision et la date de réception ou de prise de connaissance. Vérifiez rapidement les instructions de dépôt; une décision verbale ou une connaissance antérieure peut aussi compter.');
+ if(f.accommodation){
+  if(has('request','not_requested'))add('Describe the workplace barrier, the change you need and how it would help you do the work. Ask how to make an accommodation request and who will respond.','Décrivez l’obstacle au travail, la mesure nécessaire et son utilité pour accomplir le travail. Demandez comment présenter la demande et qui y répondra.');
+  else if(has('request','denied')||has('request','partial')||has('request','changed'))add('Ask for the reasons for the accommodation decision in writing, the alternatives considered and how to request a review. Explain which barrier remains.','Demandez par écrit les motifs de la décision d’accommodement, les solutions examinées et les possibilités de révision. Précisez l’obstacle qui persiste.');
+  else if(has('request','pending'))add('Ask for an acknowledgement, the next decision step and an expected response date. Explain any immediate barrier and whether an interim adjustment could help.','Demandez un accusé de réception, la prochaine étape et une date de réponse prévue. Décrivez tout obstacle immédiat et l’utilité possible d’une mesure provisoire.');
+  else add('Keep a record of the accommodation requested, the employer’s response and the remaining barrier. Ask for an individualized discussion of effective adjustments.','Conservez la demande d’accommodement, la réponse de l’employeur et l’obstacle restant. Demandez un échange individuel sur des mesures efficaces.');
+  if(f.grounds.includes('disability')||has('request','information'))add('Ask what supporting information is necessary, why it is needed and who will receive it. Use the designated secure process and avoid unnecessary medical or diagnostic details.','Demandez quels renseignements justificatifs sont nécessaires, pourquoi et à qui ils seront transmis. Utilisez le processus sécurisé désigné et évitez les renseignements médicaux ou diagnostiques inutiles.');
+  if(f.grounds.includes('religion'))add('Describe the workplace requirement that conflicts with the belief or practice and the adjustment sought. You can describe the effect without sharing more personal detail than necessary.','Décrivez l’exigence de travail incompatible avec la croyance ou la pratique et la mesure recherchée. Vous pouvez expliquer les effets sans donner plus de renseignements personnels que nécessaire.');
+ }
+ if(t.has('race')||f.discrimination)add('Record the specific words, conduct or decisions that concerned you, their effects and any recurring pattern you have observed. Include relevant examples or comparisons that you can lawfully retain.','Notez les propos, comportements ou décisions en cause, leurs effets et toute tendance observée. Incluez les exemples ou comparaisons pertinents que vous pouvez conserver légalement.');
+ if(t.has('staffing'))add(has('staffing','external')?'Keep the job advertisement, published criteria and exact screening or assessment reason. Ask which Public Service Commission investigation process, if any, applies.':'Keep the actual staffing or retention notice, assessment information and the date you received it. Confirm the process and eligibility before relying on a staffing-complaint deadline.',has('staffing','external')?'Conservez l’affiche, les critères publiés et le motif exact d’élimination ou d’évaluation. Demandez quel processus d’enquête de la CFP s’applique, le cas échéant.':'Conservez l’avis de dotation ou de maintien en poste, les renseignements d’évaluation et la date de réception. Confirmez le processus et l’admissibilité avant de vous fier à un délai de plainte de dotation.');
+ if(t.has('reprisal'))add('Keep a chronology of the concern, complaint, safety report or disclosure and the negative treatment that followed. Identify what was reported and who knew about it so the correct protection can be checked.','Conservez une chronologie de la préoccupation, plainte, déclaration de sécurité ou divulgation et du traitement défavorable qui a suivi. Précisez ce qui a été signalé et qui le savait pour vérifier la protection applicable.');
+ if(t.has('pay'))add('Keep the payment statements, the plan or agreement provision and any written decision. Identify the amount or benefit affected and the administrator handling it.','Conservez les relevés de paiement, la disposition du régime ou de la convention et toute décision écrite. Précisez le montant ou la prestation touchés et l’administrateur responsable.');
+ if(t.has('workforce'))add('Keep every affected, surplus, opting or layoff letter and the applicable workforce-adjustment provisions. Confirm the stage and the response required before choosing an option.','Conservez chaque avis de situation touchée, d’excédentaire, d’option ou de mise en disponibilité ainsi que les dispositions applicables. Confirmez l’étape et la réponse requise avant de choisir une option.');
+ if(f.union==='yes'){
+  if(has('union_support','helping'))add('Ask your representative to confirm the applicable route, who will take the next step and any filing date. Keep your own copies and proof of delivery.','Demandez à votre représentant de confirmer le recours, la personne responsable de la prochaine étape et les dates de dépôt. Conservez vos copies et preuves de transmission.');
+  else if(has('union_support','refused')||has('union_support','concern'))add('Ask the union for its reasons in writing and the internal review or appeal options. Check any separate deadline for a representation complaint without assuming an internal discussion stops it.','Demandez au syndicat ses motifs écrits et les possibilités de révision ou d’appel interne. Vérifiez tout délai distinct de plainte en représentation sans présumer que les échanges internes le suspendent.');
+  else add('Contact your union with a short summary, any decision and its date. Ask what representation it can provide and which filing deadline needs attention first.','Contactez votre syndicat avec un bref résumé, la décision et sa date. Demandez quelle représentation il peut offrir et quel délai exige une attention prioritaire.');
+ }else if(F.answered(state.answers,'union')||f.employment==='executive')add(f.union==='no'?'Ask the employer’s official recourse contact or a qualified adviser which procedures are available for your employment status. Not having a union does not by itself determine whether a grievance or another remedy is available.':'Check the appointment letter, substantive job group, bargaining-unit information or pay statement and confirm representation with the union or employer. Do not delay checking a deadline while doing so.',f.union==='no'?'Demandez au contact officiel des recours de l’employeur ou à une personne compétente quels processus sont disponibles selon votre statut. L’absence de syndicat ne détermine pas à elle seule si un grief ou une autre réparation est possible.':'Vérifiez la lettre de nomination, le groupe d’attache, les renseignements d’unité de négociation ou le relevé de paye et confirmez la représentation. Vérifiez les délais pendant cette démarche.');
+ if(!steps.length)add('Write a short description of what happened, when it happened and what you would like to change. Keep relevant notices and records through permitted channels.','Décrivez brièvement les faits, les dates et le changement souhaité. Conservez les avis et documents pertinents par les moyens autorisés.');
+ add('Check the applicable filing deadline while you consider informal support. Informal conversations, requests for records and mediation do not automatically stop that deadline.','Vérifiez le délai de dépôt pendant que vous examinez le soutien informel. Les échanges informels, les demandes de documents et la médiation ne suspendent pas automatiquement ce délai.');
+ if(has('response','waiting'))nextSteps.push(bilingual('Ask the office handling the matter for a written status, the next required step and any response date. Confirm how to preserve your rights if the delay continues.','Demandez au bureau responsable un état écrit du dossier, la prochaine étape et toute date de réponse. Confirmez comment préserver vos droits si le retard se poursuit.'));
+ else if(has('response','denied')||has('response','partial'))nextSteps.push(bilingual('Keep the reasons and response date. Ask which review, grievance or complaint route can address that decision and verify its deadline before waiting for another informal reply.','Conservez les motifs et la date de réponse. Demandez quel mécanisme de révision, grief ou plainte peut viser cette décision et vérifiez le délai avant d’attendre une autre réponse informelle.'));
+ else if(has('response','active'))nextSteps.push(bilingual('Confirm what the current process can decide, who represents you and what you must provide next. Ask whether another applicable deadline continues to run.','Confirmez ce que le processus peut décider, qui vous représente et ce que vous devez fournir ensuite. Demandez si un autre délai applicable continue de courir.'));
+ else if(F.answered(state.answers,'issue'))nextSteps.push(bilingual('If the first approach does not resolve the concern, keep the response and check the next eligible review or formal route. You do not have to confront the person involved before seeking confidential advice.','Si la première démarche ne règle pas la situation, conservez la réponse et vérifiez la prochaine révision ou voie formelle admissible. Vous n’avez pas à confronter la personne en cause avant de chercher des conseils confidentiels.'));
+ if((f.protectedConcern||f.discrimination)&&f.employer!=='other')nextSteps.push(bilingual('The Canadian Human Rights Commission may require another reasonably available grievance or review process first. Check the Commission’s filing requirements while other steps continue; do not assume they suspend its time limit.','La Commission canadienne des droits de la personne peut exiger d’abord un grief ou un examen raisonnablement disponible. Vérifiez ses exigences de dépôt pendant les autres démarches; ne présumez pas qu’elles suspendent son délai.'));
+ if(has('goal','financial'))nextSteps.push(bilingual('Identify what remedy the relevant decision-maker can order and keep a record of losses and expenses. A previous award or settlement does not establish the amount available in your case.','Identifiez les réparations que l’organisme compétent peut ordonner et conservez un relevé des pertes et dépenses. Une indemnité ou un règlement antérieur ne détermine pas le montant disponible dans votre dossier.'));
+ for(const id of ['employer','employment','union','notice','timing','grounds']){
+  const active=F.questions(state.answers).find(q=>q.id===id);if(!active)continue;
+  if(!F.answered(state.answers,id)||value(id).some(x=>['unsure','written','skipped','unknown'].includes(x)))unknown.push(L(active.label||[active.en,active.fr]));
+ }
+ return {steps:[...new Set(steps)],keys:chosenRoutes(),nextSteps,unknown};
 }
-function createGuidance(topics){
- const ts=new Set(topics);
- const steps=[
- bilingual('Keep a dated record of what happened, the decisions made, any witnesses, and the impact on you. Separate what you observed from what you suspect.','Conservez une chronologie des faits, décisions, témoins et conséquences. Distinguez ce que vous avez constaté de ce que vous soupçonnez.'),
- bilingual('Save relevant notices, emails or policies using permitted channels. Protect confidential and third-party information.','Conservez les avis, courriels ou politiques pertinents par des moyens autorisés, tout en protégeant les renseignements confidentiels et ceux de tiers.'),
- bilingual('Check the relevant filing deadline before relying on informal discussions.','Vérifiez les délais de dépôt avant de vous fier aux discussions informelles.')
- ];
- if(ts.has('race'))steps.unshift(bilingual('If you suspect a pattern of racial bias, note the specific decisions and comparators as well as any reliable organizational data. A pattern deserves examination, but general statistics alone may not prove an individual case.','Si vous soupçonnez un schéma de racisme, notez les décisions et les comparaisons pertinentes ainsi que les données fiables. Les tendances méritent un examen, mais les statistiques générales ne prouvent pas nécessairement un cas individuel.'));
- if(ts.has('disability'))steps.unshift(bilingual('For accommodation, describe the workplace barrier and the functional change you need; request a written, individualized assessment without sharing unnecessary diagnostic details.','Pour l’accommodement, décrivez l’obstacle et le changement fonctionnel nécessaire; demandez une évaluation individualisée écrite sans divulguer inutilement le diagnostic.'));
- if(ts.has('religion'))steps.unshift(bilingual('Explain the workplace requirement that conflicts with your sincerely held belief or practice and request an individualized assessment.','Expliquez l’exigence professionnelle qui entre en conflit avec votre croyance ou pratique sincère et demandez une évaluation individualisée.'));
- if(ts.has('staffing'))steps.unshift(bilingual('Find the actual staffing notice and confirm whether this is an internal or external appointment. Short complaint periods may begin with the notice.','Retrouvez l’avis de dotation et vérifiez si la nomination est interne ou externe. Un court délai peut commencer à la date de l’avis.'));
- if(ts.has('reprisal'))steps.unshift(bilingual('Document the complaint or disclosure, who knew about it, and the timing of later decisions; chronology is important but does not by itself prove a causal connection.','Notez la plainte ou divulgation, les personnes qui la connaissaient et la chronologie des décisions; la succession des événements ne prouve pas à elle seule un lien causal.'));
- return {steps,keys:chosenRoutes(topics)};
-}
-function supportText(topics){
- const ts=new Set(topics);
- let opening=bilingual('Thank you for telling me. You deserve to have your concern taken seriously, and you do not need to decide everything at once.','Merci de m’en parler. Votre préoccupation mérite d’être prise au sérieux et vous n’avez pas à tout décider immédiatement.');
- if(ts.has('race'))opening=bilingual('What you describe raises a concern about racism. You deserve to be heard without having to prove your experience in this conversation. We can look at what happened, the possible patterns, and the ways to address them.','Votre récit soulève une préoccupation liée au racisme. Vous méritez d’être écouté sans devoir prouver votre vécu dans cette conversation. Nous pouvons examiner les faits, les tendances possibles et les recours.');
- else if(ts.has('disability'))opening=bilingual('It can be exhausting to explain an accommodation need and feel unheard. Your concern deserves an individualized, respectful assessment. We can identify what was requested and how the employer responded.','Il peut être éprouvant d’expliquer un besoin d’accommodement sans se sentir entendu. Votre situation mérite une évaluation individuelle et respectueuse. Nous pouvons examiner la demande et la réponse de l’employeur.');
- else if(ts.has('religion'))opening=bilingual('Your religious belief or practice deserves a respectful, individualized discussion rather than an assumption that it is inconvenient. We can explore how the workplace requirement affects you and what was considered.','Votre croyance ou pratique religieuse mérite une discussion respectueuse et individualisée, plutôt que des présomptions. Nous pouvons examiner les effets de l’exigence de travail et les solutions envisagées.');
- else if(ts.has('harassment'))opening=bilingual('Being concerned about harassment can make work feel uncertain or unsafe. I take what you described seriously. We can identify what is happening and the support or processes that may help.','Le harcèlement peut rendre le milieu de travail incertain ou insécurisant. Je prends votre préoccupation au sérieux. Examinons les faits et les soutiens ou recours possibles.');
- else if(ts.has('reprisal'))opening=bilingual('Concern about retaliation can make it harder to speak up. We can examine what happened and ways to protect your options without rushing you into a complaint.','La crainte de représailles peut rendre la prise de parole difficile. Nous pouvons examiner les faits et préserver vos options sans précipiter une plainte.');
- const action=ts.has('staffing')?bilingual('The staffing notice and its date may be particularly important.','L’avis de dotation et sa date pourraient être particulièrement importants.'):
- ts.has('disability')?bilingual('A written record of your requested adjustment and the employer’s response may help.','Une trace écrite de la mesure demandée et de la réponse de l’employeur peut aider.'):
- bilingual('A short chronology and any written decisions are useful places to start.','Une courte chronologie et toute décision écrite constituent de bons points de départ.');
- const question=ts.has('disability')?bilingual('What adjustment did you ask for, and was a reason given for the response?','Quel accommodement avez-vous demandé et vous a-t-on expliqué la réponse?'):
- ts.has('staffing')?bilingual('Was this an internal staffing process, and when did you receive the notice?','S’agissait-il d’un processus interne et quand avez-vous reçu l’avis?'):
- ts.has('harassment')?bilingual('Is this still happening, and what would help you feel safer right now?','La situation se poursuit-elle et qu’est-ce qui vous aiderait à vous sentir en sécurité?'):
- ts.has('reprisal')?bilingual('What happened after you raised the concern or made the disclosure?','Que s’est-il passé après que vous avez soulevé la préoccupation ou fait la divulgation?'):
- bilingual('What happened most recently, and what would you most like to change?','Que s’est-il passé récemment et qu’aimeriez-vous surtout voir changer?');
- return opening+'\n\n'+action+' '+bilingual('I can help you look at possible steps and decisions below; that does not require assuming a legal violation has already been established.','Je peux vous aider à examiner les démarches et les décisions ci-dessous, sans présumer qu’une violation juridique a déjà été établie.')+'\n\n'+question;
-}
-function entry(role,text){
+function entry(role,text,pair){
+ const item={role,en:pair?pair[0]:text,fr:pair?pair[1]:text};state.turns.push(item);
  const log=$('conversation-log'),outer=elem('div',null,log,'turn '+role);
- elem('div',role==='user'?bilingual('You','Vous'):bilingual('Recourse Assistant','Assistant aux recours'),outer,'turn-label');
- const content=elem('p',text,outer,'answer-text');log.scrollTop=log.scrollHeight;
- return content;
+ const label=elem('div',role==='user'?bilingual('You','Vous'):bilingual('Recourse Assistant','Assistant aux recours'),outer,'turn-label');
+ label.dataset.en=role==='user'?'You':'Recourse Assistant';label.dataset.fr=role==='user'?'Vous':'Assistant aux recours';
+ const content=elem('p',L([item.en,item.fr]),outer,'answer-text');content.dataset.en=item.en;content.dataset.fr=item.fr;
+ log.scrollTop=log.scrollHeight;return content;
+}
+function activeQuestion(){
+ if(state.editId){const q=F.schemas[state.editId];if(q)return q;state.editId=null}
+ return state.forceComplete?null:F.next(state.answers);
+}
+function focusQuestion(){
+ const h=$('question-heading');h.focus({preventScroll:true});
+ const panel=$('question-panel'),r=panel.getBoundingClientRect();
+ if(r.top<0||r.top>innerHeight*.55)panel.scrollIntoView({block:'start',behavior:'auto'});
+}
+function renderQuestion(focus=false){
+ const q=activeQuestion(),root=$('suggestions');root.replaceChildren();$('question-source').replaceChildren();$('date-answer').hidden=true;
+ $('continue-answer').hidden=true;$('skip-question').hidden=!q;$('previous-question').hidden=!q;
+ $('show-guidance').hidden=!F.answered(state.answers,'issue')||!q;
+ if(!q){
+  state.pendingId=null;
+  $('question-progress').textContent=bilingual('YOUR GUIDANCE IS READY','VOS DÉMARCHES POSSIBLES SONT PRÊTES');
+  $('question-heading').textContent=bilingual('What would you like to do next?','Que souhaitez-vous faire maintenant?');
+  $('question-help').textContent=bilingual('Read your guidance below. You can keep refining it, ask a question or prepare a message.','Consultez vos démarches ci-dessous. Vous pouvez les préciser, poser une question ou préparer un message.');
+  for(const [id,en,fr] of [['resume','Answer remaining questions','Répondre aux questions restantes'],['review','Review or change my answers','Revoir ou modifier mes réponses'],['additional','Add another concern','Ajouter une préoccupation'],['message','Prepare a message','Préparer un message'],['cases','See related decisions','Voir les décisions connexes'],['next','What if the first step does not work?','Que faire si la première démarche échoue?']]){
+   if(id==='resume'&&!F.next(state.answers))continue;
+   const b=elem('button',bilingual(en,fr),root);b.type='button';b.dataset.action=id;b.addEventListener('click',()=>followUp(id));
+  }
+ }else{
+  const order=F.questions(state.answers),index=order.findIndex(x=>x.id===q.id);
+  $('question-progress').textContent=(state.editId?bilingual('REVIEW AN ANSWER','REVOIR UNE RÉPONSE'):bilingual('QUESTION ','QUESTION ')+(index>=0?index+1:order.filter(x=>F.answered(state.answers,x.id)).length+1))+' · '+L(q.label||[q.en,q.fr]);
+  $('question-heading').textContent=L([q.en,q.fr]);
+  const help=q.help?L(q.help):(q.multiple?bilingual('Choose all that fit, then continue. You can also write a response below.','Choisissez tout ce qui convient, puis continuez. Vous pouvez aussi écrire une réponse ci-dessous.'):bilingual('Choose one answer, or write your response below.','Choisissez une réponse ou écrivez ci-dessous.'));
+  $('question-help').textContent=help;
+  if(state.pendingId!==q.id)state.pending=new Set(value(q.id).filter(x=>q.options.some(o=>o.id===x)));state.pendingId=q.id;
+  for(const option of q.options){
+   const selected=state.pending.has(option.id),b=elem('button',L([option.en,option.fr]),root);b.type='button';b.dataset.answer=option.id;b.setAttribute('aria-pressed',String(selected));
+   b.addEventListener('click',()=>{
+    if(!q.multiple){answerQuestion(q.id,[option.id]);return}
+    if(state.pending.has(option.id))state.pending.delete(option.id);
+    else {if(option.exclusive)state.pending.clear();else for(const o of q.options)if(o.exclusive)state.pending.delete(o.id);state.pending.add(option.id)}
+    for(const node of root.querySelectorAll('button[data-answer]'))node.setAttribute('aria-pressed',String(state.pending.has(node.dataset.answer)));
+    $('continue-answer').disabled=state.pending.size===0;
+   });
+  }
+  $('continue-answer').hidden=!q.multiple;$('continue-answer').disabled=state.pending.size===0;
+  if(q.date){$('date-answer').hidden=false;$('decision-date').value=state.answers.timing?.date||''}
+  if(q.source)sourceLink($('question-source'),bilingual('About the grounds protected by the Canadian Human Rights Act','Les motifs protégés par la Loi canadienne sur les droits de la personne'),q.source);
+  $('previous-question').disabled=index<=0;
+ }
+ if(focus)focusQuestion();
+}
+function answerLabel(id,selected,lang){const def=F.questions(state.answers).find(q=>q.id===id)||F.schemas[id];return selected.map(v=>def.options.find(x=>x.id===v)?.[lang]||(v==='skipped'?(lang==='fr'?'Question passée':'Question skipped'):v==='exact'?(lang==='fr'?'Date indiquée':'Date provided'):(lang==='fr'?'Réponse écrite':'Written response'))).join(', ')}
+function acknowledge(id){
+ if(id==='urgency'&&has('urgency','danger'))return ['If there is immediate physical danger, get to a safe place and call 911. You can stop here and use the protective steps in your guidance below.','En cas de danger physique immédiat, mettez-vous en sécurité et composez le 911. Vous pouvez arrêter ici et consulter les mesures de protection ci-dessous.'];
+ if(id==='issue')return ['We can work through this at your pace. I’ll ask a few questions to understand what matters in your situation.','Nous pouvons avancer à votre rythme. Quelques questions permettront de préciser ce qui compte dans votre situation.'];
+ if(id==='grounds')return ['Thank you. More than one ground can be relevant. Let’s look at how the treatment is affecting your work.','Merci. Plusieurs motifs peuvent être pertinents. Examinons les effets du traitement sur votre travail.'];
+ if(id==='union'&&has('union','no'))return ['I’ll take that into account and focus on the support and procedures that may be available without union representation.','J’en tiendrai compte pour examiner le soutien et les processus possibles sans représentation syndicale.'];
+ if(id==='union'&&has('union','unsure'))return ['That is okay. Your guidance will include how to confirm who represents your position.','Ce n’est pas un problème. Vos démarches comprendront comment confirmer la représentation de votre poste.'];
+ if(id==='union_support'&&has('union_support','refused'))return ['That can leave you feeling without support. We can look at the reasons, review options and any separate filing requirements.','Cela peut donner le sentiment d’être sans soutien. Nous pouvons examiner les motifs, les possibilités de révision et les exigences de dépôt distinctes.'];
+ if(id==='request'&&has('request','denied'))return ['I’ll include what to ask about the refusal and how to check the next review or recourse step.','J’inclurai les questions à poser sur le refus et les démarches de révision ou de recours à vérifier.'];
+ return ['I’ve added that to your guidance below.','J’ai ajouté cette réponse à vos démarches ci-dessous.'];
+}
+function updateAll(focus=false){
+ state.topics=new Set(facts().topics);state.currentPlan=F.answered(state.answers,'issue')?createGuidance():null;
+ renderGuidance();renderCases();renderQuestion(focus);state.answerVersion++;
+ showStatus(bilingual('Your guidance has been updated.','Vos démarches ont été mises à jour.'));
+}
+function answerQuestion(id,selected,text='',date=''){
+ const wasComplete=!F.next(state.answers);
+ state.answers=F.setAnswer(state.answers,id,selected,text,date);state.editId=null;state.forceComplete=false;
+ const pair=[answerLabel(id,selected,'en')+(date?' · '+date:'')+(text?' · '+text:''),answerLabel(id,selected,'fr')+(date?' · '+date:'')+(text?' · '+text:'')];
+ entry('user',L(pair),pair);state.history.push({role:'user',content:L(pair)});
+ if(text){state.notes.push(text);state.lastConcern=state.notes.join(' ').slice(-5000)}
+ const ack=acknowledge(id);entry('assistant',L(ack),ack);state.history.push({role:'assistant',content:L(ack)});
+ if(id==='urgency'&&selected.includes('danger'))state.forceComplete=true;
+ updateAll(true);
+ if(!F.next(state.answers))completeConversation(!wasComplete);
+}
+function completeConversation(generate=true){
+ const f=facts();
+ const pair=[f.protectedConcern?'We have enough context for a useful starting plan about the treatment you described. Your steps, possible routes, points to verify and related decisions are below. You can change an answer or add another detail at any time.':'Your starting plan is ready below. It brings together practical steps, possible routes and the points that still need checking. You can change an answer or add another detail at any time.',f.protectedConcern?'Nous avons assez de contexte pour établir des démarches utiles sur le traitement décrit. Les étapes, recours possibles, points à vérifier et décisions connexes figurent ci-dessous. Vous pouvez modifier une réponse ou ajouter un détail en tout temps.':'Vos démarches de départ sont prêtes ci-dessous. Elles regroupent les étapes pratiques, recours possibles et points à vérifier. Vous pouvez modifier une réponse ou ajouter un détail en tout temps.'];
+ const answer=entry('assistant',L(pair),pair);state.history.push({role:'assistant',content:L(pair)});
+ if(has('goal','cases'))$('cases-details').open=true;
+ if(generate)startAI(state.lastConcern||F.summary(state.answers,state.lang).map(x=>x.value).join('; '),L(pair),answer,state.answerVersion);
+}
+function handle(message){
+ const input=String(message||'').trim().slice(0,1600);if(!input)return;
+ if(emergency(input))return;
+ const q=activeQuestion(),inferred=F.infer(input);
+ // Explicit facts in a typed account can answer later questions without repeating them.
+ for(const [id,vals] of Object.entries(inferred))if(id!==q?.id&&!F.answered(state.answers,id))state.answers=F.setAnswer(state.answers,id,vals);
+ if(q){
+  const date=q.id==='timing'&&/^\d{4}-\d{2}-\d{2}$/.test(input)?input:'';
+  let selected=date?['exact']:F.parse(q.id,input);
+  if(q.multiple&&state.pending.size&&!selected.some(v=>q.options.some(o=>o.id===v&&o.exclusive)))selected=[...new Set([...state.pending,...selected.filter(v=>v!=='written')])];
+  answerQuestion(q.id,selected.length?selected:['written'],input,date);
+ }else{
+  entry('user',input);state.history.push({role:'user',content:input});state.notes.push(input);state.lastConcern=state.notes.join(' ').slice(-5000);state.forceComplete=false;
+  const pair=['I’ve kept that detail. The guidance below has been updated; any new question will help clarify the next step.','J’ai conservé ce détail. Les démarches ci-dessous sont mises à jour; toute nouvelle question servira à préciser la prochaine étape.'];entry('assistant',L(pair),pair);
+  updateAll(true);if(!F.next(state.answers))completeConversation(true);
+ }
+}
+function followUp(id){
+ if(id==='resume'){state.forceComplete=false;state.editId=null;renderQuestion(true);return}
+ if(id==='additional'){state.editId='additional';state.forceComplete=false;renderQuestion(true);return}
+ if(id==='review'){$('answer-summary').open=true;$('answer-summary').scrollIntoView({block:'start'});return}
+ if(id==='message'){prepareDraft();$('share-section').scrollIntoView({block:'start'});return}
+ if(id==='cases'){$('cases-details').open=true;$('cases-details').scrollIntoView({block:'start'});return}
+ if(id==='next'){
+  const pair=[(state.currentPlan?.nextSteps||[]).join('\n\n'),(state.currentPlan?.nextSteps||[]).join('\n\n')];entry('assistant',L(pair),pair);$('reference-section').scrollIntoView({block:'start'});
+ }
+}
+function renderAnswers(){
+ const root=$('answer-list');root.replaceChildren();const answers=F.summary(state.answers,state.lang);$('answer-summary').hidden=!answers.length;
+ for(const item of answers){const row=elem('div',null,root,'answer-row'),body=elem('p',null,row);elem('strong',item.label,body);elem('span',item.value||bilingual('Not specified','Non précisé'),body);const b=elem('button',bilingual('Change','Modifier'),row,'text-button');b.type='button';b.setAttribute('aria-label',bilingual('Change: ','Modifier : ')+item.label);b.addEventListener('click',()=>{state.editId=item.id;state.forceComplete=false;renderQuestion(true)})}
 }
 function renderGuidance(){
- const root=$('route-results');root.replaceChildren();
- if(!state.currentPlan){elem('p',bilingual('As we talk, useful next steps and official references will appear here.','Au fil de notre conversation, les étapes utiles et les sources officielles apparaîtront ici.'),root,'small-note');return}
- const g=state.currentPlan;
- const caution=elem('div',null,root,'route-card caution');
- elem('h3',bilingual('First: protect your options','D’abord : préserver vos recours'),caution);
- elem('p',bilingual('Informal conversations do not automatically pause legal deadlines.','Les discussions informelles ne suspendent pas automatiquement les délais légaux.'),caution);
- const steps=elem('div',null,root,'route-card');elem('h3',bilingual('What you can do now','Ce que vous pouvez faire maintenant'),steps);
- const list=elem('ol',null,steps);g.steps.slice(0,4).forEach(x=>elem('li',x,list));
- for(const key of g.keys.slice(0,4)){const r=routes[key];if(!r)continue;const d=elem('div',null,root,'route-card');
- elem('h3',r.label[state.lang==='fr'?1:0],d);
- elem('p',r.body[state.lang==='fr'?1:0],d);
- sourceLink(d,bilingual('Official information','Source officielle'),r.url);
+ const root=$('route-results');root.replaceChildren();renderAnswers();$('plan-actions').hidden=!state.currentPlan;
+ if(!state.currentPlan){$('plan-progress').textContent=bilingual('Your practical steps and source links will appear as you answer.','Les étapes pratiques et les sources apparaîtront au fil de vos réponses.');elem('p',bilingual('Start with the concern that is on your mind. You can skip any question.','Commencez par votre préoccupation. Vous pouvez passer une question.'),root,'small-note');return}
+ const g=state.currentPlan,f=facts(),complete=!F.next(state.answers);
+ $('plan-progress').textContent=complete?bilingual('Your starting plan is ready. The routes below depend on the facts and the rules that apply to your position.','Vos démarches de départ sont prêtes. Les recours dépendent des faits et des règles applicables à votre poste.'):bilingual('This guidance will become more specific as you answer the next questions. You can use it now or keep going.','Ces démarches se préciseront au fil des prochaines réponses. Vous pouvez déjà les utiliser ou poursuivre.');
+ const caution=elem('article',null,root,'route-card caution');elem('h3',bilingual('Keep time limits in view','Gardez les délais à l’esprit'),caution);
+ elem('p',bilingual('Check the actual rule for your employer, issue and decision. Informal help does not automatically stop filing deadlines.','Vérifiez la règle applicable à votre employeur, à la question et à la décision. Le soutien informel ne suspend pas automatiquement les délais.'),caution);sourceLink(caution,bilingual('Check filing instructions and time limits','Vérifier les instructions et les délais'), '../#deadlines');
+ const d=elem('article',null,root,'route-card');elem('h3',bilingual('Your next steps','Vos prochaines étapes'),d);const list=elem('ol',null,d);g.steps.forEach(x=>elem('li',x,list));
+ if(g.nextSteps.length){const more=elem('article',null,root,'route-card');elem('h3',bilingual('If the situation is not resolved','Si la situation n’est pas réglée'),more);g.nextSteps.forEach(x=>elem('p',x,more));if(f.protectedConcern||f.discrimination)sourceLink(more,bilingual('Commission: complaint requirements','Commission : exigences liées aux plaintes'),routes.rights.url)}
+ for(const key of g.keys){const r=routes[key];if(!r)continue;const card=elem('article',null,root,'route-card');elem('h3',L(r.label),card);
+  let body=L(r.body);
+  if(key==='rights'&&!f.protectedConcern)body=bilingual('This route needs a connection to a prohibited ground and federal jurisdiction. If the ground or employer’s jurisdiction is unclear, ask the Commission about its requirements before filing.','Ce recours exige un lien avec un motif interdit et une compétence fédérale. Si le motif ou la compétence sont incertains, demandez à la Commission quelles exigences s’appliquent avant de déposer une plainte.');
+  if(key==='grievance'&&!F.answered(state.answers,'employer'))body=bilingual('If your position is covered by the federal public service grievance system, a grievance may be relevant. Confirm your employer, employment status, representation and the applicable deadline first.','Si votre poste relève du régime de griefs de la fonction publique fédérale, un grief peut être pertinent. Confirmez d’abord l’employeur, le statut, la représentation et le délai applicable.');
+  if(key==='accommodation'&&!f.grounds.includes('disability'))body=bilingual('Explain the workplace requirement, the barrier it creates and the adjustment sought. Ask for an individualized assessment and a written response. The accommodation process and possible recourse depend on the applicable law and employment arrangements.','Décrivez l’exigence, l’obstacle créé et la mesure recherchée. Demandez une évaluation individuelle et une réponse écrite. Le processus et les recours dépendent du droit et des conditions d’emploi applicables.');
+  elem('p',body,card);sourceLink(card,bilingual('Read the relevant guidance','Consulter le guide pertinent'),r.url);
  }
+ if(g.unknown.length){const u=elem('article',null,root,'route-card');elem('h3',bilingual('Details still to confirm','Détails à confirmer'),u);elem('p',g.unknown.join(' · '),u);elem('p',bilingual('An unsure answer is fine. Confirm these details with the relevant office or adviser before relying on a particular filing route.','Il est normal de ne pas savoir. Confirmez ces détails auprès du bureau ou conseiller compétent avant de vous fier à un recours précis.'),u)}
+ if(has('goal','financial')){const money=elem('article',null,root,'route-card');elem('h3',bilingual('Costs and possible financial remedies','Coûts et réparations financières possibles'),money);sourceLink(money,bilingual('See payment types, recourse costs and sources','Consulter les types de paiements, les coûts et les sources'),'../#costs');sourceLink(elem('p',null,money),bilingual('Check what a decision-maker can order','Vérifier les réparations possibles'),'../#decisions')}
 }
-function scoreCase(c,terms,queryWords){
- const grounds=c.grounds||[],issues=c.issues||[];let score=0;
- const groundsMap={race:'race',disability:'disability',religion:'religion',sex:'sex',family:'family',reprisal:'retaliation'};
- const issuesMap={race:['race','group'],disability:['accommodation','telework'],religion:['accommodation'],harassment:['harassment','investigation'],staffing:['staffinternal','staffexternal'],reprisal:['reprisal'],language:['language']};
- for(const key of terms){if(grounds.includes(groundsMap[key]))score+=16;for(const ix of issuesMap[key]||[])if(issues.includes(ix))score+=5}
- if(c.scope==='Federal public service')score+=7;else if(c.scope==='Not an employment dispute')score-=10;
- const blob=clean([c.title,c.citation,c.what,c.outcome,(c.issues||[]).join(' ')].join(' '));
- queryWords.forEach(x=>{if(blob.includes(x))score+=2});
- return score;
+function scoreCase(c){
+ const f=facts(),groundMap={race:'race',origin:'race',colour:'race',religion:'religion',disability:'disability',sex:'sex',family:'family',age:'age',gender:'gender-identity',sexual_orientation:'sexual-orientation'};
+ const issueMap={discrimination:['race','group'],accommodation:['accommodation','telework'],harassment:['harassment','investigation'],staffing:['staffinternal','staffexternal','serlo'],reprisal:['reprisal'],pay:['pay','benefits'],discipline:['discipline','performance'],workforce:['serlo','wfa'],language:['language'],union:['union']};
+ let subject=0;for(const g of f.grounds)if(groundMap[g]&&(c.grounds||[]).includes(groundMap[g]))subject+=16;
+ for(const t of f.topics)for(const i of issueMap[t]||[])if((c.issues||[]).includes(i))subject+=5;
+ if(!subject)return 0;
+ let result=subject;if(c.scope==='Federal public service')result+=7;if(c.scope==='Not an employment dispute')result-=30;
+ const text=clean([c.title,c.what,c.outcome].join(' '));words(state.lastConcern).slice(0,8).forEach(w=>{if(text.includes(w))result+=1});return result;
 }
 function related(){
- const terms=[...state.topics],qwords=words(state.lastConcern).slice(0,12);
- let candidates=state.cases.map(c=>({case:c,score:scoreCase(c,terms,qwords)})).sort((a,b)=>b.score-a.score);
- if(terms.length){const narrow=candidates.filter(x=>x.score>=10);if(narrow.length>=2)candidates=narrow}
- const chosen=[],seen=new Set();
- for(const status of ['allowed','dismissed']){const item=candidates.find(x=>x.case.status===status&&!seen.has(x.case.id));if(item){chosen.push(item.case);seen.add(item.case.id)}}
- for(const x of candidates){if(chosen.length>=3)break;if(!seen.has(x.case.id)){chosen.push(x.case);seen.add(x.case.id)}}
- return chosen;
+ if(!F.answered(state.answers,'issue'))return [];
+ const candidates=state.cases.map(c=>({case:c,score:scoreCase(c)})).filter(x=>x.score>0).sort((a,b)=>b.score-a.score);
+ const out=[],seen=new Set();
+ for(const status of ['allowed','dismissed']){const x=candidates.find(x=>x.case.status===status);if(x){out.push(x.case);seen.add(x.case.id)}}
+ for(const x of candidates)if(out.length<3&&!seen.has(x.case.id)){out.push(x.case);seen.add(x.case.id)}
+ return out;
 }
 function renderCases(){
- const root=$('related-cases');root.replaceChildren();
- if(!state.cases.length){elem('p',bilingual('Decisions are available in the full library.','Les décisions sont disponibles dans la bibliothèque complète.'),root,'small-note');return}
- for(const c of related()){
- const d=elem('article',null,root,'case-card');
- elem('h3',c.title,d);
- elem('p',[c.citation,c.body].filter(Boolean).join(' · '),d,'meta');
- elem('p',(state.lang==='fr'&&c.what_fr)||c.what,d);
- const det=elem('details',null,d);elem('summary',bilingual('How the decision was reached','Comment la décision a été prise'),det);
- elem('p',(state.lang==='fr'&&c.factors_fr)||c.factors||'',det);
- elem('p',(state.lang==='fr'&&c.outcome_fr)||c.outcome||'',det);
- if(c.finding==='not-separately-classified')elem('p',bilingual('The specific discrimination finding has not been independently classified.','La conclusion sur la discrimination n’a pas été classifiée indépendamment.'),det,'meta');
- if(c.sourceType==='secondary-summary'||c.sourceType==='representative-statement')elem('p',bilingual('Source is a published summary, not independently verified full reasons.','La source est un résumé publié, non une décision intégrale vérifiée.'),det,'meta');
- sourceLink(d,bilingual('Read the source','Lire la source'),c.url);
- }
+ const root=$('related-cases');root.replaceChildren();const found=related();
+ if(!found.length){elem('p',bilingual('As your concern becomes clearer, related decisions will appear here. You can also search the full library.','Des décisions connexes apparaîtront à mesure que votre préoccupation se précise. Vous pouvez aussi consulter la bibliothèque complète.'),root,'small-note');return}
+ for(const c of found){const d=elem('article',null,root,'case-card');elem('h3',c.title,d);elem('p',[c.citation,c.body,c.scope].filter(Boolean).join(' · '),d,'meta');elem('p',state.lang==='fr'?(c.what_fr||c.what):c.what,d);const details=elem('details',null,d);elem('summary',bilingual('Reasons and outcome','Motifs et résultat'),details);elem('p',state.lang==='fr'?(c.factors_fr||c.factors):c.factors,details);elem('p',state.lang==='fr'?(c.outcome_fr||c.outcome):c.outcome,details);if(c.finding==='not-separately-classified')elem('p',bilingual('The discrimination finding has not been separately classified.','La conclusion sur la discrimination n’a pas été classifiée séparément.'),d,'meta');if(['secondary-summary','representative-statement'].includes(c.sourceType))elem('p',bilingual('This source is a published summary or statement, not independently verified full reasons.','Cette source est un résumé ou une déclaration publiée, et non une décision intégrale vérifiée indépendamment.'),d,'meta');sourceLink(d,bilingual('Read the source','Lire la source'),c.url)}
 }
-async function loadCases(){
- try{const response=await fetch('../data/cases.json',{credentials:'omit'});if(!response.ok)throw Error('unavailable');const data=await response.json();state.cases=(data.cases||[]).filter(c=>c&&c.id&&c.title&&c.citation&&c.url&&c.what)}
- catch(e){state.cases=[]}
- renderCases();
+async function loadCases(){try{const response=await fetch('../data/cases.json',{credentials:'omit'});if(!response.ok)throw Error('unavailable');const data=await response.json();state.cases=(data.cases||[]).filter(c=>c&&c.id&&c.title&&c.citation&&c.url&&c.what)}catch(e){state.cases=[]}renderCases()}
+function showStatus(message){$('assistant-state').textContent=message}
+function promptFor(message){
+ const plan=state.currentPlan||createGuidance();return JSON.stringify({currentConcern:message,answers:F.summary(state.answers,state.lang),personalDetailsToVerify:plan.unknown,practicalSteps:plan.steps,ifUnresolved:plan.nextSteps,sourceLinkedRoutes:plan.keys.map(key=>({route:L(routes[key].label),description:L(routes[key].body),url:routes[key].url})),relatedDecisions:related().map(c=>({citation:c.citation,what:state.lang==='fr'?c.what_fr:c.what,outcome:state.lang==='fr'?c.outcome_fr:c.outcome,source:c.url}))}).slice(0,13500);
 }
+const systemPrompt=language=>'You are an automated, equity-informed support companion for Canadian federal public servants. Respond with care and respect, taking concerns about racism, disability, religion, harassment and power imbalance seriously without declaring a legal violation proven. The structured questionnaire has already gathered answers. The interface controls all follow-up questions and answer choices. Do not ask a new question or invent missing facts. Summarize the practical next step using ONLY the supplied source-linked guidance. Do not invent deadlines, rights, outcomes, eligibility, contacts or remedies. Do not tell the person to contact ARAN, send a report, or connect with a peer. No private information leaves the conversation. Write in '+language+' in 70–130 words with two short paragraphs. Refer the person to their detailed guidance below. Do not output internal reasoning, thinking tags, headings or model names.';
 const critical=/suicid|kill myself|harm myself|end my life|me tuer|me suicid|en finir avec ma vie|immediate physical danger|danger immediat/i;
 function emergency(text){
  if(!critical.test(text))return false;
  const reply=bilingual('If anyone is in immediate danger, call 911. In Canada, call or text 988 for suicide crisis support. You deserve immediate support from a real person.','En cas de danger immédiat, composez le 911. Au Canada, appelez ou textez le 988 pour obtenir du soutien en situation de crise suicidaire. Vous méritez l’aide immédiate d’une personne réelle.');
  entry('assistant',reply);$('assistant-state').textContent='';return true;
 }
-function handle(message,selected){
- const input=String(message||'').trim().slice(0,1600);if(!input)return;
- entry('user',input);state.history.push({role:'user',content:input});state.lastConcern=input;
- const found=identify(input);if(selected&&!found.includes(selected))found.push(selected);
- for(const x of found)state.topics.add(x);
- if(emergency(input))return;
- const topicList=[...state.topics];
- state.currentPlan=createGuidance(topicList);
- const baseline=supportText(topicList);
- const answer=entry('assistant',baseline);state.history.push({role:'assistant',content:baseline});
- renderGuidance();renderCases();
- const version=++state.answerVersion;
- startAI(input,baseline,answer,version);
-}
-function showStatus(msg){$('assistant-state').textContent=msg}
-function promptFor(message){
- const g=state.currentPlan||createGuidance([...state.topics]);
- const relevant=related().slice(0,3).map(c=>({citation:c.citation,case:c.title,grounds:c.grounds,issues:c.issues,what:state.lang==='fr'?c.what_fr:c.what,factors:state.lang==='fr'?c.factors_fr:c.factors,outcome:state.lang==='fr'?c.outcome_fr:c.outcome,source:c.url}));
- const refs=g.keys.slice(0,5).map(key=>({route:routes[key].label[state.lang==='fr'?1:0],description:routes[key].body[state.lang==='fr'?1:0],url:routes[key].url}));
- const prior=state.history.filter(x=>x.role==='user').slice(-4).map(x=>x.content);
- return JSON.stringify({currentConcern:message,previousUserMessages:prior,identifiedIssues:[...state.topics],practicalSteps:g.steps.slice(0,5),sourceLinkedRoutes:refs,relatedDecisions:relevant}).slice(0,10500);
-}
-const systemPrompt=(language)=>'You are an automated, equity-informed support companion for Canadian federal public servants experiencing possible racism, ableism, religious discrimination, retaliation, harassment or related barriers. Speak with the care, patience and experience of a supportive peer, but do not impersonate a human. Validate the concern without declaring discrimination proven. Consider how systemic barriers and power imbalances can affect someone. Avoid telling people to prove their feelings or minimize their experience. Be constructive, nonjudgmental, culturally sensitive and trauma-informed. Use the supplied grounded legal descriptions and cases ONLY. Do not invent case outcomes, rights, deadlines, contacts, legal tests or remedies. If a detail is missing, ask one useful question. No legal advice or predictions, no generic disclaimers repeated. Gently remind people to protect dates and avoid sharing confidential records. Answer in '+language+' in 110–190 words, 2–3 short paragraphs, with a single question at the end. Do not use headings, numbered lists or mention your model. Do not output reasoning tags or internal thinking. Avoid claiming you can connect to volunteers or send messages.';
 async function ensureAI(){
  if(state.engine)return state.engine;
  if(state.enginePromise)return state.enginePromise;
@@ -234,56 +313,48 @@ async function startAI(message,baseline,answer,version){
    }
  }catch(e){}finally{state.inferencing=false;showStatus('')}
 }
+
 function messageText(audience){
- const u=state.history.filter(x=>x.role==='user').map(x=>x.content).filter(Boolean);
- const last=u.slice(-2).join(' ').slice(0,650);
- const enIntro=audience==='union'?'I would appreciate advice about the available workplace recourse options and any applicable deadlines.':
- audience==='manager'?'I would like to discuss a workplace concern and request a respectful review of what happened.':
- audience==='advisor'?'I would appreciate a confidential conversation about the workplace concern described below and the options available to me.':
- 'I am reaching out because I am dealing with something at work and would appreciate your perspective and support.';
- const frIntro=audience==='union'?'Je souhaiterais obtenir des conseils sur les recours disponibles et les délais applicables.':
- audience==='manager'?'J’aimerais discuter d’une préoccupation au travail et demander un examen respectueux de la situation.':
- audience==='advisor'?'Je souhaiterais avoir une conversation confidentielle au sujet de la situation décrite ci-dessous et de mes options.':
- 'Je vous écris parce que je vis une situation difficile au travail et j’apprécierais votre écoute et votre soutien.';
- if(state.lang==='fr')return 'Bonjour,\n\n'+frIntro+'\n\n'+(last?'Voici comment je décrirais ma préoccupation :\n'+last+'\n\n':'')+'Je souhaite comprendre les faits, les démarches possibles et la façon de traiter la situation de manière juste et respectueuse. Seriez-vous disponible pour en parler et convenir des prochaines étapes?\n\nMerci.';
- return 'Hello,\n\n'+enIntro+'\n\n'+(last?'Here is how I would describe my concern:\n'+last+'\n\n':'')+'I would like to understand what happened, what options I have and how the situation can be handled fairly and respectfully. Would you be open to discussing this and considering next steps?\n\nThank you.';
+ const intro=audience==='union'?bilingual('I would appreciate advice on workplace recourse, representation and any applicable filing deadlines.','Je souhaiterais obtenir des conseils sur les recours au travail, la représentation et les délais de dépôt.'):
+ audience==='manager'?bilingual('I would like to discuss a workplace concern and request a respectful review of the situation.','J’aimerais discuter d’une préoccupation au travail et demander un examen respectueux de la situation.'):
+ audience==='advisor'?bilingual('I would appreciate a confidential conversation about my workplace concern and the options available.','Je souhaiterais avoir une conversation confidentielle au sujet de ma préoccupation au travail et de mes options.'):
+ bilingual('I am dealing with a concern at work and would appreciate your perspective and support.','Je vis une situation préoccupante au travail et j’apprécierais votre écoute et votre soutien.');
+ const selected=F.summary(state.answers,state.lang).filter(x=>['issue','details','grounds','situation','request','adjustment','staffing','staffing_event','reprisal','discipline','pay','workforce','language','notice','timing','goal'].includes(x.id));
+ const factsText=selected.map(x=>x.label+': '+x.value).join('\n');
+ const written=state.notes.slice(0,2).join('\n').slice(0,1000);
+ return bilingual('Hello,','Bonjour,')+'\n\n'+intro+'\n\n'+factsText+(written?'\n\n'+bilingual('In my own words:','Dans mes mots :')+'\n'+written:'')+'\n\n'+bilingual('I would like to understand which steps are available, what needs attention first and what information would help. Could we discuss how to proceed?','Je souhaite comprendre les démarches disponibles, les priorités et les renseignements utiles. Pourrions-nous discuter de la suite?')+'\n\n'+bilingual('Thank you.','Merci.');
 }
 function prepareDraft(){
- $('draft-panel').hidden=false;
- $('draft-text').value=messageText($('audience').value);
- $('draft-status').textContent=bilingual('Review and edit before copying.','Relisez et modifiez avant de copier.');
- $('draft-text').focus();
+ $('draft-panel').hidden=false;$('draft-text').value=messageText($('audience').value);$('draft-status').textContent=bilingual('Review and edit before copying.','Relisez et modifiez avant de copier.');$('draft-text').focus();
 }
-async function copyDraft(){
- const text=$('draft-text').value.trim();if(!text)return;
- try{await navigator.clipboard.writeText(text);$('draft-status').textContent=bilingual('Copied. You choose who receives it.','Copié. Vous choisissez le destinataire.')}
- catch(e){$('draft-text').focus();$('draft-text').select();$('draft-status').textContent=bilingual('Select the text and copy it.','Sélectionnez le texte et copiez-le.')}
+async function copyDraft(){const text=$('draft-text').value.trim();if(!text)return;try{await navigator.clipboard.writeText(text);$('draft-status').textContent=bilingual('Copied. You choose who receives it.','Copié. Vous choisissez le destinataire.')}catch(e){$('draft-text').focus();$('draft-text').select();$('draft-status').textContent=bilingual('Select the text and copy it.','Sélectionnez le texte et copiez-le.')}}
+async function copyGuidance(){
+ const lines=[bilingual('My recourse guidance','Mes démarches de recours'),...F.summary(state.answers,state.lang).map(x=>x.label+': '+x.value)]; for(const card of $('route-results').children){lines.push(card.innerText);for(const a of card.querySelectorAll('a'))lines.push(a.href)} const text=lines.join('\n\n');
+ try{await navigator.clipboard.writeText(text);$('plan-status').textContent=bilingual('Guidance copied.','Démarches copiées.')}catch(e){$('plan-status').textContent=bilingual('Select the guidance text and copy it.','Sélectionnez le texte des démarches et copiez-le.')}
 }
-function language(to){
- state.lang=to;document.documentElement.lang=to;
- for(const x of document.querySelectorAll('[data-en][data-fr]'))x.textContent=x.getAttribute('data-'+to);
+function language(to,focus=false){
+ state.lang=to;state.answerVersion++;document.documentElement.lang=to;
+ for(const node of document.querySelectorAll('[data-en][data-fr]'))node.textContent=node.getAttribute('data-'+to);
  $('switch-language').textContent=to==='en'?'Français':'English';$('switch-language').lang=to==='en'?'fr':'en';
  $('user-message').placeholder=$('user-message').getAttribute('data-placeholder-'+to);
- if(state.currentPlan)state.currentPlan=createGuidance([...state.topics]);
- renderGuidance();renderCases();
- if(!$('draft-panel').hidden)$('draft-text').value=messageText($('audience').value);
+ if(F.answered(state.answers,'issue'))state.currentPlan=createGuidance();
+ renderGuidance();renderCases();renderQuestion(focus);
 }
 function initialize(){
+ if(!F){$('assistant-state').textContent='The question choices could not load. Please refresh the page.';return}
  language(new URLSearchParams(location.search).get('lang')==='fr'?'fr':'en');
- entry('assistant',bilingual('I’m here to help you think through what’s happening at work. You can tell me as much or as little as feels comfortable. What is on your mind?','Je suis ici pour vous aider à réfléchir à ce qui se passe au travail. Vous pouvez m’en dire autant ou aussi peu que vous le souhaitez. Qu’est-ce qui vous préoccupe?'));
- renderGuidance();loadCases();
- $('message-form').addEventListener('submit',e=>{e.preventDefault();const val=$('user-message').value.trim();if(!val){$('user-message').focus();return}$('user-message').value='';handle(val,null)});
- for(const b of document.querySelectorAll('#suggestions button'))b.addEventListener('click',()=>handle(b.getAttribute('data-'+state.lang)||b.textContent,b.dataset.topic));
- $('switch-language').addEventListener('click',()=>language(state.lang==='en'?'fr':'en'));
- $('clear').addEventListener('click',()=>{
-   state.history=[];state.topics=new Set();state.lastConcern='';state.currentPlan=null;state.answerVersion++;$('conversation-log').replaceChildren();
-   $('draft-panel').hidden=true;$('draft-text').value='';showStatus('');
-   language(state.lang);
-   entry('assistant',bilingual('We can begin again. What would you like to talk about?','Nous pouvons recommencer. De quoi aimeriez-vous parler?'));
- });
- $('prepare-message').addEventListener('click',prepareDraft);
- $('audience').addEventListener('change',()=>{if(!$('draft-panel').hidden)prepareDraft()});
- $('copy-draft').addEventListener('click',copyDraft);
+ const greeting=['I’m here to help you understand your options. You can choose answers, add details or skip a question. Start with what is concerning you.','Je suis ici pour vous aider à comprendre vos options. Vous pouvez choisir des réponses, ajouter des détails ou passer une question. Commencez par ce qui vous préoccupe.'];entry('assistant',L(greeting),greeting);
+ loadCases();
+ $('message-form').addEventListener('submit',e=>{e.preventDefault();const text=$('user-message').value.trim();if(!text){$('user-message').focus();return}$('user-message').value='';handle(text)});
+ $('continue-answer').addEventListener('click',()=>{const q=activeQuestion();if(q&&state.pending.size)answerQuestion(q.id,[...state.pending])});
+ $('skip-question').addEventListener('click',()=>{const q=activeQuestion();if(q)answerQuestion(q.id,q.options.some(x=>x.id==='unsure')?['unsure']:['skipped'])});
+ $('previous-question').addEventListener('click',()=>{const q=activeQuestion(),all=F.questions(state.answers),i=all.findIndex(x=>x.id===q?.id);if(i>0){state.editId=all[i-1].id;renderQuestion(true)}});
+ $('show-guidance').addEventListener('click',()=>{state.forceComplete=true;state.editId=null;renderQuestion();$('reference-section').scrollIntoView({block:'start'});$('reference-heading').focus({preventScroll:true})});
+ $('use-date').addEventListener('click',()=>{const date=$('decision-date').value;if(!date){$('decision-date').focus();return}answerQuestion('timing',['exact'],'',date)});
+ $('switch-language').addEventListener('click',()=>language(state.lang==='en'?'fr':'en',true));
+ $('clear').addEventListener('click',()=>{state.answers={};state.notes=[];state.turns=[];state.history=[];state.topics=new Set();state.lastConcern='';state.currentPlan=null;state.answerVersion++;state.editId=null;state.forceComplete=false;state.pending=new Set();state.pendingId=null;$('conversation-log').replaceChildren();$('draft-panel').hidden=true;$('draft-text').value='';$('user-message').value='';$('answer-summary').open=false;showStatus('');language(state.lang);entry('assistant',L(greeting),greeting);renderQuestion(true)});
+ $('prepare-message').addEventListener('click',prepareDraft);$('audience').addEventListener('change',prepareDraft);$('copy-draft').addEventListener('click',copyDraft);
+ $('copy-guidance').addEventListener('click',copyGuidance);$('print-guidance').addEventListener('click',()=>window.print());
 }
 initialize();
 })();

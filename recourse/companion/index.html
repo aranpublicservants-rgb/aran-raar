@@ -7,8 +7,9 @@
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="color-scheme" content="light">
 <title>Recourse Assistant / Assistant aux recours</title>
-<link rel="stylesheet" href="./companion.css?v=20261116-3">
-<script src="./companion.js?v=20261116-3" defer></script>
+<link rel="stylesheet" href="./companion.css?v=20261116-4">
+<script src="./conversation-flow.js?v=20261116-4" defer></script>
+<script src="./companion.js?v=20261116-4" defer></script>
 </head>
 <body>
 <a class="skip-link" href="#conversation" data-en="Skip to the conversation" data-fr="Passer à la conversation">Skip to the conversation</a>
@@ -18,36 +19,40 @@
 </div></header>
 <main class="page-width">
 <section class="introduction">
- <p class="eyebrow" data-en="EQUITY-INFORMED WORKPLACE SUPPORT" data-fr="SOUTIEN ÉCLAIRÉ PAR L'ÉQUITÉ">EQUITY-INFORMED WORKPLACE SUPPORT</p>
- <h1 data-en="Tell me what's happening. We'll work through it." data-fr="Parlez-moi de ce qui se passe. Examinons vos options.">Tell me what's happening. We'll work through it.</h1>
- <p data-en="Whether it's racism, disability discrimination, religious accommodation or another workplace concern, you can talk it through, understand your options and prepare a message to share with someone you choose." data-fr="Qu'il s'agisse de racisme, de discrimination fondée sur le handicap, d'accommodement religieux ou d'une autre préoccupation au travail, vous pouvez en parler, comprendre vos recours et préparer un message à transmettre à la personne de votre choix.">Whether it's racism, disability discrimination, religious accommodation or another workplace concern, you can talk it through, understand your options and prepare a message to share with someone you choose.</p>
+ <p class="eyebrow" data-en="WORKPLACE SUPPORT" data-fr="SOUTIEN AU TRAVAIL">WORKPLACE SUPPORT</p>
+ <h1 data-en="Let’s work through your concern." data-fr="Examinons votre préoccupation.">Let’s work through your concern.</h1>
+ <p data-en="Choose an answer or write in your own words. We’ll ask relevant follow-up questions and build your guidance below the conversation." data-fr="Choisissez une réponse ou écrivez dans vos mots. Des questions de suivi vous aideront à préciser la situation. Vos démarches possibles s’afficheront sous la conversation.">Choose an answer or write in your own words. We’ll ask relevant follow-up questions and build your guidance below the conversation.</p>
 </section>
-
 <section id="conversation" class="conversation" aria-labelledby="conversation-heading">
-<div class="conversation-top">
- <h2 id="conversation-heading" data-en="Your conversation" data-fr="Votre conversation">Your conversation</h2>
- <button type="button" id="clear" class="text-button" data-en="Start over" data-fr="Recommencer">Start over</button>
-</div>
-<div id="conversation-log" class="conversation-log" role="log" aria-live="polite" aria-relevant="additions text"></div>
-<div class="entry-area">
- <p class="field-label" data-en="You can start with a topic" data-fr="Vous pouvez commencer par un sujet">You can start with a topic</p>
- <div id="suggestions" class="suggestions">
-  <button type="button" data-topic="race" data-en="I'm experiencing racism" data-fr="Je vis du racisme">I'm experiencing racism</button>
-  <button type="button" data-topic="disability" data-en="My accommodation was denied" data-fr="Mon accommodement a été refusé">My accommodation was denied</button>
-  <button type="button" data-topic="religion" data-en="My religious needs aren't respected" data-fr="Mes besoins religieux ne sont pas respectés">My religious needs aren't respected</button>
-  <button type="button" data-topic="harassment" data-en="I'm being harassed" data-fr="Je vis du harcèlement">I'm being harassed</button>
- </div>
- <form id="message-form">
-  <label class="field-label" for="user-message" data-en="Or tell me in your own words" data-fr="Ou expliquez-moi dans vos mots">Or tell me in your own words</label>
-  <textarea id="user-message" rows="3" maxlength="1600" aria-describedby="privacy-text" data-placeholder-en="What happened, and what would you like help with?" data-placeholder-fr="Que s'est-il passé et de quel soutien avez-vous besoin?"></textarea>
-  <div class="send-row">
-   <button type="submit" class="primary-button" id="send" data-en="Send message" data-fr="Envoyer le message">Send message</button>
-   <span id="assistant-state" class="state-text" role="status" aria-live="polite"></span>
+ <div class="conversation-top"><h2 id="conversation-heading" data-en="Your conversation" data-fr="Votre conversation">Your conversation</h2><button type="button" id="clear" class="text-button" data-en="Start over" data-fr="Recommencer">Start over</button></div>
+ <div id="conversation-log" class="conversation-log" role="log" aria-live="polite" aria-relevant="additions"></div>
+ <div class="entry-area">
+  <div id="question-panel" class="question-panel" aria-labelledby="question-heading">
+   <p id="question-progress" class="question-progress"></p>
+   <h3 id="question-heading" tabindex="-1"></h3>
+   <p id="question-help" class="small-note"></p>
+   <div id="suggestions" class="suggestions" role="group" aria-labelledby="question-heading" aria-describedby="question-help"></div>
+   <div id="date-answer" hidden><label for="decision-date" class="field-label" data-en="Date received or learned (optional)" data-fr="Date de réception ou de prise de connaissance (facultative)">Date received or learned (optional)</label><div class="date-row"><input id="decision-date" type="date"><button id="use-date" type="button" class="secondary-button" data-en="Use this date" data-fr="Utiliser cette date">Use this date</button></div></div>
+   <div class="choice-actions"><button type="button" class="primary-button" id="continue-answer" hidden data-en="Continue with these answers" data-fr="Continuer avec ces réponses">Continue with these answers</button></div>
+   <p id="question-source" class="small-note"></p>
+   <div class="guide-controls"><button type="button" id="previous-question" class="text-button" data-en="Back" data-fr="Retour">Back</button><button type="button" id="skip-question" class="text-button" data-en="Skip this question" data-fr="Passer cette question">Skip this question</button><button type="button" id="show-guidance" class="text-button" data-en="See my guidance so far" data-fr="Voir mes démarches possibles">See my guidance so far</button></div>
   </div>
- </form>
-</div>
+  <form id="message-form">
+   <label class="field-label" for="user-message" data-en="Or add a response in your own words" data-fr="Ou répondez dans vos mots">Or add a response in your own words</label>
+   <textarea id="user-message" rows="2" maxlength="1600" aria-describedby="privacy-text" data-placeholder-en="Add a detail, answer the question or ask a follow-up…" data-placeholder-fr="Ajoutez un détail, répondez à la question ou posez une question de suivi…"></textarea>
+   <div class="send-row"><button type="submit" class="secondary-button" id="send" data-en="Use my written response" data-fr="Utiliser ma réponse écrite">Use my written response</button><span id="assistant-state" class="state-text" role="status" aria-live="polite"></span></div>
+  </form>
+ </div>
 </section>
-
+<section class="evidence" id="reference-section" aria-labelledby="reference-heading">
+ <div class="section-heading"><div><p class="eyebrow" data-en="UPDATED AS YOU ANSWER" data-fr="MIS À JOUR AU FIL DE VOS RÉPONSES">UPDATED AS YOU ANSWER</p><h2 id="reference-heading" tabindex="-1" data-en="Your guidance" data-fr="Vos démarches possibles">Your guidance</h2></div><a class="inline-link" href="#conversation" data-en="Back to the conversation" data-fr="Retour à la conversation">Back to the conversation</a></div>
+ <p id="plan-progress" class="small-note"></p>
+ <details id="answer-summary" hidden><summary data-en="Review or change my answers" data-fr="Revoir ou modifier mes réponses">Review or change my answers</summary><div id="answer-list" class="answer-list"></div></details>
+ <div id="route-results" class="route-results"></div>
+ <div class="plan-actions" id="plan-actions" hidden><button type="button" class="secondary-button" id="copy-guidance" data-en="Copy guidance" data-fr="Copier les démarches">Copy guidance</button><button type="button" class="text-button" id="print-guidance" data-en="Print guidance" data-fr="Imprimer les démarches">Print guidance</button><span id="plan-status" role="status" aria-live="polite"></span></div>
+ <details id="cases-details"><summary data-en="Related decisions" data-fr="Décisions connexes">Related decisions</summary><p class="small-note" data-en="These decisions illustrate legal reasoning. They do not predict your outcome. Review the source, the employment context and any later decision." data-fr="Ces décisions illustrent le raisonnement juridique. Elles ne prédisent pas votre résultat. Consultez la source, le contexte d’emploi et toute décision ultérieure.">These decisions illustrate legal reasoning. They do not predict your outcome. Review the source, the employment context and any later decision.</p><div id="related-cases" class="case-list"></div><a class="inline-link" href="../cases/#all-published-decisions" data-en="Search the full decision library" data-fr="Rechercher dans la bibliothèque des décisions">Search the full decision library</a></details>
+<p class="footnote" id="privacy-text" data-en="Avoid including names, medical records or confidential documents. This assistant offers information and support, not a legal determination. Informal conversations do not stop filing deadlines." data-fr="Évitez d'inclure des noms, des dossiers médicaux ou des documents confidentiels. Cet assistant offre de l'information et du soutien, et non une conclusion juridique. Les échanges informels ne suspendent pas les délais.">Avoid including names, medical records or confidential documents. This assistant offers information and support, not a legal determination. Informal conversations do not stop filing deadlines.</p>
+</section>
 <section class="share-panel" id="share-section" aria-labelledby="share-heading">
  <div class="section-heading"><div><p class="eyebrow" data-en="WHEN YOU'RE READY" data-fr="QUAND VOUS SEREZ PRÊT">WHEN YOU'RE READY</p><h2 id="share-heading" data-en="Put it into words for someone you trust" data-fr="Trouver les mots pour en parler à quelqu'un de confiance">Put it into words for someone you trust</h2></div>
  <button id="prepare-message" type="button" class="secondary-button" data-en="Write a message I can share" data-fr="Rédiger un message à partager">Write a message I can share</button></div>
@@ -66,18 +71,4 @@
  </div>
 </section>
 
-<section class="evidence" id="reference-section" aria-labelledby="reference-heading">
- <div class="section-heading"><div><p class="eyebrow" data-en="UNDERSTAND YOUR OPTIONS" data-fr="COMPRENDRE VOS OPTIONS">UNDERSTAND YOUR OPTIONS</p><h2 id="reference-heading" data-en="Helpful information and decisions" data-fr="Renseignements et décisions utiles">Helpful information and decisions</h2></div></div>
- <div id="route-results" class="route-results" aria-live="polite"></div>
- <details id="cases-details">
-  <summary data-en="View related decisions" data-fr="Voir les décisions connexes">View related decisions</summary>
-  <p class="small-note" data-en="These decisions illustrate legal reasoning; they do not predict the outcome of your situation. Check the original decision and any later review." data-fr="Ces décisions illustrent le raisonnement juridique; elles ne prédisent pas le résultat de votre situation. Vérifiez la décision originale et toute révision ultérieure.">These decisions illustrate legal reasoning; they do not predict the outcome of your situation. Check the original decision and any later review.</p>
-  <div id="related-cases" class="case-list"></div>
-  <a class="inline-link" href="../cases/#all-published-decisions" data-en="Search more published decisions" data-fr="Rechercher d'autres décisions publiées">Search more published decisions</a>
- </details>
- <p class="footnote" id="privacy-text" data-en="Avoid including names, medical records or confidential documents. This assistant offers information and support, not a legal determination. Informal conversations do not stop filing deadlines." data-fr="Évitez d'inclure des noms, des dossiers médicaux ou des documents confidentiels. Cet assistant offre de l'information et du soutien, et non une conclusion juridique. Les échanges informels ne suspendent pas les délais.">Avoid including names, medical records or confidential documents. This assistant offers information and support, not a legal determination. Informal conversations do not stop filing deadlines.</p>
-</section>
-<footer><a href="../" data-en="Full recourse guide" data-fr="Guide complet des recours">Full recourse guide</a><span aria-hidden="true"> · </span><a href="../cases/" data-en="Decision library" data-fr="Bibliothèque des décisions">Decision library</a></footer>
-</main>
-</body>
-</html>
+<footer><a href="../" data-en="Full recourse guide" data-fr="Guide complet des recours">Full recourse guide</a><span aria-hidden="true"> · </span><a href="../cases/" data-en="Decision library" data-fr="Bibliothèque des décisions">Decision library</a></footer></main></body></html>
