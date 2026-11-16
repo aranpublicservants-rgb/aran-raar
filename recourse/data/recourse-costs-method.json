@@ -1,0 +1,36 @@
+{
+  "reviewed": "2026-11-16",
+  "scope_en": "Published claim-payment rows explicitly mentioning employment, grievances, wrongful dismissal or labour relations. This is a selected part of Public Accounts Volume III Section 8, not an official employee-recourse subtotal.",
+  "scope_fr": "Lignes de paiements publiées mentionnant explicitement l’emploi, les griefs, le congédiement injustifié ou les relations de travail. Sélection tirée de la section 8 du volume III des Comptes publics, et non un sous-total officiel des recours des employés.",
+  "selection_regex_case_insensitive": "employment|griev|griv|labour relations|wrongful dismissal|grief",
+  "fields_searched": [
+    "Claim-type_Type-reclamation_eng",
+    "Claim-type_Type-reclamation_fra"
+  ],
+  "grievance_regex_case_insensitive": "griev|griv|grief",
+  "amount_field": "Amount_Montant",
+  "organization_identity_field": "Dept-nbr_No-min",
+  "record_counts_are_not_counts_of_people_or_individual_payments": true,
+  "generic_human_rights_claims_without_employment_terms_are_excluded": true,
+  "grievance_amounts_are_included_in_total_do_not_add": true,
+  "summary": [
+    {
+      "fiscal_year": "2024-25",
+      "record_count": 92,
+      "organizations": 42,
+      "amount_cad": 9768216,
+      "grievance_amount_cad_included": 4889713,
+      "grievance_record_count": 51,
+      "original_csv_sha256": "40274d2918fc4544a40e6fc1c6e75b88e3d6b0e68b9595cbc763fb7e5dc6e0f1"
+    },
+    {
+      "fiscal_year": "2025-26",
+      "record_count": 178,
+      "organizations": 39,
+      "amount_cad": 6417497,
+      "grievance_amount_cad_included": 5010104,
+      "grievance_record_count": 158,
+      "original_csv_sha256": "dc3f04550a5c82e2930d344b6fc9e92c2682c1352d0db7c6a5e0b1ab2043f40d"
+    }
+  ]
+}
