@@ -30,6 +30,7 @@
   };
   var filters = {
     '': collections.join(','),
+    'all': '',
     'labour': 'FPSLREB,CIRB',
     'rights': 'CHRT,FC,FCA,SCC',
     'safety': 'OHSTC,FC,FCA',
@@ -128,12 +129,13 @@
     controller = new AbortController();
     results.replaceChildren(); $('a2aj-more').replaceChildren();
     txt(status,'Searching public case-law collections… / Recherche dans les collections publiques…');
+    var selected = Object.prototype.hasOwnProperty.call(filters,dataset.value) ? filters[dataset.value] : filters[''];
     var params = new URLSearchParams({
       query:q, doc_type:'cases', search_type:type.value,
-      dataset:filters[dataset.value] || filters[''],
       sort_results:sort.value, search_language:lang.value,
       size:'50'
     });
+    if (selected) params.set('dataset',selected);
     if (start.value) params.set('start_date',start.value);
     if (end.value) params.set('end_date',end.value);
     try {
