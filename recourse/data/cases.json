@@ -5,8 +5,8 @@
     "en",
     "fr"
   ],
-  "status": "164 curated entries from supplied HTML; not exhaustive of all Canadian decisions",
-  "methodology": "Includes every previously indexed case plus additional decisions drawn from official federal Board and CHRT annual reports or linked full decisions. Case status distinguishes successful, unsuccessful, mixed and procedural outcomes; a procedural ruling does not decide discrimination. Official annual report summaries are linked when a validated direct case URL is not available. Court appeals and later rulings may change outcomes. This finite case index is not an exhaustive census of every published decision and cannot include confidential settlements or unpublished complaints. A separate official-source directory links to searchable full decision collections. Historical statutory remedies and tribunal jurisdictions can differ from current law. Entries with direct court judgments are distinguishable from official summaries; confidential settlements and unpublished CHRC files are not included. This expansion incorporates 115 additional entries from a user-supplied HTML library, preserving the previous 49 structured entries without alteration. Their facts, reasons, outcomes, citations, protected grounds, issues, decision bodies, scopes and source links were reconstructed directly from the supplied HTML; source-specific notes not displayed in that HTML cannot be recovered. For new non-procedural cases, the separate 'finding' field is marked 'not-separately-classified' to avoid inventing a legal classification. 'status' accurately carries the uploaded outcome label. Some CanLII links were not directly opened by the original researchers. Links and appeals require independent checking.",
+  "status": "Expanded, source-labelled case and published administrative-findings index; not an exhaustive census",
+  "methodology": "Includes every previously indexed case plus additional decisions drawn from official federal Board and CHRT annual reports or linked full decisions. Case status distinguishes successful, unsuccessful, mixed and procedural outcomes; a procedural ruling does not decide discrimination. Official annual report summaries are linked when a validated direct case URL is not available. Court appeals and later rulings may change outcomes. This finite case index is not an exhaustive census of every published decision and cannot include confidential settlements or unpublished complaints. A separate official-source directory links to searchable full decision collections. Historical statutory remedies and tribunal jurisdictions can differ from current law. Entries with direct court judgments are distinguishable from official summaries; confidential settlements and unpublished CHRC files are not included. This expansion incorporates 115 additional entries from a user-supplied HTML library, preserving the previous 49 structured entries without alteration. Their facts, reasons, outcomes, citations, protected grounds, issues, decision bodies, scopes and source links were reconstructed directly from the supplied HTML; source-specific notes not displayed in that HTML cannot be recovered. For new non-procedural cases, the separate 'finding' field is marked 'not-separately-classified' to avoid inventing a legal classification. 'status' accurately carries the uploaded outcome label. Some CanLII links were not directly opened by the original researchers. Links and appeals require independent checking. Independent supplemental search on 2026-11-15 added recent Board, Tribunal, Federal Court, Official Languages Commissioner and RCMP External Review Committee records. Five cases link to secondary reporting because a direct official full-decision URL was not retrievable. For those cases, an officialDecisionSearch URL is supplied separately. Administrative investigations and ERC recommendations are explicitly labelled and must not be treated as court orders. Distinguish human-rights decisions, staffing grievances, judicial review, administrative investigations and non-final recommendations.",
   "fields": [
     "id",
     "title",
@@ -30,7 +30,9 @@
     "caseType",
     "reviewStatus",
     "finding",
-    "appliesTo"
+    "appliesTo",
+    "officialDecisionSearch",
+    "lastReviewed"
   ],
   "cases": [
     {
@@ -4475,18 +4477,291 @@
       "sourceType": "full-decision",
       "finding": "not-separately-classified",
       "reviewStatus": "Not individually re-verified during HTML reconstruction; check cited decision and subsequent appeals"
+    },
+    {
+      "id": "ab-ised-2026",
+      "title": "A.B. v. Treasury Board (Department of Industry)",
+      "citation": "2026 FPSLREB 76",
+      "body": "Federal Public Sector Labour Relations and Employment Board",
+      "issues": [
+        "accommodation",
+        "telework",
+        "discipline"
+      ],
+      "grounds": [
+        "disability"
+      ],
+      "status": "allowed",
+      "finding": "discrimination-established",
+      "scope": "Federal public service",
+      "route": "fpslreb-grievance",
+      "what": "An ISED employee with post-traumatic stress disorder sought to continue successful telework instead of returning to an office environment that aggravated his symptoms. The employer offered office-based measures rather than considering remote work on its individual merits.",
+      "factors": "The employee supplied clinical evidence of disability-related limitations. The Board criticized treating telework as a last resort and failing to assess the requested measure individually; a general return-to-office requirement does not override the duty to accommodate.",
+      "outcome": "The grievance succeeded. The Board ordered telework for at least two years, wage losses and leave restoration, plus $18,000 for pain and suffering and $10,000 for reckless discrimination. This does not confer a general right to telework.",
+      "what_fr": "Un employé d'ISDE ayant un trouble de stress post-traumatique demandait le maintien d'un télétravail qui fonctionnait, plutôt qu'un retour dans des locaux aggravant ses symptômes. L'employeur proposait surtout des mesures au bureau.",
+      "factors_fr": "La preuve clinique décrivait les limitations fonctionnelles. La Commission a critiqué l'idée que le télétravail soit un dernier recours et l'absence d'évaluation individuelle; une politique générale de présence ne remplace pas l'obligation d'accommodement.",
+      "outcome_fr": "Grief accueilli. La Commission a ordonné le télétravail pendant au moins deux ans, des pertes salariales et des crédits de congé, ainsi que 18 000 $ pour préjudice moral et 10 000 $ pour conduite discriminatoire inconsidérée. Ce n'est pas un droit général au télétravail.",
+      "url": "https://pipsc.ca/pipsc-statement-on-labour-board-decision-regarding-return-to-office-mandates/",
+      "sourceType": "representative-statement",
+      "officialDecisionSearch": "https://decisions.fpslreb-crtespf.gc.ca/fpslreb-crtespf/en/nav.do",
+      "sourceNote": "Ruling identified by citation and confirmed by union and published legal reporting; direct official full-decision URL not independently retrieved. Verify appeals and exact remedy in the official Board database.",
+      "appliesTo": "Direct federal public-service or institution decision"
+    },
+    {
+      "id": "parkes-ircc-2026",
+      "title": "Parkes v. Deputy Head (Department of Citizenship and Immigration)",
+      "citation": "2026 FPSLREB 7",
+      "body": "Federal Public Sector Labour Relations and Employment Board",
+      "issues": [
+        "race",
+        "staffinternal",
+        "group"
+      ],
+      "grounds": [
+        "race"
+      ],
+      "status": "dismissed",
+      "finding": "discrimination-not-established",
+      "scope": "Federal public service",
+      "route": "fpslreb-staffing",
+      "what": "An IRCC employee alleged racial discrimination in choosing a non-advertised process for an acting Senior Immigration Officer position and relied partly on departmental antiracism information.",
+      "factors": "The Board accepted that systemic racism may exist but required evidence connecting the specific challenged staffing decision to the alleged protected ground. The general reports offered did not establish that connection; the Board also considered the application chronology.",
+      "outcome": "Staffing complaint dismissed. This ruling does not declare that systemic discrimination is absent at IRCC or elsewhere; it concerns the evidence and specific appointment under review.",
+      "what_fr": "Une employée d'IRCC alléguait une discrimination raciale dans le choix d'une nomination intérimaire non annoncée et invoquait notamment des données ministérielles sur le racisme.",
+      "factors_fr": "La Commission n'a pas nié la possibilité de racisme systémique, mais a exigé des éléments établissant un lien avec la décision de dotation précise. Les rapports généraux et la chronologie des candidatures n'établissaient pas ce lien.",
+      "outcome_fr": "Plainte de dotation rejetée. Cette décision ne conclut pas à l'absence de discrimination systémique à IRCC ou ailleurs; elle porte sur les faits et la nomination examinés.",
+      "url": "https://www.hcamag.com/ca/specialization/employment-law/irccs-own-anti-racism-data-fails-employee-at-tribunal/569061",
+      "sourceType": "secondary-summary",
+      "officialDecisionSearch": "https://decisions.fpslreb-crtespf.gc.ca/fpslreb-crtespf/en/nav.do",
+      "sourceNote": "Citation and outcome verified from published case reporting, not from independently opened full Board reasons; check exact terminology and later review in official database.",
+      "appliesTo": "Direct federal public-service or institution decision"
+    },
+    {
+      "id": "mukbil-cbsa-2026",
+      "title": "Mukbil v. Canada Border Services Agency",
+      "citation": "2026 CHRT 88",
+      "body": "Canadian Human Rights Tribunal",
+      "issues": [
+        "race",
+        "staffexternal",
+        "performance"
+      ],
+      "grounds": [
+        "race",
+        "sex",
+        "religion",
+        "family"
+      ],
+      "status": "dismissed",
+      "finding": "discrimination-not-established",
+      "scope": "Federal public service",
+      "route": "chrc-chrt",
+      "what": "A Black former CBSA casual worker alleged that failure to obtain a permanent or extended appointment was connected to her race, religion, sex, family status and origin.",
+      "factors": "The Tribunal considered the written casual-employment offer, informal communications, pandemic disruption, the role's language requirements, comparisons with other employees and departmental discrimination reports. It found insufficient evidence that prohibited grounds influenced the specific decisions.",
+      "outcome": "Human-rights complaint dismissed. Staffing irregularities and workplace inequity indicators, without evidence connecting them to the particular adverse decision, did not establish this complaint.",
+      "what_fr": "Une ancienne employée occasionnelle noire de l'ASFC alléguait que l'absence de nomination permanente ou prolongée était liée à sa race, sa religion, son sexe, sa situation familiale et son origine.",
+      "factors_fr": "Le Tribunal a examiné l'offre d'emploi occasionnel, les communications, la pandémie, les exigences linguistiques, les comparaisons avec d'autres employés et des rapports sur la discrimination. Le lien avec les motifs protégés n'a pas été démontré.",
+      "outcome_fr": "Plainte en droits de la personne rejetée. Des irrégularités de dotation et des indicateurs d'iniquité ne suffisaient pas, sans preuve de lien avec la décision défavorable précise.",
+      "url": "https://www.hrreporter.com/chrr-plus/employment-law/was-cbsa-worker-promised-a-permanent-job/395084",
+      "sourceType": "secondary-summary",
+      "officialDecisionSearch": "https://www.chrt-tcdp.gc.ca/en/human-rights/search-human-rights-decisions",
+      "sourceNote": "Citation and decision reported in October 2026; use the CHRT official decisions search to obtain the full ruling and check for judicial review.",
+      "appliesTo": "Direct federal public-service or institution decision"
+    },
+    {
+      "id": "shakov-2017",
+      "title": "Canada (Attorney General) v. Shakov",
+      "citation": "2017 FCA 250",
+      "body": "Federal Court of Appeal",
+      "issues": [
+        "language",
+        "staffexternal",
+        "investigation"
+      ],
+      "grounds": [],
+      "status": "mixed",
+      "finding": "review",
+      "scope": "Federal public service",
+      "route": "court-review",
+      "what": "Public Service Commission investigators examined an external non-advertised federal appointment after a director position's linguistic profile changed from bilingual to English-essential.",
+      "factors": "The Court assessed whether the PSC considered extraordinary organizational circumstances and properly confined its analysis to improper conduct under the Public Service Employment Act, rather than treating its investigation simply as an Official Languages Act proceeding.",
+      "outcome": "The Federal Court of Appeal allowed the appeal in part and remitted the investigation to the PSC. The earlier PSC remedies, including appointment revocation, had been set aside; this was not a general ruling permitting arbitrary language requirements.",
+      "what_fr": "La Commission de la fonction publique a enquêté sur une nomination externe non annoncée dont le profil linguistique avait été modifié de bilingue à anglais essentiel.",
+      "factors_fr": "La Cour a examiné si la CFP avait tenu compte de circonstances organisationnelles exceptionnelles et de son mandat d'enquête sur la conduite irrégulière selon la Loi sur l'emploi dans la fonction publique, plutôt que de traiter le dossier seulement comme une question relevant de la Loi sur les langues officielles.",
+      "outcome_fr": "La Cour d'appel fédérale a accueilli l'appel en partie et renvoyé l'enquête à la CFP. Les anciennes mesures, dont la révocation de la nomination, avaient été annulées. La décision ne permet pas d'imposer arbitrairement des exigences linguistiques.",
+      "url": "https://www.clo-ocol.gc.ca/en/decisions/court-decisions/canada-attorney-general-v-shakov",
+      "sourceType": "official-summary",
+      "officialDecisionSearch": "https://decisions.fca-caf.gc.ca/fca-caf/en/nav.do",
+      "sourceNote": "Official Commissioner of Official Languages summary, not the full Court of Appeal reasons.",
+      "appliesTo": "Direct federal public-service or institution decision"
+    },
+    {
+      "id": "qi-cra-2025",
+      "title": "Qi v. Canada (Attorney General)",
+      "citation": "2025 FC 1783",
+      "body": "Federal Court",
+      "issues": [
+        "harassment",
+        "investigation",
+        "performance"
+      ],
+      "grounds": [],
+      "status": "allowed",
+      "finding": "other-success",
+      "scope": "Federal public service",
+      "route": "court-review",
+      "what": "A CRA employee challenged a workplace harassment investigation that had substantiated only one of several allegations without giving her a meaningful opportunity to answer contrary evidence and draft findings.",
+      "factors": "The parties accepted that procedural fairness had been breached. The Federal Court considered whether the investigator could simply reopen a portion of the process or whether the defects required a fresh investigation.",
+      "outcome": "Judicial review succeeded; the Federal Court ordered a new investigation. This was a procedural-fairness ruling, not a judicial determination that every underlying allegation of harassment was established.",
+      "what_fr": "Une employée de l'ARC contestait une enquête sur le harcèlement qui n'avait retenu qu'une allégation et ne lui avait pas permis de répondre adéquatement à la preuve contraire et aux conclusions préliminaires.",
+      "factors_fr": "Les parties reconnaissaient un manquement à l'équité procédurale. La Cour fédérale a examiné si une reprise partielle suffisait ou si les lacunes exigeaient une nouvelle enquête.",
+      "outcome_fr": "Contrôle judiciaire accueilli et nouvelle enquête ordonnée. La Cour n'a pas établi le bien-fondé de toutes les allégations de harcèlement.",
+      "url": "https://mkworkplaceinvestigations.com/procedural-fairness-in-workplace-investigations/",
+      "sourceType": "secondary-summary",
+      "officialDecisionSearch": "https://decisions.fct-cf.gc.ca/fc-cf/en/nav.do",
+      "sourceNote": "Legal practitioner summary reviewed; direct court judgment URL not independently retrieved; distinguish procedural remedy from merits findings.",
+      "appliesTo": "Direct federal public-service or institution decision"
+    },
+    {
+      "id": "carreau-cas-2025",
+      "title": "Carreau v. Canada (Attorney General)",
+      "citation": "2025 FC 1537",
+      "body": "Federal Court",
+      "issues": [
+        "harassment",
+        "investigation"
+      ],
+      "grounds": [],
+      "status": "dismissed",
+      "finding": "procedural",
+      "scope": "Federal public service",
+      "route": "court-review",
+      "what": "A senior executive challenged an investigator's conclusions and the employer's handling of a workplace harassment and violence investigation under federal prevention regulations.",
+      "factors": "The Court considered whether parties already had fair opportunities to respond and whether a right to comment on a finalized investigative report existed. It distinguished cases where fairness required reinvestigation.",
+      "outcome": "Judicial review was dismissed. The Court did not require the finalized report to be reopened for additional argument; failure or delay by senior management can be relevant to workplace harassment.",
+      "what_fr": "Une haute dirigeante contestait les conclusions d'une enquête et les mesures prises par l'employeur après une enquête sur le harcèlement et la violence au travail.",
+      "factors_fr": "La Cour a examiné si les parties avaient déjà eu une occasion équitable de répondre et si elles pouvaient commenter de nouveau un rapport devenu définitif. Elle a distingué les dossiers exigeant une nouvelle enquête.",
+      "outcome_fr": "Contrôle judiciaire rejeté. La Cour n'a pas exigé de rouvrir le rapport définitif; l'inaction ou les retards de la haute direction peuvent être pertinents au harcèlement.",
+      "url": "https://www.hrreporter.com/chrr-plus/employment-law-cases/10077",
+      "sourceType": "secondary-summary",
+      "officialDecisionSearch": "https://decisions.fct-cf.gc.ca/fc-cf/en/nav.do",
+      "sourceNote": "Case report and published legal commentary reviewed; direct full judgment not independently retrieved.",
+      "appliesTo": "Direct federal public-service or institution decision"
+    },
+    {
+      "id": "ocol-public-safety-2026",
+      "title": "Commissioner of Official Languages: Public Safety Canada language-of-work and intimidation investigation",
+      "citation": "OCOL investigation summary, 27 February 2026",
+      "body": "Office of the Commissioner of Official Languages",
+      "issues": [
+        "language",
+        "reprisal",
+        "investigation"
+      ],
+      "grounds": [],
+      "status": "allowed",
+      "finding": "other-success",
+      "scope": "Federal public service",
+      "route": "ocol-investigation",
+      "what": "A Public Safety Canada employee received regularly used work documents only in English despite requesting French, then reported intimidating executive comments after indicating an intention to complain.",
+      "factors": "The Commissioner found the institution failed to provide required work instruments in French. Evidence connected the executive's remarks to the contemplated official-languages complaint, giving reasonable grounds to believe intimidation occurred.",
+      "outcome": "The complaint was founded. The Commissioner recommended management reminders about language-of-work obligations and employees' right to complain. This is an administrative investigation result, not a damages award.",
+      "what_fr": "Un employé de Sécurité publique Canada a reçu des documents de travail courants seulement en anglais malgré sa demande en français, puis a signalé des commentaires intimidants après avoir annoncé son intention de porter plainte.",
+      "factors_fr": "Le commissaire a constaté le manquement à l'obligation de fournir les instruments de travail en français. La preuve reliait les commentaires du cadre à l'intention de porter plainte et appuyait une conclusion de motifs raisonnables de croire à de l'intimidation.",
+      "outcome_fr": "Plainte fondée. Le commissaire a recommandé un rappel aux gestionnaires sur les droits linguistiques et le droit de porter plainte. Il s'agit d'une enquête administrative, non d'une indemnité judiciaire.",
+      "url": "https://www.clo-ocol.gc.ca/en/decisions/investigation-summaries/investigation-summary-public-safety-canada-2023",
+      "sourceType": "official-summary",
+      "sourceNote": "Published founded investigation with recommendations; not a binding merits judgment or quantified compensation award.",
+      "appliesTo": "Direct federal public-service or institution decision"
+    },
+    {
+      "id": "ocol-dnd-2026",
+      "title": "Commissioner of Official Languages: National Defence engineering position linguistic requirements",
+      "citation": "OCOL investigation summary, 20 February 2026",
+      "body": "Office of the Commissioner of Official Languages",
+      "issues": [
+        "language",
+        "staffinternal",
+        "investigation"
+      ],
+      "grounds": [],
+      "status": "allowed",
+      "finding": "other-success",
+      "scope": "Federal public service",
+      "route": "ocol-investigation",
+      "what": "Two complainants challenged an English-essential linguistic designation in an internal DND appointment process for a supervisory engineering position.",
+      "factors": "The department had objectively identified a CBC/CBC profile for the position but did not use it in the staffing action. The Commissioner's assessment focused on the real supervisory duties and language-of-work obligations.",
+      "outcome": "Complaints founded. The Commissioner recommended changing the position designation to bilingual CBC/CBC and temporary measures to support both official languages in performing its duties. This is an investigation, not appointment revocation.",
+      "what_fr": "Deux plaignants contestaient la désignation anglais essentiel d'un poste d'ingénierie avec fonctions de supervision dans un processus interne du MDN.",
+      "factors_fr": "Le ministère avait objectivement établi un profil CBC/CBC pour le poste sans l'appliquer à la dotation. Le commissaire s'est appuyé sur les fonctions de supervision et les obligations relatives à la langue de travail.",
+      "outcome_fr": "Plaintes fondées. Le commissaire a recommandé de désigner le poste bilingue CBC/CBC et d'adopter des mesures temporaires pour assurer le travail dans les deux langues officielles. Il ne s'agit pas d'une révocation de nomination.",
+      "url": "https://www.clo-ocol.gc.ca/en/decisions/investigation-summaries/investigation-summary-national-defence-2025",
+      "sourceType": "official-summary",
+      "sourceNote": "Official section 91 investigation summary; administrative recommendations, not a judicial merits decision.",
+      "appliesTo": "Direct federal public-service or institution decision"
+    },
+    {
+      "id": "ocol-njc-2026",
+      "title": "Commissioner of Official Languages: National Joint Council travel terminology",
+      "citation": "OCOL investigation summary, 8 May 2026",
+      "body": "Office of the Commissioner of Official Languages",
+      "issues": [
+        "language",
+        "investigation"
+      ],
+      "grounds": [],
+      "status": "dismissed",
+      "finding": "other-dismissed",
+      "scope": "Federal public service",
+      "route": "ocol-investigation",
+      "what": "An employee challenged French meal terminology in National Joint Council travel directives, alleging it confused Canadian francophones using an internal expense system.",
+      "factors": "The Commissioner compared terminology with authoritative dictionaries and considered whether the French documentation remained intelligible and of equal quality.",
+      "outcome": "Complaint found unfounded. The Commissioner nevertheless encouraged Canadian French terminology, which was subsequently adopted. Not a discrimination merits decision.",
+      "what_fr": "Une plainte contestait les termes français des repas dans les Directives sur les voyages du Conseil national mixte, jugés confus pour des francophones du Canada.",
+      "factors_fr": "Le commissaire a comparé le vocabulaire aux dictionnaires reconnus et examiné l'intelligibilité et la qualité comparable des documents en français.",
+      "outcome_fr": "Plainte non fondée. Le commissaire a toutefois encouragé l'adoption des termes courants au Canada, qui ont ensuite été utilisés. Ce n'est pas un jugement de discrimination.",
+      "url": "https://www.clo-ocol.gc.ca/en/decisions/investigation-summaries/investigation-summary-national-joint-council-may-8-2026",
+      "sourceType": "official-summary",
+      "sourceNote": "Official administrative investigation; inclusion helps compare founded and unfounded language-of-work complaints.",
+      "appliesTo": "Direct federal public-service or institution decision"
+    },
+    {
+      "id": "rcmp-erc-nc291-2026",
+      "title": "RCMP External Review Committee: harassment appeal involving official bilingualism",
+      "citation": "RCMP ERC case NC-291 (published 2026)",
+      "body": "RCMP External Review Committee",
+      "issues": [
+        "language",
+        "harassment",
+        "investigation"
+      ],
+      "grounds": [],
+      "status": "procedural",
+      "finding": "review",
+      "scope": "Federal public sector",
+      "route": "rcmp-erc",
+      "what": "An RCMP member appealed a harassment determination that did not analyze whether the constitutional value of official bilingualism mattered to the alleged workplace conduct.",
+      "factors": "The External Review Committee found the original decision-maker failed to meaningfully consider relevant Charter values alongside operational context when exercising discretion.",
+      "outcome": "The Committee recommended allowing the appeal and remitting the issue for redetermination. A recommendation is not the final RCMP adjudicator's decision and is not an award of damages.",
+      "what_fr": "Un membre de la GRC a fait appel d'une décision sur le harcèlement qui n'avait pas examiné la pertinence de la valeur constitutionnelle du bilinguisme officiel.",
+      "factors_fr": "Le Comité externe d'examen a conclu que le décideur n'avait pas suffisamment tenu compte des valeurs pertinentes de la Charte et des impératifs opérationnels.",
+      "outcome_fr": "Le Comité a recommandé d'accueillir l'appel et de renvoyer le dossier pour une nouvelle décision. Il ne s'agit pas de la décision finale de la GRC ni d'une indemnité.",
+      "url": "https://www.canada.ca/en/rcmp-external-review-committee/services/case-summaries/other-appeals/nc-291.html",
+      "sourceType": "official-summary",
+      "sourceNote": "Official ERC recommendation only. Do not represent as a final binding adjudication or an adjudicated CHRA discrimination claim.",
+      "appliesTo": "Federal public-sector review route; confirm employer-specific legislation"
     }
   ],
   "coverage": {
-    "included": 164,
+    "included": 174,
     "checkedAsOf": "2026-11-15",
     "sourceCoverage": "All 164 entries from the user-uploaded self-contained HTML. Previous 49 structured records were retained unchanged; 115 new records reconstructed from the HTML.",
     "excluded": "Unpublished decisions, confidential settlements and records not publicly released.",
     "byRoute": {
-      "court-review": 52,
-      "fpslreb-staffing": 7,
-      "chrc-chrt": 53,
-      "fpslreb-grievance": 26,
+      "court-review": 55,
+      "fpslreb-staffing": 8,
+      "chrc-chrt": 54,
+      "fpslreb-grievance": 27,
       "fpslreb-unfair": 3,
       "psc-staffing": 3,
       "psc-political": 3,
@@ -4496,33 +4771,36 @@
       "ohsa-appeal": 5,
       "chrc-screening": 3,
       "eea-compliance": 1,
-      "cirb-jurisdiction": 1
+      "cirb-jurisdiction": 1,
+      "ocol-investigation": 3,
+      "rcmp-erc": 1
     },
     "byScope": {
       "General legal precedent": 38,
-      "Federal public sector": 22,
+      "Federal public sector": 23,
       "Other federally regulated employment": 26,
-      "Federal public service": 70,
+      "Federal public service": 79,
       "Not an employment dispute": 8
     },
     "byStatus": {
-      "allowed": 68,
-      "dismissed": 49,
-      "mixed": 18,
+      "allowed": 72,
+      "dismissed": 53,
+      "mixed": 19,
       "review": 7,
       "precedent": 3,
-      "procedural": 19
+      "procedural": 20
     },
     "byGround": {
-      "sex": 25,
-      "family": 16,
+      "sex": 26,
+      "family": 17,
       "age": 5,
-      "disability": 39,
+      "disability": 40,
       "retaliation": 10,
-      "race": 40,
-      "religion": 18,
+      "race": 42,
+      "religion": 19,
       "sexual-orientation": 7,
       "gender-identity": 3
     }
-  }
+  },
+  "lastReviewed": "2026-11-15"
 }
