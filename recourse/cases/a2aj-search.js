@@ -47,7 +47,12 @@
     'CMAC':'CMAC',
     'OIC':'OIC'
   };
-  function txt(node, value) { node.textContent = String(value == null ? '' : value); }
+  function localize(value) { var parts=String(value).split(' / '); return parts.length===2?parts[document.documentElement.lang==='fr'?1:0]:String(value); }
+  function txt(node, value) {
+    var text=String(value == null ? '' : value), parts=text.split(' / ');
+    if(parts.length===2 && node.tagName!=='H3' && !node.classList.contains('a2aj-snippet')) {node.dataset.en=parts[0];node.dataset.fr=parts[1];text=localize(text);}
+    node.textContent=text;
+  }
   function add(parent, element, content, className) {
     var el = document.createElement(element);
     if (typeof content !== 'undefined') txt(el, content);
@@ -100,7 +105,7 @@
       if (!doc || typeof doc !== 'object') return;
       var item = add(results,'li',undefined,'a2aj-hit');
       add(item,'h3',recTitle(doc));
-      add(item,'p',[citation(doc), names[doc.dataset] || doc.dataset || '', recDate(doc)].filter(Boolean).join(' · '),'a2aj-meta');
+      add(item,'p',[citation(doc), localize(names[doc.dataset] || doc.dataset || ''), recDate(doc)].filter(Boolean).join(' · '),'a2aj-meta');
       var snip = doc.snippet || '';
       if (snip) {
         // The provider can send HTML highlighting: intentionally render it as plain text.
@@ -127,6 +132,8 @@
       txt(status,'Check the date range. / Vérifiez la plage de dates.'); return;
     }
     controller = new AbortController();
+    var requestController=controller, timedOut=false;
+    var timer=setTimeout(function(){timedOut=true;requestController.abort();},20000);
     results.replaceChildren(); $('a2aj-more').replaceChildren();
     txt(status,'Searching public case-law collections… / Recherche dans les collections publiques…');
     var selected = Object.prototype.hasOwnProperty.call(filters,dataset.value) ? filters[dataset.value] : filters[''];
@@ -139,17 +146,17 @@
     if (start.value) params.set('start_date',start.value);
     if (end.value) params.set('end_date',end.value);
     try {
-      var r = await fetch(root + '/search?' + params.toString(), {signal:controller.signal,mode:'cors',credentials:'omit',cache:'no-store'});
+      var r = await fetch(root + '/search?' + params.toString(), {signal:requestController.signal,mode:'cors',credentials:'omit',cache:'no-store'});
       if (!r.ok) throw new Error('HTTP '+r.status);
       show(await r.json());
     } catch (err) {
-      if (err && err.name === 'AbortError') return;
+      if (err && err.name === 'AbortError' && !timedOut) return;
       failure('External case-law search unavailable / Recherche externe indisponible');
-    }
+    } finally {clearTimeout(timer);}
   });
   document.querySelectorAll('[data-a2aj-topic]').forEach(function (button) {
     button.addEventListener('click', function () {
-      query.value = button.getAttribute('data-a2aj-topic') || '';
+      query.value = (lang.value==='fr'?button.getAttribute('data-a2aj-topic-fr'):button.getAttribute('data-a2aj-topic')) || button.getAttribute('data-a2aj-topic') || '';
       dataset.value = button.getAttribute('data-a2aj-body') || '';
       form.requestSubmit();
     });
@@ -157,7 +164,7 @@
   $('a2aj-reset').addEventListener('click',function () {
     if (controller) controller.abort();
     query.value=''; dataset.value=''; type.value='full_text'; sort.value='newest_first';
-    start.value=''; end.value=''; lang.value='en';
+    start.value=''; end.value=''; lang.value=document.documentElement.lang==='fr'?'fr':'en';
     results.replaceChildren(); $('a2aj-more').replaceChildren();
     txt(status,'Ready to search published case law / Prêt à rechercher la jurisprudence');
   });
@@ -181,7 +188,7 @@
         .forEach(function (d) {
           var row = add(ul,'li');
           add(row,'strong',d.dataset+' — ');
-          add(row,'span',String(d.number_of_documents||0)+' published records / dossiers publiés; '+(d.earliest_document_date||'?')+' to / à '+(d.latest_document_date||'?'));
+          add(row,'span',String(d.number_of_documents||0)+(document.documentElement.lang==='fr'?' dossiers publiés; ':' published records; ')+(d.earliest_document_date||'?')+' – '+(d.latest_document_date||'?'));
         });
       coverage.dataset.loaded='true';
     } catch (e) {

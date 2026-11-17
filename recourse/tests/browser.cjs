@@ -56,9 +56,23 @@ const server=http.createServer((req,res)=>{
     await page.locator('#q').fill('nothing-matches-982173');assert.equal(await page.locator('#noresults').isVisible(),true);assert.equal(await page.locator('#download-results').isEnabled(),false);
     await page.locator('#reset').click();assert.match(await page.locator('#showing').innerText(),/176/);
     assert.equal(await page.locator('html').getAttribute('lang'),lang);
+    const sent=[];
+    await page.route('https://api.a2aj.ca/**',async route=>{sent.push(route.request().url());await route.fulfill({contentType:'application/json',body:JSON.stringify({results:[{name_en:'Public test decision',name_fr:'Décision publique de test',citation_en:'2026 TEST 1',dataset:'FC',document_date_en:'2026-01-01',url_en:'https://decisions.fct-cf.gc.ca/'}]})})});
+    await page.locator('#all-published-decisions>summary').click();
+    await page.locator('#a2aj-query').fill('public test phrase');assert.equal(sent.length,0,'External search must require an explicit action');
+    await page.locator('[data-a2aj-topic]').first().click();await page.waitForFunction(()=>document.querySelectorAll('#a2aj-results>li').length===1);
+    assert.equal(new URL(sent[0]).searchParams.get('search_language'),lang);
+    assert.match(new URL(sent[0]).searchParams.get('query'),lang==='fr'?/discrimination raciale/:/racial discrimination/);
+    assert.ok(!(await page.locator('#a2aj-status').innerText()).includes(' / '));
+    await page.unroute('https://api.a2aj.ca/**');await page.route('https://api.a2aj.ca/**',route=>route.fulfill({status:503,body:'unavailable'}));
+    await page.locator('#a2aj-form button[type=submit]').click();await page.waitForFunction(()=>/unavailable|indisponible/.test(document.querySelector('#a2aj-status').textContent));
+    assert.ok(await page.locator('#a2aj-results a').count()>=2);
+    await page.locator('#a2aj-reset').click();assert.equal(await page.locator('#a2aj-language').inputValue(),lang);
+    await page.unroute('https://api.a2aj.ca/**');
     for(const url of [base+(lang==='fr'?'?lang=fr':''),base+'companion/'+(lang==='fr'?'?lang=fr':''),base+'cases/'+(lang==='fr'?'?lang=fr':'')]){
      await page.goto(url);await page.waitForFunction(()=>!document.querySelector('#showing')||!document.querySelector('#showing').textContent.match(/Loading|Chargement/));
      assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>document.documentElement.clientWidth+2),false,'Viewport overflow '+url+' '+mode.name);
+     if(new URL(url).pathname==='/recourse/'){await page.locator('.quick-form>summary').click();await page.locator('.directory-disclosure>summary').click();await page.locator('.research-disclosure>summary').click();await page.locator('.selected-examples>summary').click();}
      await page.addScriptTag({path:require.resolve('axe-core')});
      const violations=await page.evaluate(async()=> (await axe.run(document,{runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21aa']}})).violations.filter(v=>['serious','critical'].includes(v.impact)).map(v=>({id:v.id,nodes:v.nodes.map(n=>({target:n.target,summary:n.failureSummary}))})));
      assert.deepEqual(violations,[],'Accessibility '+url+' '+JSON.stringify(violations));
