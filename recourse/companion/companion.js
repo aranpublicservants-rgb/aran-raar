@@ -1,7 +1,7 @@
 /* Adaptive conversation, source-based guidance and the existing on-device language engine. */
 (()=>{'use strict';
 const $=id=>document.getElementById(id),F=window.RecourseFlow;
-const state={lang:'en',answers:{},notes:[],turns:[],history:[],topics:new Set(),cases:[],lastConcern:'',currentPlan:null,engine:null,enginePromise:null,inferencing:false,answerVersion:0,editId:null,forceComplete:false,pending:new Set(),pendingId:null,chosenDraft:null};
+const state={lang:'en',answers:{},notes:[],turns:[],history:[],topics:new Set(),cases:[],lastConcern:'',currentPlan:null,engine:null,enginePromise:null,inferencing:false,answerVersion:0,editId:null,forceComplete:false,pending:new Set(),pendingId:null,chosenDraft:null,casesStatus:'loading',allowAI:false};
 const bilingual=(en,fr)=>state.lang==='fr'?fr:en;
 const elem=(tag,text,parent,className)=>{const x=document.createElement(tag);if(text!==null&&text!==undefined)x.textContent=text;if(className)x.className=className;if(parent)parent.appendChild(x);return x;};
 const urlOk=v=>typeof v==='string'&&/^(https:\/\/|\.{1,2}\/)/.test(v);
@@ -174,7 +174,7 @@ function acknowledge(id){
 }
 function updateAll(focus=false){
  state.topics=new Set(facts().topics);state.currentPlan=F.answered(state.answers,'issue')?createGuidance():null;
- renderGuidance();renderCases();renderQuestion(focus);state.answerVersion++;
+ renderGuidance();renderCases();renderQuestion(focus);$('prepare-message').disabled=!F.answered(state.answers,'issue');$('enable-wording').disabled=!F.answered(state.answers,'issue');state.answerVersion++;
  showStatus(bilingual('Your guidance has been updated.','Vos démarches ont été mises à jour.'));
 }
 function answerQuestion(id,selected,text='',date=''){
@@ -193,7 +193,7 @@ function completeConversation(generate=true){
  const pair=[f.protectedConcern?'We have enough context for a useful starting plan about the treatment you described. Your steps, possible routes, points to verify and related decisions are below. You can change an answer or add another detail at any time.':'Your starting plan is ready below. It brings together practical steps, possible routes and the points that still need checking. You can change an answer or add another detail at any time.',f.protectedConcern?'Nous avons assez de contexte pour établir des démarches utiles sur le traitement décrit. Les étapes, recours possibles, points à vérifier et décisions connexes figurent ci-dessous. Vous pouvez modifier une réponse ou ajouter un détail en tout temps.':'Vos démarches de départ sont prêtes ci-dessous. Elles regroupent les étapes pratiques, recours possibles et points à vérifier. Vous pouvez modifier une réponse ou ajouter un détail en tout temps.'];
  const answer=entry('assistant',L(pair),pair);state.history.push({role:'assistant',content:L(pair)});
  if(has('goal','cases'))$('cases-details').open=true;
- if(generate)startAI(state.lastConcern||F.summary(state.answers,state.lang).map(x=>x.value).join('; '),L(pair),answer,state.answerVersion);
+ if(generate&&state.allowAI)startAI(state.lastConcern||F.summary(state.answers,state.lang).map(x=>x.value).join('; '),L(pair),answer,state.answerVersion);
 }
 function handle(message){
  const input=String(message||'').trim().slice(0,1600);if(!input)return;
@@ -263,11 +263,11 @@ function related(){
  return out;
 }
 function renderCases(){
- const root=$('related-cases');root.replaceChildren();const found=related();
+ const root=$('related-cases');root.replaceChildren();if(state.casesStatus==='loading'){elem('p',bilingual('Loading related decisions…','Chargement des décisions connexes…'),root,'small-note');return}if(state.casesStatus==='error'){elem('p',bilingual('Related decisions could not load. Your guidance remains available. Try again or open the decision library.','Impossible de charger les décisions connexes. Vos démarches restent disponibles. Réessayez ou consultez la bibliothèque.'),root,'small-note');const retry=elem('button',bilingual('Try again','Réessayer'),root,'secondary-button');retry.type='button';retry.addEventListener('click',loadCases);return}const found=related();
  if(!found.length){elem('p',bilingual('As your concern becomes clearer, related decisions will appear here. You can also search the full library.','Des décisions connexes apparaîtront à mesure que votre préoccupation se précise. Vous pouvez aussi consulter la bibliothèque complète.'),root,'small-note');return}
  for(const c of found){const d=elem('article',null,root,'case-card');elem('h3',c.title,d);elem('p',[c.citation,c.body,c.scope].filter(Boolean).join(' · '),d,'meta');elem('p',state.lang==='fr'?(c.what_fr||c.what):c.what,d);const details=elem('details',null,d);elem('summary',bilingual('Reasons and outcome','Motifs et résultat'),details);elem('p',state.lang==='fr'?(c.factors_fr||c.factors):c.factors,details);elem('p',state.lang==='fr'?(c.outcome_fr||c.outcome):c.outcome,details);if(c.finding==='not-separately-classified')elem('p',bilingual('The discrimination finding has not been separately classified.','La conclusion sur la discrimination n’a pas été classifiée séparément.'),d,'meta');if(['secondary-summary','representative-statement'].includes(c.sourceType))elem('p',bilingual('This source is a published summary or statement, not independently verified full reasons.','Cette source est un résumé ou une déclaration publiée, et non une décision intégrale vérifiée indépendamment.'),d,'meta');sourceLink(d,bilingual('Read the source','Lire la source'),c.url)}
 }
-async function loadCases(){try{const response=await fetch('../data/cases.json',{credentials:'omit'});if(!response.ok)throw Error('unavailable');const data=await response.json();state.cases=(data.cases||[]).filter(c=>c&&c.id&&c.title&&c.citation&&c.url&&c.what)}catch(e){state.cases=[]}renderCases()}
+async function loadCases(){state.casesStatus='loading';renderCases();try{const response=await fetch('../data/cases.json',{credentials:'omit'});if(!response.ok)throw Error('unavailable');const data=await response.json();state.cases=(data.cases||[]).filter(c=>c&&c.id&&c.title&&c.citation&&c.url&&c.what);state.casesStatus='ready'}catch(e){state.cases=[];state.casesStatus='error'}renderCases()}
 function showStatus(message){$('assistant-state').textContent=message}
 function promptFor(message){
  const plan=state.currentPlan||createGuidance();return JSON.stringify({currentConcern:message,answers:F.summary(state.answers,state.lang),personalDetailsToVerify:plan.unknown,practicalSteps:plan.steps,ifUnresolved:plan.nextSteps,sourceLinkedRoutes:plan.keys.map(key=>({route:L(routes[key].label),description:L(routes[key].body),url:routes[key].url})),relatedDecisions:related().map(c=>({citation:c.citation,what:state.lang==='fr'?c.what_fr:c.what,outcome:state.lang==='fr'?c.outcome_fr:c.outcome,source:c.url}))}).slice(0,13500);
@@ -308,7 +308,7 @@ async function startAI(message,baseline,answer,version){
    const finalText=raw.includes('</think>')?raw.split('</think>').slice(-1)[0]:raw;
    const text=finalText.replace(/<think>[\s\S]*?<\/think>/gi,'').replace(/<think>[\s\S]*$/gi,'').replace(/<\/?think>/gi,'').trim();
    if(text&&version===state.answerVersion&&text.length>=35){
-     answer.textContent=text;
+     answer.textContent=text;answer.dataset[state.lang]=text;
      if(state.history.length&&state.history[state.history.length-1].role==='assistant')state.history[state.history.length-1].content=text;
    }
  }catch(e){}finally{state.inferencing=false;showStatus('')}
@@ -328,8 +328,11 @@ function prepareDraft(){
  $('draft-panel').hidden=false;$('draft-text').value=messageText($('audience').value);$('draft-status').textContent=bilingual('Review and edit before copying.','Relisez et modifiez avant de copier.');$('draft-text').focus();
 }
 async function copyDraft(){const text=$('draft-text').value.trim();if(!text)return;try{await navigator.clipboard.writeText(text);$('draft-status').textContent=bilingual('Copied. You choose who receives it.','Copié. Vous choisissez le destinataire.')}catch(e){$('draft-text').focus();$('draft-text').select();$('draft-status').textContent=bilingual('Select the text and copy it.','Sélectionnez le texte et copiez-le.')}}
+function guidanceText(){
+ const lines=[bilingual('My recourse guidance','Mes démarches de recours'),...F.summary(state.answers,state.lang).map(x=>x.label+': '+x.value)]; for(const card of $('route-results').children){lines.push(card.innerText);for(const a of card.querySelectorAll('a'))lines.push(a.href)} return lines.join('\n\n');
+}
 async function copyGuidance(){
- const lines=[bilingual('My recourse guidance','Mes démarches de recours'),...F.summary(state.answers,state.lang).map(x=>x.label+': '+x.value)]; for(const card of $('route-results').children){lines.push(card.innerText);for(const a of card.querySelectorAll('a'))lines.push(a.href)} const text=lines.join('\n\n');
+ const text=guidanceText();
  try{await navigator.clipboard.writeText(text);$('plan-status').textContent=bilingual('Guidance copied.','Démarches copiées.')}catch(e){$('plan-status').textContent=bilingual('Select the guidance text and copy it.','Sélectionnez le texte des démarches et copiez-le.')}
 }
 function language(to,focus=false){
@@ -338,7 +341,7 @@ function language(to,focus=false){
  $('switch-language').textContent=to==='en'?'Français':'English';$('switch-language').lang=to==='en'?'fr':'en';
  $('user-message').placeholder=$('user-message').getAttribute('data-placeholder-'+to);
  if(F.answered(state.answers,'issue'))state.currentPlan=createGuidance();
- renderGuidance();renderCases();renderQuestion(focus);
+ renderGuidance();renderCases();renderQuestion(focus);$('prepare-message').disabled=!F.answered(state.answers,'issue');$('enable-wording').disabled=!F.answered(state.answers,'issue');
 }
 function initialize(){
  if(!F){$('assistant-state').textContent='The question choices could not load. Please refresh the page.';return}
@@ -354,7 +357,7 @@ function initialize(){
  $('switch-language').addEventListener('click',()=>language(state.lang==='en'?'fr':'en',true));
  $('clear').addEventListener('click',()=>{state.answers={};state.notes=[];state.turns=[];state.history=[];state.topics=new Set();state.lastConcern='';state.currentPlan=null;state.answerVersion++;state.editId=null;state.forceComplete=false;state.pending=new Set();state.pendingId=null;$('conversation-log').replaceChildren();$('draft-panel').hidden=true;$('draft-text').value='';$('user-message').value='';$('answer-summary').open=false;showStatus('');language(state.lang);entry('assistant',L(greeting),greeting);renderQuestion(true)});
  $('prepare-message').addEventListener('click',prepareDraft);$('audience').addEventListener('change',prepareDraft);$('copy-draft').addEventListener('click',copyDraft);
- $('copy-guidance').addEventListener('click',copyGuidance);$('print-guidance').addEventListener('click',()=>window.print());
+ $('download-guidance').addEventListener('click',()=>{const url=URL.createObjectURL(new Blob([guidanceText()],{type:'text/plain;charset=utf-8'})),a=document.createElement('a');a.href=url;a.download=state.lang==='fr'?'mes-demarches-recours.txt':'my-recourse-guidance.txt';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);$('plan-status').textContent=bilingual('Guidance downloaded.','Démarches téléchargées.')});$('enable-wording').addEventListener('click',()=>{state.allowAI=true;completeConversation(true)});$('copy-guidance').addEventListener('click',copyGuidance);$('print-guidance').addEventListener('click',()=>window.print());
 }
 initialize();
 })();

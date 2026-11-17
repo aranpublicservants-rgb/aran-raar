@@ -1,0 +1,26 @@
+name: Recourse journeys and accessibility
+on:
+  push:
+    branches: [main]
+    paths: ['recourse/**', '.github/workflows/recourse-review.yml']
+  pull_request:
+    paths: ['recourse/**', '.github/workflows/recourse-review.yml']
+permissions:
+  contents: read
+jobs:
+  recourse-check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check adaptive flows and complete library coverage
+        run: node --test recourse/companion/tests/flow.test.cjs recourse/tests/library.test.cjs
+      - name: Prepare browser checks
+        run: |
+          npm install --no-save playwright axe-core
+          npx playwright install --with-deps chromium
+      - name: Check English and French journeys on desktop and phone
+        run: node recourse/tests/browser.cjs
