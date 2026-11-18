@@ -5,6 +5,16 @@
 **Library:** https://aranpublicservants-rgb.github.io/aran-raar/recourse/cases/  
 **Structured data:** https://github.com/aranpublicservants-rgb/aran-raar/blob/main/recourse/data/cases.json
 
+## Targeted update of November 18, 2026
+
+The supplied 165-record library was compared with the current index. Every supplied record is already included in the 176-record index, including A.B., 2026 FPSLREB 76, under ID `ab-ised-2026`. The total remains 176. No duplicate A.B. record was added, and the 11 other records were retained.
+
+A.B. now links to the official English and French case pages instead of the union statement. The official English page confirmed the case title and canonical link. Automated access to the embedded full reasons returned HTTP 403. The summary therefore incorporates the supplied November 18 verification note, which reports a full-text check; this update does not claim an independent recheck of the full reasons or subsequent judicial-review status.
+
+The bilingual remedy summary now specifies at least two years of telework from the order, back pay from May 29, 2024, restoration of 65 sick-leave hours, $18,000 for pain and suffering and $10,000 for reckless conduct. It distinguishes the $28,000 human-rights award from back pay and notes that permanent telework, interest and unproven uninsured therapy/medication costs were not awarded. The unsupported discipline tag was removed. The disability, telework, accommodation, grievance and allowed-result classifications remain available.
+
+The source type is now `full-decision`, meaning that the source link points to the decision itself. The visible bilingual source note preserves the verification limits. Six other entries still use secondary or representative sources. The findings below describe the original November 15 audit and remain historical.
+
 ## Executive summary
 
 An independent public-source check of the existing 164-record library identified **12 additional case decisions and published administrative findings**, resulting in **176 indexed records across 16 recourse route groups**. This is not a complete census of Canadian judicial and tribunal decisions, or even of all federal decisions; it is a manually researched **curated index**. Published administration findings and non-final recommendations are counted as indexed **records**, not as adjudicated case-law decisions.

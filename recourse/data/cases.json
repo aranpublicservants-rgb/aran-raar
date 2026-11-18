@@ -1,12 +1,12 @@
 {
   "title": "Federal public service recourse: expanded case-law library",
-  "lastPrepared": "2026-11-15",
+  "lastPrepared": "2026-11-18",
   "languages": [
     "en",
     "fr"
   ],
   "status": "Expanded, source-labelled case and published administrative-findings index; not an exhaustive census",
-  "methodology": "Includes every previously indexed case plus additional decisions drawn from official federal Board and CHRT annual reports or linked full decisions. Case status distinguishes successful, unsuccessful, mixed and procedural outcomes; a procedural ruling does not decide discrimination. Official annual report summaries are linked when a validated direct case URL is not available. Court appeals and later rulings may change outcomes. This finite case index is not an exhaustive census of every published decision and cannot include confidential settlements or unpublished complaints. A separate official-source directory links to searchable full decision collections. Historical statutory remedies and tribunal jurisdictions can differ from current law. Entries with direct court judgments are distinguishable from official summaries; confidential settlements and unpublished CHRC files are not included. This expansion incorporates 115 additional entries from a user-supplied HTML library, preserving the previous 49 structured entries without alteration. Their facts, reasons, outcomes, citations, protected grounds, issues, decision bodies, scopes and source links were reconstructed directly from the supplied HTML; source-specific notes not displayed in that HTML cannot be recovered. For new non-procedural cases, the separate 'finding' field is marked 'not-separately-classified' to avoid inventing a legal classification. 'status' accurately carries the uploaded outcome label. Some CanLII links were not directly opened by the original researchers. Links and appeals require independent checking. Independent supplemental search on 2026-11-15 added recent Board, Tribunal, Federal Court, Official Languages Commissioner and RCMP External Review Committee records. Five cases link to secondary reporting because a direct official full-decision URL was not retrievable. For those cases, an officialDecisionSearch URL is supplied separately. Administrative investigations and ERC recommendations are explicitly labelled and must not be treated as court orders. Distinguish human-rights decisions, staffing grievances, judicial review, administrative investigations and non-final recommendations. Two additional Federal Court workplace-investigation fairness decisions, Marentette (2024 FC 676) and Brown (2024 FC 823), were identified in Treasury Board policy references, union materials and practitioner analysis, with direct full rulings yet to be checked.",
+  "methodology": "Includes every previously indexed case plus additional decisions drawn from official federal Board and CHRT annual reports or linked full decisions. Case status distinguishes successful, unsuccessful, mixed and procedural outcomes; a procedural ruling does not decide discrimination. Official annual report summaries are linked when a validated direct case URL is not available. Court appeals and later rulings may change outcomes. This finite case index is not an exhaustive census of every published decision and cannot include confidential settlements or unpublished complaints. A separate official-source directory links to searchable full decision collections. Historical statutory remedies and tribunal jurisdictions can differ from current law. Entries with direct court judgments are distinguishable from official summaries; confidential settlements and unpublished CHRC files are not included. This expansion incorporates 115 additional entries from a user-supplied HTML library, preserving the previous 49 structured entries without alteration. Their facts, reasons, outcomes, citations, protected grounds, issues, decision bodies, scopes and source links were reconstructed directly from the supplied HTML; source-specific notes not displayed in that HTML cannot be recovered. For new non-procedural cases, the separate 'finding' field is marked 'not-separately-classified' to avoid inventing a legal classification. 'status' accurately carries the uploaded outcome label. Some CanLII links were not directly opened by the original researchers. Links and appeals require independent checking. Independent supplemental search on 2026-11-15 added recent Board, Tribunal, Federal Court, Official Languages Commissioner and RCMP External Review Committee records. Five cases link to secondary reporting because a direct official full-decision URL was not retrievable. For those cases, an officialDecisionSearch URL is supplied separately. Administrative investigations and ERC recommendations are explicitly labelled and must not be treated as court orders. Distinguish human-rights decisions, staffing grievances, judicial review, administrative investigations and non-final recommendations. Two additional Federal Court workplace-investigation fairness decisions, Marentette (2024 FC 676) and Brown (2024 FC 823), were identified in Treasury Board policy references, union materials and practitioner analysis, with direct full rulings yet to be checked. Targeted update on 2026-11-18: all 165 entries in the supplied library were matched to the existing 176-record index. The existing A.B. record was updated with official decision links and remedy details from the supplied verification note. No records were added or removed. The official case title and link were confirmed; full reasons and subsequent judicial-review status were not independently rechecked during this update. The broader audit date remains unchanged.",
   "fields": [
     "id",
     "title",
@@ -32,7 +32,12 @@
     "finding",
     "appliesTo",
     "officialDecisionSearch",
-    "lastReviewed"
+    "lastReviewed",
+    "url_fr",
+    "sourceNote_fr",
+    "decisionDate",
+    "fileNumber",
+    "adjudicator"
   ],
   "cases": [
     {
@@ -4485,8 +4490,7 @@
       "body": "Federal Public Sector Labour Relations and Employment Board",
       "issues": [
         "accommodation",
-        "telework",
-        "discipline"
+        "telework"
       ],
       "grounds": [
         "disability"
@@ -4495,17 +4499,23 @@
       "finding": "discrimination-established",
       "scope": "Federal public service",
       "route": "fpslreb-grievance",
-      "what": "An ISED employee with post-traumatic stress disorder sought to continue successful telework instead of returning to an office environment that aggravated his symptoms. The employer offered office-based measures rather than considering remote work on its individual merits.",
-      "factors": "The employee supplied clinical evidence of disability-related limitations. The Board criticized treating telework as a last resort and failing to assess the requested measure individually; a general return-to-office requirement does not override the duty to accommodate.",
-      "outcome": "The grievance succeeded. The Board ordered telework for at least two years, wage losses and leave restoration, plus $18,000 for pain and suffering and $10,000 for reckless discrimination. This does not confer a general right to telework.",
-      "what_fr": "Un employé d'ISDE ayant un trouble de stress post-traumatique demandait le maintien d'un télétravail qui fonctionnait, plutôt qu'un retour dans des locaux aggravant ses symptômes. L'employeur proposait surtout des mesures au bureau.",
-      "factors_fr": "La preuve clinique décrivait les limitations fonctionnelles. La Commission a critiqué l'idée que le télétravail soit un dernier recours et l'absence d'évaluation individuelle; une politique générale de présence ne remplace pas l'obligation d'accommodement.",
-      "outcome_fr": "Grief accueilli. La Commission a ordonné le télétravail pendant au moins deux ans, des pertes salariales et des crédits de congé, ainsi que 18 000 $ pour préjudice moral et 10 000 $ pour conduite discriminatoire inconsidérée. Ce n'est pas un droit général au télétravail.",
-      "url": "https://pipsc.ca/pipsc-statement-on-labour-board-decision-regarding-return-to-office-mandates/",
-      "sourceType": "representative-statement",
+      "what": "A computer engineer at ISED with post-traumatic stress disorder requested full-time telework to control his environment. The employer instead proposed a headset, an isolated cubicle and attendance on less busy days. The medical evidence showed that these office measures did not address his disability-related needs.",
+      "factors": "The Board found a breach of article 44, the collective agreement’s prohibition of discrimination. The employer had to consider the individual medical evidence and measures that would reasonably accommodate the employee. The Directive on Prescribed Presence requires case-by-case consideration of human rights obligations. Telework could not be treated as a last resort simply because of a general return-to-office policy. The result depends on this employee’s needs and the evidence about reasonable accommodation.",
+      "outcome": "Grievance allowed. The Board ordered telework for at least two years from the date of the order; permanent telework was not granted. It ordered back pay from May 29, 2024 and the restoration of 65 hours of sick leave. It awarded $18,000 for pain and suffering and $10,000 for reckless conduct, totalling $28,000 in human rights damages, separate from back pay. No interest was awarded. Uninsured therapy and medication costs were not reimbursed because their value was not established by evidence.",
+      "what_fr": "Un ingénieur informaticien d’ISDE ayant un trouble de stress post-traumatique a demandé le télétravail à temps plein pour contrôler son environnement. L’employeur a plutôt proposé un casque antibruit, un cubicule isolé et une présence lors de journées moins achalandées. La preuve médicale montrait que ces mesures au bureau ne répondaient pas aux besoins liés à son handicap.",
+      "factors_fr": "La Commission a conclu à une violation de l’article 44 de la convention collective, qui interdit la discrimination. L’employeur devait examiner la preuve médicale individuelle et les mesures permettant un accommodement raisonnable. La Directive sur la présence prescrite exige un examen au cas par cas des obligations en matière de droits de la personne. Une politique générale de retour au bureau ne permettait pas de traiter le télétravail comme un dernier recours. Le résultat dépend des besoins de cet employé et de la preuve sur les mesures d’accommodement raisonnables.",
+      "outcome_fr": "Grief accueilli. La Commission a ordonné le télétravail pendant au moins deux ans à compter de la date de l’ordonnance; le télétravail permanent n’a pas été accordé. Elle a ordonné le versement du salaire rétroactif à compter du 29 mai 2024 et le rétablissement de 65 heures de congé de maladie. Elle a accordé 18 000 $ pour préjudice moral et 10 000 $ pour conduite téméraire, soit 28 000 $ en dommages-intérêts liés aux droits de la personne, en plus du salaire rétroactif. Aucun intérêt n’a été accordé. Les frais de thérapie et de médicaments non assurés n’ont pas été remboursés, faute de preuve de leur valeur.",
+      "url": "https://decisions.fpslreb-crtespf.gc.ca/fpslreb-crtespf/d/en/item/521590/index.do",
+      "sourceType": "full-decision",
       "officialDecisionSearch": "https://decisions.fpslreb-crtespf.gc.ca/fpslreb-crtespf/en/nav.do",
-      "sourceNote": "Ruling identified by citation and confirmed by union and published legal reporting; direct official full-decision URL not independently retrieved. Verify appeals and exact remedy in the official Board database.",
-      "appliesTo": "Direct federal public-service or institution decision"
+      "sourceNote": "Official case title and link confirmed on November 18, 2026. Remedy details incorporate a case note reporting a full-text check on that date. The full reasons and subsequent judicial-review status were not independently rechecked during this update.",
+      "appliesTo": "Direct federal public-service or institution decision",
+      "url_fr": "https://decisions.fpslreb-crtespf.gc.ca/fpslreb-crtespf/d/fr/item/521590/index.do",
+      "sourceNote_fr": "Le titre officiel et le lien ont été confirmés le 18 novembre 2026. Les précisions sur les réparations proviennent d’une note de jurisprudence faisant état d’une vérification du texte intégral à cette date. Les motifs intégraux et l’état d’un éventuel contrôle judiciaire n’ont pas été revérifiés indépendamment lors de cette mise à jour.",
+      "decisionDate": "2026-06-19",
+      "fileNumber": "566-02-52621",
+      "adjudicator": "Christopher Rootham",
+      "lastReviewed": "2026-11-18"
     },
     {
       "id": "parkes-ircc-2026",

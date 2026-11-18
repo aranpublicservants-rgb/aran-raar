@@ -66,10 +66,10 @@
     el('p', lang === 'fr' ? (c.outcome_fr || c.outcome) : c.outcome, detail);
     if (c.finding === 'not-separately-classified') el('p', t('The discrimination finding has not been separately classified. This result must not be read as proof of discrimination.', 'La conclusion sur la discrimination n’a pas été classifiée séparément. Ce résultat ne constitue pas une preuve de discrimination.'), detail, 'source-limit');
     if (['secondary-summary', 'representative-statement'].includes(c.sourceType)) el('p', t('This entry relies on a published secondary summary or representative statement. Consult the primary reasons before relying on it.', 'Cette entrée repose sur un résumé secondaire ou une déclaration de représentant. Consultez les motifs originaux avant de vous y fier.'), detail, 'source-limit');
-    if (c.sourceNote) el('p', c.sourceNote, detail, 'source-limit');
-    el('p', t('Source type: ', 'Type de source : ') + ({'official-summary':t('Official summary', 'Sommaire officiel'),'official-decision':t('Official decision', 'Décision officielle'),'secondary-summary':t('Secondary summary', 'Résumé secondaire'),'representative-statement':t('Representative statement', 'Déclaration de représentant')}[c.sourceType] || c.sourceType || t('See source', 'Consulter la source')), detail, 'meta');
+    if (c.sourceNote) el('p', lang === 'fr' ? (c.sourceNote_fr || c.sourceNote) : c.sourceNote, detail, 'source-limit');
+    el('p', t('Source type: ', 'Type de source : ') + ({'full-decision':t('Full decision', 'Décision intégrale'),'official-summary':t('Official summary', 'Sommaire officiel'),'official-decision':t('Official decision', 'Décision officielle'),'secondary-summary':t('Secondary summary', 'Résumé secondaire'),'representative-statement':t('Representative statement', 'Déclaration de représentant')}[c.sourceType] || c.sourceType || t('See source', 'Consulter la source')), detail, 'meta');
     if (/annual-report|\/nav.do|\/faq.html|search-human-rights-decisions|case-summaries|investigation-summaries|\/results\/?$|summaries-investigation/.test(c.url)) el('p', t('The source link opens a collection or report. Use the citation above to find the relevant record.', 'Le lien mène à une collection ou un rapport. Utilisez la référence ci-dessus pour trouver le dossier.'), a, 'meta');
-    source(a, t('Open the source', 'Consulter la source'), c.url);
+    source(a, t('Open the source', 'Consulter la source'), lang === 'fr' ? (c.url_fr || c.url) : c.url);
   }
   function render() {
     const root = $('body-decisions'); root.replaceChildren();
@@ -115,7 +115,7 @@
   for (const [id, delta] of [['previous-page', -1], ['next-page', 1]]) $(id).addEventListener('click', () => { page += delta; render(); $('results-heading').focus(); $('results-heading').scrollIntoView({block:'start'}); });
   $('download-results').addEventListener('click', () => {
     const header = [t('Title','Titre'),t('Citation','Référence'),t('Decision-maker','Organisme'),t('Context','Contexte'),t('Result','Résultat'),t('Facts','Faits'),t('Factors','Facteurs'),t('Outcome','Suite'),t('Source type','Type de source'),t('Source','Source')];
-    const rows = filtered.map(c => [c.title,c.citation,c.body,label(meta.scope[c.scope]),label(meta.outcomes[c.status]),lang==='fr'?c.what_fr:c.what,lang==='fr'?c.factors_fr:c.factors,lang==='fr'?c.outcome_fr:c.outcome,c.sourceType,c.url]);
+    const rows = filtered.map(c => [c.title,c.citation,c.body,label(meta.scope[c.scope]),label(meta.outcomes[c.status]),lang==='fr'?c.what_fr:c.what,lang==='fr'?c.factors_fr:c.factors,lang==='fr'?c.outcome_fr:c.outcome,c.sourceType,lang==='fr'?(c.url_fr||c.url):c.url]);
     const url = URL.createObjectURL(new Blob(['\ufeff'+[header,...rows].map(row=>row.map(csvCell).join(',')).join('\r\n')],{type:'text/csv;charset=utf-8'}));
     const a = el('a'); a.href = url; a.download = lang==='fr'?'decisions-recours.csv':'recourse-decisions.csv'; a.click(); setTimeout(()=>URL.revokeObjectURL(url),1000);
   });
