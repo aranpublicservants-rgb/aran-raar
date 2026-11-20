@@ -1,4 +1,4 @@
-const VERSION='aran-network-shell-20261107-5';
+const VERSION='aran-network-shell-20261120-reports';
 const ROOT=new URL('./',self.location).href;
 const FILES=['./','index.html','fr.html','working-draft.html','working-draft-fr.html','styles.css?v=20261107-5','enhancements.css?v=20261107-5','shared.js?v=20261107-5','app.js?v=20261107-5','enhancements.js?v=20261107-5','draft.js?v=20261107-5','site-v3.css?v=20261107-5','ui.js?v=20261107-5','assets/aran-logo.svg','assets/aran-icon.svg','assets/og-aran-en.png','assets/og-aran-fr.png','manifest.webmanifest',...['meeting-agenda','action-tracker','accessible-event','lesson-template'].flatMap(n=>['en','fr'].map(l=>'templates/'+n+'-'+l+'.txt'))];
 self.addEventListener('install',event=>{event.waitUntil(caches.open(VERSION).then(cache=>cache.addAll(FILES.map(p=>new Request(new URL(p,ROOT).href,{cache:'reload'})))).then(()=>self.skipWaiting()));});
